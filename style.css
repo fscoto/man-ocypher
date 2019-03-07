@@ -279,7 +279,9 @@ span.Op { }
 b.Ic {		font-style: normal; }
 code.Ev {	font-style: normal;
 		font-weight: normal;
-		font-family: monospace; }
+		font-family: "Source Code Pro", Courier, monospace;
+		line-height: 1.4;
+		font-size: 96%; }
 i.Pa {		font-weight: normal; }
 
 /* Semantic markup for function libraries. */
@@ -299,10 +301,14 @@ var.Va {	font-style: italic;
 		font-weight: normal; }
 code.Dv {	font-style: normal;
 		font-weight: normal;
-		font-family: monospace; }
+		font-family: "Source Code Pro", Courier, monospace;
+		line-height: 1.4;
+		font-size: 96%; }
 code.Er {	font-style: normal;
 		font-weight: normal;
-		font-family: monospace; }
+		font-family: "Source Code Pro", Courier, monospace;
+		line-height: 1.4;
+		font-size: 96%; }
 
 /* Various semantic markup. */
 
@@ -329,9 +335,14 @@ a.Ux { }
 		font-weight: bold; }
 .symb {		font-style: normal;
 		font-weight: bold; }
-.Li {		font-style: normal;
+.Li {		margin-left: 1.5em;
+		font-style: normal;
 		font-weight: normal;
-		font-family: monospace; }
+		font-family: "Source Code Pro", Courier, monospace;
+		line-height: 1.4;
+		font-size: 96%; }
 .lit {		font-style: normal;
 		font-weight: normal;
-		font-family: monospace; }
+		font-family: "Source Code Pro", Courier, monospace;
+		line-height: 1.4;
+		font-size: 96%; }
