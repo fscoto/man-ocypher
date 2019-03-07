@@ -337,14 +337,20 @@ a.Ux { }
 		font-weight: bold; }
 .symb {		font-style: normal;
 		font-weight: bold; }
+pre {		margin-left: 1.5em;
+		font-style: normal;
+		font-weight: normal;
+		font-family: "Source Code Pro", Courier, monospace;
+		line-height: 1.5;
+		font-size: 80%; }
 .Li {		margin-left: 1.5em;
 		font-style: normal;
 		font-weight: normal;
 		font-family: "Source Code Pro", Courier, monospace;
-		line-height: 1.4;
-		font-size: 96%; }
+		line-height: 1.5;
+		font-size: 80%; }
 .lit {		font-style: normal;
 		font-weight: normal;
 		font-family: "Source Code Pro", Courier, monospace;
-		line-height: 1.4;
-		font-size: 96%; }
+		line-height: 1.5;
+		font-size: 80%; }
