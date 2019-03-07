@@ -75,7 +75,7 @@ These functions perform a key exchange between a <i class="Em">client</i> and a
   exchange as the client</a></h2>
 When starting a new connection to the server, the client first reads the
   server's public key from the network; then it calls
-  <code class="Fn">crypto_client_x_init_client</code>() to initialize a
+  <code class="Fn">crypto_client_x_init_client</code>() to initialise a
   <var class="Vt">crypto_kex_ctx</var>. The arguments to
   <code class="Fn">crypto_client_x_init_client</code>() are:
 <dl class="Bl-tag">
@@ -109,7 +109,7 @@ When starting a new connection to the server, the client first reads the
 <h2 class="Ss" id="Key_exchange_as_the_server"><a class="permalink" href="#Key_exchange_as_the_server">Key
   exchange as the server</a></h2>
 When accepting a new connection from a client, the server calls
-  <code class="Fn">crypto_client_xk1_init_server</code>() to initialize a
+  <code class="Fn">crypto_client_xk1_init_server</code>() to initialise a
   <var class="Vt">crypto_kex_ctx</var>. The arguments to
   <code class="Fn">crypto_client_xk1_init_server</code>() are identical to the
   arguments to <code class="Fn">crypto_client_xk1_init_client</code>(), except
@@ -117,7 +117,7 @@ When accepting a new connection from a client, the server calls
   <var class="Fa">remote_pk</var> can be specified because the server
   authenticates clients only once the handshake completes, which is application
   logic and not part of the key exchange protocol.
-<p class="Pp">After initializing <var class="Fa">ctx</var>, the server waits for
+<p class="Pp">After initialising <var class="Fa">ctx</var>, the server waits for
     the client to send <var class="Fa">msg1</var> and reads it from the network.
     The server then calls <code class="Fn">crypto_kex_x_2</code>() with
     <var class="Fa">msg1</var>, which yields <var class="Fa">session_key</var>
