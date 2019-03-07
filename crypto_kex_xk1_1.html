@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
+  <title>CRYPTO_KEX_XK1_INIT_CLIENT(3MONOCYPHER)</title>
+</head>
+<body>
+<table class="head">
+  <tr>
+    <td class="head-ltitle">CRYPTO_KEX_XK1_INIT_CLIENT(3MONOCYPHER)</td>
+    <td class="head-vol">3MONOCYPHER</td>
+    <td class="head-rtitle">CRYPTO_KEX_XK1_INIT_CLIENT(3MONOCYPHER)</td>
+  </tr>
+</table>
+<div class="manual-text">
+<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm" title="Nm">crypto_kex_xk1_init_client</code>,
+  <code class="Nm" title="Nm">crypto_kex_xk1_init_server</code>,
+  <code class="Nm" title="Nm">crypto_kex_xk1_1</code>,
+  <code class="Nm" title="Nm">crypto_kex_xk1_2</code>,
+  <code class="Nm" title="Nm">crypto_kex_xk1_3</code>,
+  <code class="Nm" title="Nm">crypto_kex_xk1_4</code> &#x2014;
+<div class="Nd" title="Nd">interactive key exchange for establishing secure
+  channels</div>
+<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In" title="In">#include
+  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
+<div class="Pp"></div>
+<var class="Ft" title="Ft">void</var>
+<br/>
+<code class="Fn" title="Fn">crypto_kex_xk1_init_client</code>(<var class="Fa" title="Fa">crypto_kex_ctx
+  *ctx</var>, <var class="Fa" title="Fa">uint8_t random_seed[32]</var>,
+  <var class="Fa" title="Fa">const uint8_t local_sk[32]</var>,
+  <var class="Fa" title="Fa">const uint8_t local_pk[32]</var>,
+  <var class="Fa" title="Fa">const uint8_t remote_pk[32]</var>);
+<div class="Pp"></div>
+<var class="Ft" title="Ft">void</var>
+<br/>
+<code class="Fn" title="Fn">crypto_kex_xk1_init_server</code>(<var class="Fa" title="Fa">crypto_kex_ctx
+  *ctx</var>, <var class="Fa" title="Fa">uint8_t random_seed[32]</var>,
+  <var class="Fa" title="Fa">const uint8_t local_sk[32]</var>,
+  <var class="Fa" title="Fa">const uint8_t local_pk[32]</var>);
+<div class="Pp"></div>
+<var class="Ft" title="Ft">void</var>
+<br/>
+<code class="Fn" title="Fn">crypto_kex_xk1_1</code>(<var class="Fa" title="Fa">crypto_kex_ctx
+  *ctx</var>, <var class="Fa" title="Fa">uint8_t msg1[32]</var>);
+<div class="Pp"></div>
+<var class="Ft" title="Ft">void</var>
+<br/>
+<code class="Fn" title="Fn">crypto_kex_xk1_2</code>(<var class="Fa" title="Fa">crypto_kex_ctx
+  *ctx</var>, <var class="Fa" title="Fa">uint8_t msg2[48]</var>,
+  <var class="Fa" title="Fa">const uint8_t msg1[32]</var>);
+<div class="Pp"></div>
+<var class="Ft" title="Ft">int</var>
+<br/>
+<code class="Fn" title="Fn">crypto_kex_xk1_3</code>(<var class="Fa" title="Fa">crypto_kex_ctx
+  *ctx</var>, <var class="Fa" title="Fa">uint8_t session_key[32]</var>,
+  <var class="Fa" title="Fa">uint8_t msg3[48]</var>,
+  <var class="Fa" title="Fa">const uint8_t msg2[48]</var>);
+<div class="Pp"></div>
+<var class="Ft" title="Ft">int</var>
+<br/>
+<code class="Fn" title="Fn">crypto_kex_xk1_4</code>(<var class="Fa" title="Fa">crypto_kex_ctx
+  *ctx</var>, <var class="Fa" title="Fa">uint8_t session_key[32]</var>,
+  <var class="Fa" title="Fa">uint8_t remote_pk[32]</var>,
+  <var class="Fa" title="Fa">const uint8_t msg3[48]</var>);
+<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+These functions perform a key exchange between a
+  <i class="Em" title="Em">client</i> and a <i class="Em" title="Em">server</i>
+  to establish a secure channel. The result of the key exchange is a
+  <i class="Em" title="Em">session key</i> that is suitable for use with
+  <a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>.
+  The <i class="Em" title="Em">server</i> must have generated an X25519 secret
+  key and its corresponding public key ahead of time using
+  <a class="Xr" title="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>.
+  This key is also used by the client to verify the server's identity. The
+  <i class="Em" title="Em">client</i> must know the
+  <i class="Em" title="Em">server's</i> public key before performing the key
+  exchange. The <i class="Em" title="Em">client</i> initiates the key exchange.
+<div class="Pp"></div>
+These functions differ from the
+  <a class="Xr" title="Xr" href="crypto_kex_x_init_client.html">crypto_kex_x_init_client(3monocypher)</a>
+  functions in that the functions described in this page provide stronger
+  security guarantees, but also require the server to be able to respond to a
+  connection from a client immediately.
+<h2 class="Ss" title="Ss" id="Key_exchange_as_the_client"><a class="permalink" href="#Key_exchange_as_the_client">Key
+  exchange as the client</a></h2>
+When starting a new connection to the server, the client first calls
+  <code class="Fn" title="Fn">crypto_client_xk1_init_client</code>() to
+  initialize a <var class="Vt" title="Vt">crypto_kex_ctx</var>. The arguments to
+  <code class="Fn" title="Fn">crypto_client_xk1_init_client</code>() are:
+<dl class="Bl-tag">
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">ctx</var></dt>
+  <dd>A pointer to a <var class="Vt" title="Vt">crypto_kex_ctx</var>.</dd>
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">random_seed</var></dt>
+  <dd>32 randomly generated bytes. See
+      <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a> for
+      advice about generating random bytes (use the operating system's random
+      number generator). This argument is not constant because it is wiped after
+      use.</dd>
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">local_sk</var></dt>
+  <dd>A 32-byte secret random number. This is a long-term secret used to
+      identify the respective party.</dd>
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">local_pk</var></dt>
+  <dd>The public key corresponding to the
+      <var class="Fa" title="Fa">local_sk</var>, generated using
+      <a class="Xr" title="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>.
+      If <code class="Dv" title="Dv">NULL</code>, the public key will be
+      generated for you.</dd>
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">remote_pk</var></dt>
+  <dd>The public key of the server, which must be known to the client before
+      making a connection. This is used to authenticate the server's
+    identity.</dd>
+</dl>
+<div class="Pp"></div>
+After initialising <var class="Fa" title="Fa">ctx</var>, the client calls
+  <code class="Fn" title="Fn">crypto_kex_xk1_1</code>() to generate
+  <var class="Fa" title="Fa">msg1</var>. It proceeds to send
+  <var class="Fa" title="Fa">msg1</var> to the server. The client then reads
+  <var class="Fa" title="Fa">msg2</var> from the server. It calls
+  <code class="Fn" title="Fn">crypto_kex_xk1_3</code>(), which yields the
+  <var class="Fa" title="Fa">session_key</var> and
+  <var class="Fa" title="Fa">msg3</var>.
+  <code class="Fn" title="Fn">crypto_kex_xk1_3</code>() returns zero on success
+  and -1 if the server's message mismatches the key exchange until now.
+  <i class="Em" title="Em">Always check the return value</i>. This function also
+  wipes the data in <var class="Fa" title="Fa">ctx</var>. The client sends
+  <var class="Fa" title="Fa">msg3</var> to the server to complete the key
+  exchange.
+<h2 class="Ss" title="Ss" id="Key_exchange_as_the_server"><a class="permalink" href="#Key_exchange_as_the_server">Key
+  exchange as the server</a></h2>
+When accepting a new connection from a client, the server first calls
+  <code class="Fn" title="Fn">crypto_client_xk1_init_server</code>() to
+  initialize a <var class="Vt" title="Vt">crypto_kex_ctx</var>. The arguments to
+  <code class="Fn" title="Fn">crypto_client_xk1_init_server</code>() are
+  identical to the arguments to
+  <code class="Fn" title="Fn">crypto_client_xk1_init_client</code>(), except
+  that the server does not know the client's public key yet, so no
+  <var class="Fa" title="Fa">remote_pk</var> can be specified because the server
+  authenticates clients once the handshake completes; the server's
+  <var class="Fa" title="Fa">local_sk</var> and
+  <var class="Fa" title="Fa">local_pk</var> are generated ahead of time and
+  known to the clients.
+<div class="Pp"></div>
+After initializing <var class="Fa" title="Fa">ctx</var>, the server waits for
+  the client to send <var class="Fa" title="Fa">msg1</var> and reads it from the
+  network. The server then calls
+  <code class="Fn" title="Fn">crypto_kex_xk1_2</code>() with
+  <var class="Fa" title="Fa">msg1</var>, which yields
+  <var class="Fa" title="Fa">msg2</var>. <var class="Fa" title="Fa">msg2</var>
+  is sent to the client. The server reads the client's response
+  (<var class="Fa" title="Fa">msg3</var>) from the network and calls
+  <code class="Fn" title="Fn">crypto_kex_xk1_4</code>() with
+  <var class="Fa" title="Fa">msg3</var>, which yields
+  <var class="Fa" title="Fa">session_key</var> and
+  <var class="Fa" title="Fa">remote_pk</var>, the client's public key. The
+  server can use this to authenticate clients by their public key;
+  <i class="Em" title="Em">if possible, always authenticate clients</i>.
+  <code class="Fn" title="Fn">crypto_kex_xk1_4</code>() returns zero on success
+  and -1 if the client's message mismatches the key exchange until now.
+  <i class="Em" title="Em">Always check the return value</i>. This function also
+  wipes the data in <var class="Fa" title="Fa">ctx</var>.
+<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+  VALUES</a></h1>
+<code class="Fn" title="Fn">crypto_kex_xk1_init_client</code>(),
+  <code class="Fn" title="Fn">crypto_kex_xk1_init_server</code>(),
+  <code class="Fn" title="Fn">crypto_kex_xk1_1</code>() and
+  <code class="Fn" title="Fn">crypto_kex_xk1_2</code>() return nothing.
+<div class="Pp"></div>
+<code class="Fn" title="Fn">crypto_kex_xk1_3</code>() and
+  <code class="Fn" title="Fn">crypto_kex_xk1_4</code>() return 0 on success or
+  -1 if the messages were corrupt or mismatched the server's identity.
+  Corruption can be caused by transmission errors, programmer error, or an
+  attacker's interference.
+<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+These examples use *NIX networking functions to keep the examples readable, but
+  any kind of networking code will work. It is assumed that the client and
+  server have already established a connection with each other.
+<div class="Pp"></div>
+Client:
+<div class="Pp"></div>
+<div class="Bd Bd-indent">
+<pre class="Li">
+crypto_kex_ctx client_ctx; /* key exchange context */ 
+uint8_t sk[32];            /* 32 random bytes long-term secret key */ 
+uint8_t their_pk[32];      /* the server's public key 
+                            * (known ahead of time) */ 
+uint8_t seed[32];          /* 32 random bytes */ 
+uint8_t buf[48];           /* buffer for the key exchange messages */ 
+uint8_t session_key[32];   /* the resulting session key */ 
+int fd;                    /* the socket of the connection */ 
+ 
+/* (generate random bytes in seed here) */ 
+crypto_kex_xk1_init_client(&amp;client_ctx, seed, sk, NULL, their_pk); 
+crypto_kex_xk1_1(&amp;client_ctx, buf); 
+if (write(fd, buf, 32) != 32) 
+    return -1; 
+if (read(fd, buf, 48) != 48) 
+    return -2; 
+if (crypto_kex_xk1_3(&amp;client_ctx, session_key, buf, buf) != 0) 
+    return -3; 
+if (write(fd, buf, 48) != 48) 
+    return -4; 
+/* key exchange complete; 
+ * send/receive messages encrypted with crypto_lock() now */
+</pre>
+</div>
+<div class="Pp"></div>
+Server:
+<div class="Pp"></div>
+<div class="Bd Bd-indent">
+<pre class="Li">
+crypto_kex_ctx server_ctx; /* key exchange context */ 
+uint8_t sk[32];            /* 32 random bytes long-term secret key */ 
+uint8_t my_pk[32];         /* public key to sk */ 
+uint8_t their_pk[32];      /* the client's public key */ 
+uint8_t seed[32];          /* 32 random bytes */ 
+uint8_t buf[48];           /* buffer for the key exchange messages */ 
+uint8_t session_key[32];   /* the resulting session key */ 
+int fd;                    /* the socket of the connection */ 
+ 
+/* (generate random bytes in seed here) */ 
+crypto_kex_xk1_init_server(&amp;server_ctx, seed, sk, my_pk); 
+if (read(fd, buf, 32) != 32) 
+    return -1; 
+crypto_kex_xk1_2(&amp;server_ctx, buf, buf); 
+if (write(fd, buf, 48) != 48) 
+    return -2; 
+if (read(fd, buf, 48) != 48) 
+    return -3; 
+if (crypto_kex_xk1_4(&amp;server_ctx, session_key, their_pk, buf) != 0) 
+    return -4; 
+/* key exchange complete; 
+ * send/receive messages encrypted with crypto_lock() now */
+</pre>
+</div>
+<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+  ALSO</a></h1>
+<a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+  <a class="Xr" title="Xr" href="crypto_kex_x_init_client.html">crypto_kex_x_init_client(3monocypher)</a>,
+  <a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
+<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+These functions are equivalent to an implementation of the XK1 pattern of the
+  Noise protocol framework.</div>
+<table class="foot">
+  <tr>
+    <td class="foot-date">March 6, 2019</td>
+    <td class="foot-os">OpenBSD 6.4</td>
+  </tr>
+</table>
+</body>
+</html>

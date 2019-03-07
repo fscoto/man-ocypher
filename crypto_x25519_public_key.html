@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
+  <title>CRYPTO_KEY_EXCHANGE(3MONOCYPHER)</title>
+</head>
+<body>
+<table class="head">
+  <tr>
+    <td class="head-ltitle">CRYPTO_KEY_EXCHANGE(3MONOCYPHER)</td>
+    <td class="head-vol">3MONOCYPHER</td>
+    <td class="head-rtitle">CRYPTO_KEY_EXCHANGE(3MONOCYPHER)</td>
+  </tr>
+</table>
+<div class="manual-text">
+<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm" title="Nm">crypto_key_exchange</code>,
+  <code class="Nm" title="Nm">crypto_key_exchange_public_key</code> &#x2014;
+<div class="Nd" title="Nd">Elliptic Curve Diffie-Hellman key exchange</div>
+<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In" title="In">#include
+  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
+<div class="Pp"></div>
+<var class="Ft" title="Ft">int</var>
+<br/>
+<code class="Fn" title="Fn">crypto_key_exchange</code>(<var class="Fa" title="Fa">uint8_t
+  shared_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
+  your_secret_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
+  their_public_key[32]</var>);
+<div class="Pp"></div>
+<var class="Ft" title="Ft">void</var>
+<br/>
+<code class="Fn" title="Fn">crypto_key_exchange_public_key</code>(<var class="Fa" title="Fa">uint8_t
+  your_public_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
+  your_secret_key[32]</var>);
+<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<code class="Fn" title="Fn">crypto_key_exchange</code>() computes a shared key
+  with your secret key and their public key.
+<div class="Pp"></div>
+<code class="Fn" title="Fn">crypto_key_exchange_public_key</code>()
+  deterministically computes the public key from a random secret key. It is a
+  medium-level primitive. Prefer the
+  <a class="Xr" title="Xr" href="crypto_kex_xk1_init_client.html">crypto_kex_xk1_init_client(3monocypher)</a>
+  and
+  <a class="Xr" title="Xr" href="crypto_kex_x_init_client.html">crypto_kex_x_init_client(3monocypher)</a>
+  families of functions unless you have a specific reason not to.
+<div class="Pp"></div>
+The arguments are:
+<dl class="Bl-tag">
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">shared_key</var></dt>
+  <dd>The shared secret, known only to those who know a relevant secret key
+      (yours or theirs). It is cryptographically random, and suitable for use
+      with the
+      <a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>
+      family of functions.</dd>
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">your_secret_key</var></dt>
+  <dd>A 32-byte random number, known only to you. See
+      <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a> for
+      advice about generating random bytes (use the operating system's random
+      number generator). Do not use the same private key for both key exchanges
+      and signatures. The public keys are different, and revealing both may leak
+      information.</dd>
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">their_public_key</var></dt>
+  <dd>The public key of the other party.</dd>
+  <dt>&#x00A0;</dt>
+  <dd>&#x00A0;</dd>
+  <dt><var class="Fa" title="Fa">your_public_key</var></dt>
+  <dd>Your public key, generated from
+      <var class="Fa" title="Fa">your_secret_key</var> with
+      <code class="Fn" title="Fn">crypto_key_exchange_public_key</code>().</dd>
+</dl>
+<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+  VALUES</a></h1>
+Some public keys force the shared key to a known constant.
+  <code class="Fn" title="Fn">crypto_key_exchange</code>() returns -1 if it
+  detects such a public key, otherwise it returns 0. This never happens with
+  legitimate public keys.
+<div class="Pp"></div>
+<b class="Sy" title="Sy">The return value has been deprecated</b>.
+  <code class="Fn" title="Fn">crypto_key_exchange</code>() will return
+  <var class="Vt" title="Vt">void</var> starting with the next major release of
+  Monocypher. Some poorly designed protocols require to test for
+  &#x201C;contributory&#x201D; behaviour, which ensures that no untrusted party
+  forces the shared secret to a known constant. Protocols should instead be
+  designed in such a way that no such check is necessary, namely by
+  authenticating the other party or exchanging keys over a trusted channel.
+<div class="Pp"></div>
+<code class="Fn" title="Fn">crypto_key_exchange_public_key</code>() returns
+  nothing.
+<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+Generate a public key from a randomly generated secret key:
+<div class="Pp"></div>
+<div class="Bd Bd-indent">
+<pre class="Li">
+const uint8_t sk[32]; /* Random secret key */ 
+uint8_t       pk[32]; /* Public key        */ 
+crypto_key_exchange_public_key(pk, sk); 
+/* Wipe secrets if they are no longer needed */ 
+crypto_wipe(sk, 32);
+</pre>
+</div>
+<div class="Pp"></div>
+Generate a shared, symmetric key with your secret key and their public key. (The
+  other party will generate the same shared key with your public key and their
+  secret key.)
+<div class="Pp"></div>
+<div class="Bd Bd-indent">
+<pre class="Li">
+const uint8_t their_pk  [32]; /* Their public key   */ 
+const uint8_t your_sk   [32]; /* Your secret key    */ 
+uint8_t       shared_key[32]; /* Shared session key */ 
+crypto_key_exchange(shared_key, your_sk, their_pk); 
+/* Wipe secrets if they are no longer needed */ 
+crypto_wipe(your_sk, 32);
+</pre>
+</div>
+<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+  ALSO</a></h1>
+<a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
+<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+These functions implement X25519, described in RFC 7748.
+  <code class="Fn" title="Fn">crypto_key_exchange</code>() uses HChacha20 as
+  well.
+<h1 class="Sh" title="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
+  CONSIDERATIONS</a></h1>
+If either of the long term secret keys leaks, it may compromise
+  <i class="Em" title="Em">all past messages</i>. This can be avoided by using
+  protocols that provide forward secrecy, such as the X3DH key agreement
+  protocol.
+<h1 class="Sh" title="Sh" id="IMPLEMENTATION_DETAILS"><a class="permalink" href="#IMPLEMENTATION_DETAILS">IMPLEMENTATION
+  DETAILS</a></h1>
+<code class="Fn" title="Fn">crypto_key_exchange_public_key</code>() is an alias
+  to
+  <a class="Xr" title="Xr" href="crypto_x25519_public_key.html">crypto_x25519_public_key(3monocypher)</a>.</div>
+<table class="foot">
+  <tr>
+    <td class="foot-date">July 17, 2018</td>
+    <td class="foot-os">OpenBSD 6.4</td>
+  </tr>
+</table>
+</body>
+</html>
