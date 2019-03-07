@@ -1,6 +1,7 @@
 /*
  * This file has been engineered to be compatible with both older mandoc and
  * newer mandoc.
+ * Also added some webfonts.
  *
  * mandoc 1.14.1 changed the class named for emph/symb/lit/spacer to
  * Em/Sy/Li/Pp.
@@ -10,7 +11,7 @@
  * - Liberation Sans was added to the font-family in body.
  * - added to body:
  *   margin: 1em auto; max-width: 40em; padding: 0 .62em; font-size: 1.1em;
- *   line-height: 1.62;
+ *   line-height: 1.4;
  * - Removed .Sh and .Ss from h1 (not present in older mandoc)
  * - Removed html styling breaking centering in body. It was:
  *   html {     max-width: 100ex; }
@@ -20,52 +21,112 @@
  *
  * Licensing terms of mandoc, which includes mandoc.css, follow:
  * ----------------------------------------------------------------------------
- * With the exceptions noted below, all code and documentation
- * contained in the mandoc toolkit is protected by the Copyright
- * of the following developers:
- *
- * Copyright (c) 2008-2012, 2014 Kristaps Dzonsons <kristaps@bsd.lv>
- * Copyright (c) 2010-2017 Ingo Schwarze <schwarze@openbsd.org>
- * Copyright (c) 2009, 2010, 2011, 2012 Joerg Sonnenberger <joerg@netbsd.org>
- * Copyright (c) 2013 Franco Fichtner <franco@lastsummer.de>
- * Copyright (c) 2014 Baptiste Daroussin <bapt@freebsd.org>
- * Copyright (c) 2016 Ed Maste <emaste@freebsd.org>
- * Copyright (c) 2017 Michael Stapelberg <stapelberg@debian.org>
- * Copyright (c) 1999, 2004 Marc Espie <espie@openbsd.org>
- * Copyright (c) 1998, 2004, 2010 Todd C. Miller <Todd.Miller@courtesan.com>
- * Copyright (c) 2008, 2017 Otto Moerbeek <otto@drijf.net>
- * Copyright (c) 2004 Ted Unangst <tedu@openbsd.org>
- * Copyright (c) 1994 Christos Zoulas <christos@netbsd.org>
- * Copyright (c) 2003, 2007, 2008, 2014 Jason McIntyre <jmc@openbsd.org>
- *
- * See the individual source files for information about who contributed
- * to which file during which years.
- *
- *
- * The mandoc distribution as a whole is distributed by its developers
- * under the following license:
- *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ * Written by ingo Schwarze <schwarze@openbsd.org>.
+ * I place this file into the public domain.
+ * Permission to use, copy, modify, and distribute it for any purpose
+ * with or without fee is hereby granted, without any conditions.
  * ----------------------------------------------------------------------------
- * No contributor information was found at the head of mandoc.css.
  */
-body { margin: 1em auto;
-       max-width: 40em;
-       padding: 0 .62em;
-       font-size: 1.1em;
-       line-height: 1.62;
-       font-size: 125%;
-       font-family: "Liberation Sans", Arial, sans-serif; }
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    src: url('WOFF2/TTF/SourceSerifPro-Regular.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceSerifPro-Regular.otf.woff') format('woff'),
+         url('OTF/SourceSerifPro-Regular.otf') format('opentype'),
+         url('TTF/SourceSerifPro-Regular.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 400;
+    font-style: italic;
+    font-stretch: normal;
+    src: url('WOFF2/TTF/SourceSerifPro-It.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceSerifPro-It.otf.woff') format('woff'),
+         url('OTF/SourceSerifPro-It.otf') format('opentype'),
+         url('TTF/SourceSerifPro-It.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    src: url('WOFF2/TTF/SourceSerifPro-Bold.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceSerifPro-Bold.otf.woff') format('woff'),
+         url('OTF/SourceSerifPro-Bold.otf') format('opentype'),
+         url('TTF/SourceSerifPro-Bold.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 700;
+    font-style: italic;
+    font-stretch: normal;
+    src: url('WOFF2/TTF/SourceSerifPro-BoldIt.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceSerifPro-BoldIt.otf.woff') format('woff'),
+         url('OTF/SourceSerifPro-BoldIt.otf') format('opentype'),
+         url('TTF/SourceSerifPro-BoldIt.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Source Code Pro';
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    src: url('EOT/SourceCodePro-Regular.eot') format('embedded-opentype'),
+         url('WOFF2/TTF/SourceCodePro-Regular.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceCodePro-Regular.otf.woff') format('woff'),
+         url('OTF/SourceCodePro-Regular.otf') format('opentype'),
+         url('TTF/SourceCodePro-Regular.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Source Code Pro';
+    font-weight: 400;
+    font-style: italic;
+    font-stretch: normal;
+    src: url('EOT/SourceCodePro-It.eot') format('embedded-opentype'),
+         url('WOFF2/TTF/SourceCodePro-It.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceCodePro-It.otf.woff') format('woff'),
+         url('OTF/SourceCodePro-It.otf') format('opentype'),
+         url('TTF/SourceCodePro-It.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Source Code Pro';
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    src: url('EOT/SourceCodePro-Bold.eot') format('embedded-opentype'),
+         url('WOFF2/TTF/SourceCodePro-Bold.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceCodePro-Bold.otf.woff') format('woff'),
+         url('OTF/SourceCodePro-Bold.otf') format('opentype'),
+         url('TTF/SourceCodePro-Bold.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Source Code Pro';
+    font-weight: 700;
+    font-style: italic;
+    font-stretch: normal;
+    src: url('EOT/SourceCodePro-BoldIt.eot') format('embedded-opentype'),
+         url('WOFF2/TTF/SourceCodePro-BoldIt.ttf.woff2') format('woff2'),
+         url('WOFF/OTF/SourceCodePro-BoldIt.otf.woff') format('woff'),
+         url('OTF/SourceCodePro-BoldIt.otf') format('opentype'),
+         url('TTF/SourceCodePro-BoldIt.ttf') format('truetype');
+}
+
+
+body {	margin: 1em auto;
+	max-width: 512px;
+	max-width: 76ch;
+	line-height: 1.4;
+	font-size: 16px;
+	font-family: "Source Serif Pro", Georgia, serif; }
+code {	font-family: "Source Code Pro", Courier, monospace; }
 table {		margin-top: 0em;
 		margin-bottom: 0em; }
 td {		vertical-align: top; }
@@ -73,7 +134,7 @@ ul, ol, dl {	margin-top: 0em;
 		margin-bottom: 0em; }
 li, dt {	margin-top: 1em; }
 
-a.selflink {	border-bottom: thin dotted;
+a {		border-bottom: thin dotted;
 		color: inherit;
 		font: inherit;
 		text-decoration: inherit; }
