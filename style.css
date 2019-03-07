@@ -290,7 +290,8 @@ i.Pa {		font-weight: normal; }
 
 span.Lb { }
 b.In {		font-style: normal; }
-a.In { }
+a.In { 		font-style: normal;
+		border-bottom: 0; }
 b.Fd {		font-style: normal; }
 var.Ft {	font-style: italic;
 		font-weight: normal; }
