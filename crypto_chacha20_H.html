@@ -14,73 +14,78 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_chacha20_H</code> &#x2014;
-<div class="Nd" title="Nd">HChacha20 special-purpose hashing</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_chacha20_H</code>(<var class="Fa" title="Fa">uint8_t
-  out[32]</var>, <var class="Fa" title="Fa">const uint8_t key[32]</var>,
-  <var class="Fa" title="Fa">const uint8_t in[16]</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<code class="Fn" title="Fn">crypto_chacha20_H</code>() provides a
-  not-so-cryptographic hash. It may be used for some specific purposes, such as
-  X25519 key derivation, or XChacha20 initialisation. If in doubt, do not use
-  directly. Use
-  <a class="Xr" title="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_chacha20_H</code> &#x2014;
+<div class="Nd">HChacha20 special-purpose hashing</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_chacha20_H</code>(<var class="Fa">uint8_t
+    out[32]</var>, <var class="Fa">const uint8_t key[32]</var>,
+    <var class="Fa">const uint8_t in[16]</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<code class="Fn">crypto_chacha20_H</code>() provides a not-so-cryptographic
+  hash. It may be used for some specific purposes, such as X25519 key
+  derivation, or XChacha20 initialisation. If in doubt, do not use directly. Use
+  <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
   instead.
-<div class="Pp"></div>
-The arguments are:
+<p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">key</var></dt>
+  <dt><var class="Fa">key</var></dt>
   <dd>A sufficiently random key, such as the output of
-      <a class="Xr" title="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">in</var></dt>
+      <a class="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>.</dd>
+  <dt><var class="Fa">in</var></dt>
   <dd>The space reserved for the Chacha20 nonce and counter. It does not have to
       be random.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">out</var></dt>
-  <dd>A cryptographically secure random number <i class="Em" title="Em">if</i>
-      there is enough entropy in <var class="Fa" title="Fa">key</var>. X25519
-      shared secrets have enough entropy.</dd>
+  <dt><var class="Fa">out</var></dt>
+  <dd>A cryptographically secure random number <i class="Em">if</i> there is
+      enough entropy in <var class="Fa">key</var>. X25519 shared secrets have
+      enough entropy.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
 This function returns nothing.
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 Simple hash:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-const uint8_t key[32]; /* Must have enough entropy           */ 
-const uint8_t in [16]; /* Does not have to be random         */ 
-uint8_t       out[32]; /* Will be random iff the above holds */ 
-crypto_chacha20_H(out, key, in); 
-/* Wipe secrets if they are no longer needed */ 
-crypto_wipe(key, 32); 
+<div class="Bd Pp Bd-indent">
+<pre>
+const uint8_t key[32]; /* Must have enough entropy           */
+const uint8_t in [16]; /* Does not have to be random         */
+uint8_t       out[32]; /* Will be random iff the above holds */
+crypto_chacha20_H(out, key, in);
+/* Wipe secrets if they are no longer needed */
+crypto_wipe(key, 32);
 crypto_wipe(in , 16);
 </pre>
 </div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_chacha20_encrypt.html">crypto_chacha20_encrypt(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+<a class="Xr" href="crypto_chacha20_encrypt.html">crypto_chacha20_encrypt(3monocypher)</a>,
+  <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 This function implements HChacha20. HChacha20 derives from Chacha20 the same way
   HSalsa20 derives from Salsa20.
-<h1 class="Sh" title="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
-<b class="Sy" title="Sy">This is not a general-purpose cryptographic hash
-  function</b>.</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
+<b class="Sy">This is not a general-purpose cryptographic hash function</b>.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>

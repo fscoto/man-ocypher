@@ -14,154 +14,140 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_sign</code>,
-  <code class="Nm" title="Nm">crypto_check</code>,
-  <code class="Nm" title="Nm">crypto_sign_public_key</code> &#x2014;
-<div class="Nd" title="Nd">public key signatures</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_sign_public_key</code>(<var class="Fa" title="Fa">uint8_t
-  public_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
-  secret_key[32]</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_sign</code>(<var class="Fa" title="Fa">uint8_t
-  signature[64]</var>, <var class="Fa" title="Fa">const uint8_t
-  secret_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
-  public_key[32]</var>, <var class="Fa" title="Fa">const uint8_t *message</var>,
-  <var class="Fa" title="Fa">size_t message_size</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">int</var>
-<br/>
-<code class="Fn" title="Fn">crypto_check</code>(<var class="Fa" title="Fa">const
-  uint8_t signature[64]</var>, <var class="Fa" title="Fa">const uint8_t
-  public_key[32]</var>, <var class="Fa" title="Fa">const uint8_t *message</var>,
-  <var class="Fa" title="Fa">size_t message_size</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<code class="Fn" title="Fn">crypto_sign</code>() and
-  <code class="Fn" title="Fn">crypto_check</code>() provide EdDSA public key
-  signatures and verification.
-<div class="Pp"></div>
-The arguments are:
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_sign</code>, <code class="Nm">crypto_check</code>,
+  <code class="Nm">crypto_sign_public_key</code> &#x2014;
+<div class="Nd">public key signatures</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_sign_public_key</code>(<var class="Fa">uint8_t
+    public_key[32]</var>, <var class="Fa">const uint8_t
+  secret_key[32]</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_sign</code>(<var class="Fa">uint8_t
+    signature[64]</var>, <var class="Fa">const uint8_t secret_key[32]</var>,
+    <var class="Fa">const uint8_t public_key[32]</var>, <var class="Fa">const
+    uint8_t *message</var>, <var class="Fa">size_t message_size</var>);</p>
+<p class="Pp"><var class="Ft">int</var>
+  <br/>
+  <code class="Fn">crypto_check</code>(<var class="Fa">const uint8_t
+    signature[64]</var>, <var class="Fa">const uint8_t public_key[32]</var>,
+    <var class="Fa">const uint8_t *message</var>, <var class="Fa">size_t
+    message_size</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<code class="Fn">crypto_sign</code>() and <code class="Fn">crypto_check</code>()
+  provide EdDSA public key signatures and verification.
+<p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">signature</var></dt>
+  <dt><var class="Fa">signature</var></dt>
   <dd>The signature.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">secret_key</var></dt>
+  <dt><var class="Fa">secret_key</var></dt>
   <dd>A 32-byte random number, known only to you. See
-      <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a> about
-      random number generation (use your operating system's random number
-      generator). Do not use the same private key for both signatures and key
-      exchanges. The public keys are different, and revealing both may leak
-      information.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">public_key</var></dt>
-  <dd>The public key, generated from <var class="Fa" title="Fa">secret_key</var>
-      with <code class="Fn" title="Fn">crypto_sign_public_key</code>().</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">message</var></dt>
+      <a class="Xr" href="intro.html">intro(3monocypher)</a> about random number
+      generation (use your operating system's random number generator). Do not
+      use the same private key for both signatures and key exchanges. The public
+      keys are different, and revealing both may leak information.</dd>
+  <dt><var class="Fa">public_key</var></dt>
+  <dd>The public key, generated from <var class="Fa">secret_key</var> with
+      <code class="Fn">crypto_sign_public_key</code>().</dd>
+  <dt><var class="Fa">message</var></dt>
   <dd>Message to sign.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">message_size</var></dt>
-  <dd>Length of <var class="Fa" title="Fa">message</var>, in bytes.</dd>
+  <dt><var class="Fa">message_size</var></dt>
+  <dd>Length of <var class="Fa">message</var>, in bytes.</dd>
 </dl>
-<div class="Pp"></div>
-<var class="Fa" title="Fa">signature</var> and
-  <var class="Fa" title="Fa">message</var> may overlap.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_sign_public_key</code>() computes the public
-  key of the specified secret key.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_sign</code>() signs a message with
-  <var class="Fa" title="Fa">secret_key</var>. The public key is optional, and
-  will be recomputed if not provided. This recomputation doubles the execution
-  time.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_check</code>() checks that a given signature
-  is genuine. Meaning, only someone who had the private key could have signed
-  the message. <b class="Sy" title="Sy">It does not run in constant time</b>. It
-  does not have to in most threat models, because nothing is secret: everyone
-  knows the public key, and the signature and message are rarely secret. If the
-  message needs to be secret, use
-  <a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
-  and
-  <a class="Xr" title="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>
-  instead.
-<div class="Pp"></div>
-An incremental interface is available; see
-  <a class="Xr" title="Xr" href="crypto_sign_init_first_pass.html">crypto_sign_init_first_pass(3monocypher)</a>.
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+<p class="Pp"><var class="Fa">signature</var> and <var class="Fa">message</var>
+    may overlap.</p>
+<p class="Pp"><code class="Fn">crypto_sign_public_key</code>() computes the
+    public key of the specified secret key.</p>
+<p class="Pp"><code class="Fn">crypto_sign</code>() signs a message with
+    <var class="Fa">secret_key</var>. The public key is optional, and will be
+    recomputed if not provided. This recomputation doubles the execution
+  time.</p>
+<p class="Pp"><code class="Fn">crypto_check</code>() checks that a given
+    signature is genuine. Meaning, only someone who had the private key could
+    have signed the message. <b class="Sy">It does not run in constant time</b>.
+    It does not have to in most threat models, because nothing is secret:
+    everyone knows the public key, and the signature and message are rarely
+    secret. If the message needs to be secret, use
+    <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
+    and
+    <a class="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>
+    instead.</p>
+<p class="Pp">An incremental interface is available; see
+    <a class="Xr" href="crypto_sign_init_first_pass.html">crypto_sign_init_first_pass(3monocypher)</a>.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<code class="Fn" title="Fn">crypto_sign_public_key</code>() and
-  <code class="Fn" title="Fn">crypto_sign</code>() return nothing.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_check</code>() returns 0 for legitimate
-  messages and -1 for forgeries.
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+<code class="Fn">crypto_sign_public_key</code>() and
+  <code class="Fn">crypto_sign</code>() return nothing.
+<p class="Pp"><code class="Fn">crypto_check</code>() returns 0 for legitimate
+    messages and -1 for forgeries.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 Generate a public key from a random secret key:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-const uint8_t sk[32]; /* Random secret key   */ 
-uint8_t       pk[32]; /* Matching public key */ 
-crypto_sign_public_key(pk, sk); 
-/* Wipe the secret key if it is no longer needed */ 
+<div class="Bd Pp Bd-indent">
+<pre>
+const uint8_t sk[32]; /* Random secret key   */
+uint8_t       pk[32]; /* Matching public key */
+crypto_sign_public_key(pk, sk);
+/* Wipe the secret key if it is no longer needed */
 crypto_wipe(sk, 32);
 </pre>
 </div>
-<div class="Pp"></div>
-Sign a message:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-const uint8_t sk       [ 32]; /* Your secret key     */ 
-const uint8_t pk       [ 32]; /* Matching public key */ 
-const uint8_t message  [500]; /* Message to sign     */ 
-uint8_t       signature[ 64]; 
-crypto_sign(signature, sk, pk, message, 500); 
-/* Wipe the secret key if it is no longer needed */ 
+<p class="Pp">Sign a message:</p>
+<div class="Bd Pp Bd-indent">
+<pre>
+const uint8_t sk       [ 32]; /* Your secret key     */
+const uint8_t pk       [ 32]; /* Matching public key */
+const uint8_t message  [500]; /* Message to sign     */
+uint8_t       signature[ 64];
+crypto_sign(signature, sk, pk, message, 500);
+/* Wipe the secret key if it is no longer needed */
 crypto_wipe(sk, 32);
 </pre>
 </div>
-<div class="Pp"></div>
-Check the above:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-const uint8_t pk       [ 32]; /* Their public key   */ 
-const uint8_t message  [500]; /* Signed message     */ 
-const uint8_t signature[ 64]; /* Signature to check */ 
-if (crypto_check(signature, pk, message, 500)) { 
-    /* Message is corrupted, abort processing */ 
-} else { 
-    /* Message is genuine */ 
+<p class="Pp">Check the above:</p>
+<div class="Bd Pp Bd-indent">
+<pre>
+const uint8_t pk       [ 32]; /* Their public key   */
+const uint8_t message  [500]; /* Signed message     */
+const uint8_t signature[ 64]; /* Signature to check */
+if (crypto_check(signature, pk, message, 500)) {
+    /* Message is corrupted, abort processing */
+} else {
+    /* Message is genuine */
 }
 </pre>
 </div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+<a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
+  <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 These functions implement PureEdDSA with Curve25519 and Blake2b, as described in
   RFC 8032. This is the same as Ed25519, with Blake2b instead of SHA-512.
-<h1 class="Sh" title="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
-<h2 class="Ss" title="Ss" id="Signature_malleability"><a class="permalink" href="#Signature_malleability">Signature
+<section class="Ss">
+<h2 class="Ss" id="Signature_malleability"><a class="permalink" href="#Signature_malleability">Signature
   malleability</a></h2>
 EdDSA signatures are not unique like cryptographic hashes. For any given public
   key and message, there are many possible valid signatures. Some of them
@@ -169,15 +155,19 @@ EdDSA signatures are not unique like cryptographic hashes. For any given public
   existing signature. Observing a valid signature only proves that someone with
   knowledge of the private key signed the document at some point. Do not rely on
   any other security property.
-<h2 class="Ss" title="Ss" id="Fault_injection"><a class="permalink" href="#Fault_injection">Fault
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Fault_injection"><a class="permalink" href="#Fault_injection">Fault
   injection</a></h2>
 Fault injection (also known as glitching) may be used to manipulate the
   resulting signature and recover the secret key in some cases. This requires
   hardware access. If attackers are expected to have such access and the
-  relevant equipment, use <code class="Fn" title="Fn">crypto_check</code>() to
-  verify the signature before sending it away. This verification reduces the
-  speed of the whole operation by a factor of 3, and only provides an incomplete
-  protection.</div>
+  relevant equipment, use <code class="Fn">crypto_check</code>() to verify the
+  signature before sending it away. This verification reduces the speed of the
+  whole operation by a factor of 3, and only provides an incomplete protection.
+</section>
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>

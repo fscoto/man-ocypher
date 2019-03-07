@@ -14,38 +14,43 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_memcmp</code>,
-  <code class="Nm" title="Nm">crypto_zerocmp</code> &#x2014;
-<div class="Nd" title="Nd">deprecated timing-safe data comparisons</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">int</var>
-<br/>
-<code class="Fn" title="Fn">crypto_memcmp</code>(<var class="Fa" title="Fa">const
-  uint8_t *p1</var>, <var class="Fa" title="Fa">size_t n</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">int</var>
-<br/>
-<code class="Fn" title="Fn">crypto_zerocmp</code>(<var class="Fa" title="Fa">const
-  uint8_t *p</var>, <var class="Fa" title="Fa">size_t n</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<code class="Fn" title="Fn">crypto_memcmp</code>() and
-  <code class="Fn" title="Fn">crypto_zerocmp</code>() were meant to provide
-  timing-safe data comparison. They have been removed from Monocypher because
-  they could not uphold those guarantees when compiled with
-  <code class="Fl" title="Fl">-O3</code> on common compilers. Use
-  <a class="Xr" title="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a>
-  and
-  <a class="Xr" title="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_memcmp</code>, <code class="Nm">crypto_zerocmp</code>
+  &#x2014;
+<div class="Nd">deprecated timing-safe data comparisons</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">int</var>
+  <br/>
+  <code class="Fn">crypto_memcmp</code>(<var class="Fa">const uint8_t *p1</var>,
+    <var class="Fa">size_t n</var>);</p>
+<p class="Pp"><var class="Ft">int</var>
+  <br/>
+  <code class="Fn">crypto_zerocmp</code>(<var class="Fa">const uint8_t *p</var>,
+    <var class="Fa">size_t n</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<code class="Fn">crypto_memcmp</code>() and
+  <code class="Fn">crypto_zerocmp</code>() were meant to provide timing-safe
+  data comparison. They have been removed from Monocypher because they could not
+  uphold those guarantees when compiled with <code class="Fl">-O3</code> on
+  common compilers. Use
+  <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
+  <a class="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a> and
+  <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
   instead.
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a></div>
+<a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>

@@ -14,59 +14,60 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_wipe</code> &#x2014;
-<div class="Nd" title="Nd">wipe data from memory</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_wipe</code>(<var class="Fa" title="Fa">void
-  *secret</var>, <var class="Fa" title="Fa">size_t secret_size</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<code class="Fn" title="Fn">crypto_wipe</code>() securely erases sensitive data
-  in memory.
-<div class="Pp"></div>
-Sensitive data (such as cryptographic keys or secret plaintexts) should be
-  erased from memory as early as possible, to minimise the window in which it
-  can be leaked. Standard functions like memset and bzero are not safe to use,
-  as the compiler may decide they have no effect and optimise them out.
-<div class="Pp"></div>
-The arguments are:
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_wipe</code> &#x2014;
+<div class="Nd">wipe data from memory</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_wipe</code>(<var class="Fa">void *secret</var>,
+    <var class="Fa">size_t secret_size</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<code class="Fn">crypto_wipe</code>() securely erases sensitive data in memory.
+<p class="Pp">Sensitive data (such as cryptographic keys or secret plaintexts)
+    should be erased from memory as early as possible, to minimise the window in
+    which it can be leaked. Standard functions like memset and bzero are not
+    safe to use, as the compiler may decide they have no effect and optimise
+    them out.</p>
+<p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">secret</var></dt>
+  <dt><var class="Fa">secret</var></dt>
   <dd>The buffer to erase.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">secret_size</var></dt>
+  <dt><var class="Fa">secret_size</var></dt>
   <dd>The number of bytes to erase from the buffer. Normally this is the size of
       the entire buffer.</dd>
 </dl>
-<div class="Pp"></div>
-Monocypher will wipe its context structs when finalizing an operation such as
-  signing or decrypting. When using direct interfaces like
-  <a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  these context structs are invisible to you. They are exposed in incremental
-  interfaces like
-  <a class="Xr" title="Xr" href="crypto_lock_init.html">crypto_lock_init(3monocypher)</a>.
-  The original key buffer does not get automatically wiped. When using
-  incremental interfaces, you may want to wipe the original key buffers
-  immediately after calling the respective init function.
-<div class="Pp"></div>
-Using <code class="Fn" title="Fn">crypto_wipe</code>() alone may not suffice for
-  security. It is recommended to lock down relevant memory regions as well.
-  Refer to <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a> for
-  instructions on how to lock down memory on common operating systems.
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+<p class="Pp">Monocypher will wipe its context structs when finalizing an
+    operation such as signing or decrypting. When using direct interfaces like
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>, these
+    context structs are invisible to you. They are exposed in incremental
+    interfaces like
+    <a class="Xr" href="crypto_lock_init.html">crypto_lock_init(3monocypher)</a>.
+    The original key buffer does not get automatically wiped. When using
+    incremental interfaces, you may want to wipe the original key buffers
+    immediately after calling the respective init function.</p>
+<p class="Pp">Using <code class="Fn">crypto_wipe</code>() alone may not suffice
+    for security. It is recommended to lock down relevant memory regions as
+    well. Refer to <a class="Xr" href="intro.html">intro(3monocypher)</a> for
+    instructions on how to lock down memory on common operating systems.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
 This function returns nothing.
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a></div>
+<a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>

@@ -14,212 +14,184 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_argon2i</code> &#x2014;
-<div class="Nd" title="Nd">password key derivation</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_argon2i</code>(<var class="Fa" title="Fa">uint8_t
-  *hash</var>, <var class="Fa" title="Fa">uint32_t hash_size</var>,
-  <var class="Fa" title="Fa">void *work_area</var>,
-  <var class="Fa" title="Fa">uint32_t nb_blocks</var>,
-  <var class="Fa" title="Fa">uint32_t nb_iterations</var>,
-  <var class="Fa" title="Fa">const uint8_t *password</var>,
-  <var class="Fa" title="Fa">uint32_t password_size</var>,
-  <var class="Fa" title="Fa">const uint8_t *salt</var>,
-  <var class="Fa" title="Fa">uint32_t salt_size</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_argon2i_general</code>(<var class="Fa" title="Fa">uint8_t
-  *hash</var>, <var class="Fa" title="Fa">uint32_t hash_size</var>,
-  <var class="Fa" title="Fa">void *work_area</var>,
-  <var class="Fa" title="Fa">uint32_t nb_blocks</var>,
-  <var class="Fa" title="Fa">uint32_t nb_iterations</var>,
-  <var class="Fa" title="Fa">const uint8_t *password</var>,
-  <var class="Fa" title="Fa">uint32_t password_size</var>,
-  <var class="Fa" title="Fa">const uint8_t *salt</var>,
-  <var class="Fa" title="Fa">uint32_t salt_size</var>,
-  <var class="Fa" title="Fa">const uint8_t *key</var>,
-  <var class="Fa" title="Fa">uint32_t key_size</var>,
-  <var class="Fa" title="Fa">const uint8_t *ad</var>,
-  <var class="Fa" title="Fa">uint32_t ad_size</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_argon2i</code> &#x2014;
+<div class="Nd">password key derivation</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_argon2i</code>(<var class="Fa">uint8_t *hash</var>,
+    <var class="Fa">uint32_t hash_size</var>, <var class="Fa">void
+    *work_area</var>, <var class="Fa">uint32_t nb_blocks</var>,
+    <var class="Fa">uint32_t nb_iterations</var>, <var class="Fa">const uint8_t
+    *password</var>, <var class="Fa">uint32_t password_size</var>,
+    <var class="Fa">const uint8_t *salt</var>, <var class="Fa">uint32_t
+    salt_size</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_argon2i_general</code>(<var class="Fa">uint8_t
+    *hash</var>, <var class="Fa">uint32_t hash_size</var>, <var class="Fa">void
+    *work_area</var>, <var class="Fa">uint32_t nb_blocks</var>,
+    <var class="Fa">uint32_t nb_iterations</var>, <var class="Fa">const uint8_t
+    *password</var>, <var class="Fa">uint32_t password_size</var>,
+    <var class="Fa">const uint8_t *salt</var>, <var class="Fa">uint32_t
+    salt_size</var>, <var class="Fa">const uint8_t *key</var>,
+    <var class="Fa">uint32_t key_size</var>, <var class="Fa">const uint8_t
+    *ad</var>, <var class="Fa">uint32_t ad_size</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
 Argon2i is a resource intensive password key derivation scheme optimised for the
   typical x86-like processor. It runs in constant time with respect to the
   contents of the password.
-<div class="Pp"></div>
-Typical applications are password checking (for online services), and key
-  derivation (for encryption). Derived keys can be used to encrypt private keys
-  or password databases.
-<div class="Pp"></div>
-The version provided by Monocypher has no threading support, so the degree of
-  parallelism is limited to 1. This is considered good enough for most purposes.
-<div class="Pp"></div>
-The arguments to <code class="Fn" title="Fn">crypto_argon2i</code>() are:
+<p class="Pp">Typical applications are password checking (for online services),
+    and key derivation (for encryption). Derived keys can be used to encrypt
+    private keys or password databases.</p>
+<p class="Pp">The version provided by Monocypher has no threading support, so
+    the degree of parallelism is limited to 1. This is considered good enough
+    for most purposes.</p>
+<p class="Pp">The arguments to <code class="Fn">crypto_argon2i</code>() are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">hash</var></dt>
+  <dt><var class="Fa">hash</var></dt>
   <dd>The output hash.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">hash_size</var></dt>
-  <dd>Length of <var class="Fa" title="Fa">hash</var>, in bytes. This argument
-      should be set to 32 or 64 for compatibility with the
-      <code class="Fn" title="Fn">crypto_verify*</code>() constant time
-      comparison functions.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">work_area</var></dt>
+  <dt><var class="Fa">hash_size</var></dt>
+  <dd>Length of <var class="Fa">hash</var>, in bytes. This argument should be
+      set to 32 or 64 for compatibility with the
+      <code class="Fn">crypto_verify*</code>() constant time comparison
+      functions.</dd>
+  <dt><var class="Fa">work_area</var></dt>
   <dd>Temporary buffer for the algorithm, allocated by the caller. It must be
-      <var class="Fa" title="Fa">nb_blocks</var> &#x00D7; 1024 bytes big, and
-      suitably aligned for 64-bit integers. If you are not sure how to allocate
-      that buffer, just use <code class="Fn" title="Fn">malloc</code>().
-    <div class="Pp"></div>
-    The work area is automatically wiped by
-      <code class="Fn" title="Fn">crypto_argon2i</code>().</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">nb_blocks</var></dt>
+      <var class="Fa">nb_blocks</var> &#x00D7; 1024 bytes big, and suitably
+      aligned for 64-bit integers. If you are not sure how to allocate that
+      buffer, just use <code class="Fn">malloc</code>().
+    <p class="Pp">The work area is automatically wiped by
+        <code class="Fn">crypto_argon2i</code>().</p>
+  </dd>
+  <dt><var class="Fa">nb_blocks</var></dt>
   <dd>The number of blocks for the work area. Must be at least 8. A value of
       100000 (one hundred megabytes) is a good starting point. If the
       computation takes too long, reduce this number. If it is too fast,
       increase this number. If it is still too fast with all available memory,
-      increase <var class="Fa" title="Fa">nb_iterations</var>.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">nb_iterations</var></dt>
+      increase <var class="Fa">nb_iterations</var>.</dd>
+  <dt><var class="Fa">nb_iterations</var></dt>
   <dd>The number of iterations. It must be at least 1. A value of 3 is
       recommended.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">password</var></dt>
+  <dt><var class="Fa">password</var></dt>
   <dd>The password to hash. It should be wiped with
-      <a class="Xr" title="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>
-      after being hashed.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">password_size</var></dt>
-  <dd>Length of <var class="Fa" title="Fa">password</var>, in bytes.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">salt</var></dt>
+      <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> after
+      being hashed.</dd>
+  <dt><var class="Fa">password_size</var></dt>
+  <dd>Length of <var class="Fa">password</var>, in bytes.</dd>
+  <dt><var class="Fa">salt</var></dt>
   <dd>A password salt. This should be filled with random bytes, generated
       separately for each password to be hashed. See
-      <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a> for
-      advice about generating random bytes (use the operating system's random
-      number generator).</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">salt_size</var></dt>
-  <dd>Length of <var class="Fa" title="Fa">salt</var>, in bytes. Must be at
-      least 8. 16 is recommended.</dd>
+      <a class="Xr" href="intro.html">intro(3monocypher)</a> for advice about
+      generating random bytes (use the operating system's random number
+      generator).</dd>
+  <dt><var class="Fa">salt_size</var></dt>
+  <dd>Length of <var class="Fa">salt</var>, in bytes. Must be at least 8. 16 is
+      recommended.</dd>
 </dl>
-<div class="Pp"></div>
-The output hash must not overlap with the work area, or it will be wiped along
-  with it. Any other overlap is permitted.
-<div class="Pp"></div>
-Use
-  <a class="Xr" title="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a>
-  or
-  <a class="Xr" title="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
-  to compare password hashes to prevent timing attacks.
-<div class="Pp"></div>
-To select the <var class="Fa" title="Fa">nb_blocks</var> and
-  <var class="Fa" title="Fa">nb_iterations</var> parameters, it should first be
-  decided how long the computation should take. For user authentication, we
-  recommend somewhere between half a second (convenient) and several seconds
-  (paranoid). The computation should use as much memory as can be spared.
-<div class="Pp"></div>
-Since parameter selection depends on your hardware, some trial and error will be
-  required in order to determine the ideal settings. Three iterations and 100000
-  blocks (that is, one hundred megabytes of memory) is a good starting point.
-  Adjust <var class="Fa" title="Fa">nb_blocks</var> first. If using all
-  available memory is not slow enough, increase
-  <var class="Fa" title="Fa">nb_iterations</var>.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_argon2i_general</code>() is a variant of
-  <code class="Fn" title="Fn">crypto_argon2i</code>() that supports keyed
-  hashing and hashing of additional data. The additional arguments are:
+<p class="Pp">The output hash must not overlap with the work area, or it will be
+    wiped along with it. Any other overlap is permitted.</p>
+<p class="Pp">Use
+    <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
+    <a class="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a>
+    or
+    <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
+    to compare password hashes to prevent timing attacks.</p>
+<p class="Pp">To select the <var class="Fa">nb_blocks</var> and
+    <var class="Fa">nb_iterations</var> parameters, it should first be decided
+    how long the computation should take. For user authentication, we recommend
+    somewhere between half a second (convenient) and several seconds (paranoid).
+    The computation should use as much memory as can be spared.</p>
+<p class="Pp">Since parameter selection depends on your hardware, some trial and
+    error will be required in order to determine the ideal settings. Three
+    iterations and 100000 blocks (that is, one hundred megabytes of memory) is a
+    good starting point. Adjust <var class="Fa">nb_blocks</var> first. If using
+    all available memory is not slow enough, increase
+    <var class="Fa">nb_iterations</var>.</p>
+<p class="Pp"><code class="Fn">crypto_argon2i_general</code>() is a variant of
+    <code class="Fn">crypto_argon2i</code>() that supports keyed hashing and
+    hashing of additional data. The additional arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">key</var></dt>
-  <dd>A key to use in the hash. Can be <code class="Dv" title="Dv">NULL</code>
-      if <var class="Fa" title="Fa">key_size</var> is zero. The key is generally
-      not needed, but it does have some uses. In the context of password
-      derivation, it would be stored separately from the password database, and
-      would remain secret even if an attacker were to steal the database. Note
-      that changing the key requires rehashing the user's password, which is
-      only possible upon user login.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">key_size</var></dt>
-  <dd>Length of <var class="Fa" title="Fa">key</var>, in bytes. Must be zero if
-      there is no key.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">ad</var></dt>
+  <dt><var class="Fa">key</var></dt>
+  <dd>A key to use in the hash. Can be <code class="Dv">NULL</code> if
+      <var class="Fa">key_size</var> is zero. The key is generally not needed,
+      but it does have some uses. In the context of password derivation, it
+      would be stored separately from the password database, and would remain
+      secret even if an attacker were to steal the database. Note that changing
+      the key requires rehashing the user's password, which is only possible
+      upon user login.</dd>
+  <dt><var class="Fa">key_size</var></dt>
+  <dd>Length of <var class="Fa">key</var>, in bytes. Must be zero if there is no
+      key.</dd>
+  <dt><var class="Fa">ad</var></dt>
   <dd>Additional data. This is additional data that goes into the hash, similar
       to the authenticated encryption with authenticated data (AEAD)
       construction in
-      <a class="Xr" title="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>.
+      <a class="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>.
       This most likely has no practical application but is exposed for the sake
-      of completeness. This parameter may be
-      <code class="Dv" title="Dv">NULL</code> if
-      <var class="Fa" title="Fa">ad_size</var> is zero.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">ad_size</var></dt>
-  <dd>Length of <var class="Fa" title="Fa">ad</var>, in bytes. Must be zero if
-      there is no additional data.</dd>
+      of completeness. This parameter may be <code class="Dv">NULL</code> if
+      <var class="Fa">ad_size</var> is zero.</dd>
+  <dt><var class="Fa">ad_size</var></dt>
+  <dd>Length of <var class="Fa">ad</var>, in bytes. Must be zero if there is no
+      additional data.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
 These functions return nothing.
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 This example shows how to hash a password with the recommended baseline
   parameters:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-uint8_t        hash[32];                    /* Output hash     */ 
-const uint8_t *password;                    /* User's password */ 
-uint8_t        password_size;               /* Password length */ 
-const uint8_t  salt[16];                    /* Random salt     */ 
-const uint32_t nb_blocks = 100000;          /* 100 megabytes   */ 
-const uint32_t nb_iterations = 3;           /* 3 iterations    */ 
-void *work_area = malloc(nb_blocks * 1024); /* Work area       */ 
-if (work_area == NULL) { 
-    /* Handle malloc() failure */ 
-} 
-crypto_argon2i(hash, 32, 
-               work_area, nb_blocks, nb_iterations, 
-               password, password_size, 
-               salt, 16); 
-/* Wipe secrets if they are no longer needed */ 
-crypto_wipe(password, password_size); 
+<div class="Bd Pp Bd-indent">
+<pre>
+uint8_t        hash[32];                    /* Output hash     */
+const uint8_t *password;                    /* User's password */
+uint8_t        password_size;               /* Password length */
+const uint8_t  salt[16];                    /* Random salt     */
+const uint32_t nb_blocks = 100000;          /* 100 megabytes   */
+const uint32_t nb_iterations = 3;           /* 3 iterations    */
+void *work_area = malloc(nb_blocks * 1024); /* Work area       */
+if (work_area == NULL) {
+    /* Handle malloc() failure */
+}
+crypto_argon2i(hash, 32,
+               work_area, nb_blocks, nb_iterations,
+               password, password_size,
+               salt, 16);
+/* Wipe secrets if they are no longer needed */
+crypto_wipe(password, password_size);
 free(work_area);
 </pre>
 </div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+<a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+  <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
+  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 These functions implement Argon2i. An RFC draft is being maintained.
-<h1 class="Sh" title="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
 Any deviation from the specified input and output length ranges results in
-  <b class="Sy" title="Sy">undefined behaviour</b>. Make sure your inputs are
-  correct.</div>
+  <b class="Sy">undefined behaviour</b>. Make sure your inputs are correct.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>
