@@ -55,12 +55,13 @@ These functions perform a key exchange between a <i class="Em">client</i> and a
   <i class="Em">server</i> to establish a secure channel. The result of the key
   exchange is a <i class="Em">session key</i> that is suitable for use with
   <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>. The
-  <i class="Em">server</i> generates an X25519 secret key and its corresponding
-  public key ahead of time using
-  <a class="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>
-  when the key exchange starts. The <i class="Em">client</i> does not need to
-  know the <i class="Em">server's</i> public key before performing the key
-  exchange. The <i class="Em">client</i> initiates the key exchange.
+  <i class="Em">server</i> and the <i class="Em">client</i> each generate a
+  long-term X25519 secret key and its corresponding public key ahead of time
+  before the key exchange using
+  <a class="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>.
+  The <i class="Em">client</i> must know the <i class="Em">server's</i> public
+  key before performing the key exchange. The <i class="Em">client</i> initiates
+  the key exchange.
 <p class="Pp">These functions differ from the
     <a class="Xr" href="crypto_kex_xk1_init_client.html">crypto_kex_xk1_init_client(3monocypher)</a>
     functions in that the functions described in this page can be used even if a
