@@ -138,7 +138,7 @@ td {		vertical-align: top; }
 ul, ol, dl {	margin-top: 0em;
 		margin-bottom: 0em; }
 
-a {		border-bottom: thin dotted;
+a {		border-bottom: thin dotted #808080;
 		color: inherit;
 		font: inherit;
 		text-decoration: inherit; }
