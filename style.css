@@ -121,7 +121,7 @@
 
 
 body {	margin: 1em auto;
-	max-width: 512px;
+	max-width: 65em;
 	max-width: 76ch;
 	padding-bottom: 12em;
 	line-height: 1.4;
@@ -137,6 +137,7 @@ table {		margin-top: 0em;
 td {		vertical-align: top; }
 ul, ol, dl {	margin-top: 0em;
 		margin-bottom: 0em; }
+li, dt {	margin-top: 1em; }
 
 a {		border-bottom: thin dotted #808080;
 		color: inherit;
