@@ -48,10 +48,18 @@ Poly1305 is a one time authenticator, derived from Carter &amp; Wegman universal
   timing attacks.
 <h2 class="Ss" title="Ss" id="Key_exchange"><a class="permalink" href="#Key_exchange">Key
   exchange</a></h2>
-<a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
-  implements X25519, an elliptic curve Diffie Hellman key exchange algorithm
-  based on Curve25519. X25519 derives a shared secret from two private/public
-  key pairs. It is fast, simple, and relatively easy to implement securely.
+The
+  <a class="Xr" title="Xr" href="crypto_kex_xk1_init_client.html">crypto_kex_xk1_init_client(3monocypher)</a>
+  and
+  <a class="Xr" title="Xr" href="crypto_kex_x_init_client.html">crypto_kex_x_init_client(3monocypher)</a>
+  families of functions, provide key exhange protocols with forward secrecy.
+<div class="Pp"></div>
+If more control over the key exchange is required, there is
+  <a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+  which implements X25519, an elliptic curve Diffie Hellman key exchange
+  algorithm based on Curve25519. X25519 derives a shared secret from two
+  private/public key pairs. It is fast, simple, and relatively easy to implement
+  securely.
 <h2 class="Ss" title="Ss" id="Public_key_signatures"><a class="permalink" href="#Public_key_signatures">Public
   key signatures</a></h2>
 <a class="Xr" title="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a>
