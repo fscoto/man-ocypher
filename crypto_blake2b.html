@@ -204,6 +204,16 @@ crypto_blake2b_final(&amp;ctx, hash);
 These functions implement BLAKE2b.
 </section>
 <section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_blake2b</code>(),
+  <code class="Fn">crypto_blake2b_general</code>(),
+  <code class="Fn">crypto_blake2b_general_init</code>(),
+  <code class="Fn">crypto_blake2b_init</code>(),
+  <code class="Fn">crypto_blake2b_update</code>(), and
+  <code class="Fn">crypto_blake2b_final</code>() functions first appeared in
+  Monocypher 0.1.
+</section>
+<section class="Sh">
 <h1 class="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
 Monocypher does not perform any input validation. Any deviation from the
   specified input and output length ranges results in <b class="Sy">undefined

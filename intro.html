@@ -186,8 +186,8 @@ Use the facilities of your operating system. Avoid user space random number
 <section class="Ss">
 <h2 class="Ss" id="Timing_attacks"><a class="permalink" href="#Timing_attacks">Timing
   attacks</a></h2>
-Monocypher runs in &quot;constant time&quot;. There is no flow from secrets to
-  timings. No secret dependent indices, no secret dependent branches.
+Monocypher runs in &#x201C;constant time&#x201D;. There is no flow from secrets
+  to timings. No secret dependent indices, no secret dependent branches.
   Nevertheless, there are a couple important caveats.
 <p class="Pp">Comparing secrets should be done with constant-time comparison
     functions, such as
@@ -211,7 +211,8 @@ Encryption does not hide the length of the input plaintext. Most compression
   characters. If an attacker can add data to the input before it is compressed
   and encrypted, they can observe changes to the ciphertext length to recover
   secrets from the input. Researchers have demonstrated an attack on HTTPS to
-  steal session cookies when compression is enabled, dubbed &quot;CRIME&quot;.
+  steal session cookies when compression is enabled, dubbed
+  &#x201C;CRIME&#x201D;.
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Forward_secrecy"><a class="permalink" href="#Forward_secrecy">Forward

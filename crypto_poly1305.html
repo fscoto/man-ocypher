@@ -47,8 +47,8 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-Poly1305 is a one-time message authentication code. &quot;One-time&quot; means
-  the authentication key can be used only once. <b class="Sy">This makes
+Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+  means the authentication key can be used only once. <b class="Sy">This makes
   Poly1305 easy to misuse</b>. On the other hand, Poly1305 is fast, and provably
   secure if used correctly.
 <p class="Pp">Poly1305 is a low-level primitive. Consider using authenticated
@@ -154,6 +154,14 @@ crypto_poly1305_final(&amp;ctx, mac);
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 These functions implement Poly1305, described in RFC 8439.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_poly1305_init</code>(),
+  <code class="Fn">crypto_poly1305_update</code>(), and
+  <code class="Fn">crypto_poly1305_final</code>() functions first appeared in
+  Monocypher 0.1. <code class="Fn">crypto_poly1305</code>() first appeared in
+  Monocypher 1.1.0.
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY

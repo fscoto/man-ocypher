@@ -117,6 +117,12 @@ crypto_wipe(shared_secret, 32);
 This function implements X25519, described in RFC 7748.
 </section>
 <section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_x25519</code>(), and
+  <code class="Fn">crypto_x25519_public_key</code>() functions first appeared in
+  Monocypher 0.1.
+</section>
+<section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 If either of the long term secret keys leaks, it may compromise

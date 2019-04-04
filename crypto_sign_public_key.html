@@ -145,6 +145,16 @@ These functions implement PureEdDSA with Curve25519 and Blake2b, as described in
   RFC 8032. This is the same as Ed25519, with Blake2b instead of SHA-512.
 </section>
 <section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_sign</code>(),
+  <code class="Fn">crypto_check</code>(), and
+  <code class="Fn">crypto_sign_public_key</code>() functions appeared in
+  Monocypher 0.2.
+<p class="Pp"><b class="Sy">A critical security vulnerability</b> that caused
+    all-zero signatures to be accepted was introduced in Monocypher 0.3; it was
+    fixed in Monocypher 1.1.1 and 2.0.4.</p>
+</section>
+<section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 <section class="Ss">

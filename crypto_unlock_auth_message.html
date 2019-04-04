@@ -279,6 +279,24 @@ These functions implement RFC 8439, with XChacha20 instead of Chacha20.
   Chacha20 itself is secure).
 </section>
 <section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_lock_init</code>(),
+  <code class="Fn">crypto_lock_auth_ad</code>(),
+  <code class="Fn">crypto_lock_auth_message</code>(),
+  <code class="Fn">crypto_lock_update</code>(),
+  <code class="Fn">crypto_lock_final</code>(),
+  <code class="Fn">crypto_unlock_init</code>(),
+  <code class="Fn">crypto_unlock_auth_ad</code>(),
+  <code class="Fn">crypto_unlock_auth_message</code>(),
+  <code class="Fn">crypto_unlock_update</code>(), and
+  <code class="Fn">crypto_unlock_final</code>() functions first appeared in
+  Monocypher 1.1.0. <code class="Fn">crypto_lock_aead_auth</code>() and
+  <code class="Fn">crypto_unlock_aead_auth</code>() were renamed to
+  <code class="Fn">crypto_lock_auth_ad</code>() and
+  <code class="Fn">crypto_unlock_auth_ad</code>() respectively in Monocypher
+  2.0.0.
+</section>
+<section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 Messages are not verified until the call to

@@ -188,6 +188,13 @@ free(work_area);
 These functions implement Argon2i. An RFC draft is being maintained.
 </section>
 <section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_argon2i_general</code>() function first appeared in
+  Monocypher 0.1 but was called <code class="Fn">crypto_argon2i</code>(); it was
+  renamed to its current name in Monocypher 1.1.0. The current
+  <code class="Fn">crypto_argon2i</code>() first appeared in Monocypher 1.1.0.
+</section>
+<section class="Sh">
 <h1 class="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
 Any deviation from the specified input and output length ranges results in
   <b class="Sy">undefined behaviour</b>. Make sure your inputs are correct.

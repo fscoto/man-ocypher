@@ -126,6 +126,12 @@ These functions implement X25519, described in RFC 7748.
   <code class="Fn">crypto_key_exchange</code>() uses HChacha20 as well.
 </section>
 <section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_key_exchange</code>() function first appeared in
+  Monocypher 0.2. The <code class="Fn">crypto_key_exchange_public_key</code>()
+  macro alias first appeared in Monocypher 1.1.0.
+</section>
+<section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 If either of the long term secret keys leaks, it may compromise
