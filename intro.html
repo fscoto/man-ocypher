@@ -29,13 +29,19 @@
   encryption</a></h2>
 <p class="Pp"><a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>
     and <a class="Xr" href="crypto_unlock.html">crypto_unlock(3monocypher)</a>
-    use the Chacha20 cipher and the Poly1305 one time authenticator. An
-    incremental interface is also available.</p>
+    use the Chacha20 cipher and the Poly1305 one time authenticator.</p>
 <p class="Pp">Chacha20 is a stream cipher based on a cryptographic hash
     function. It runs efficiently on a wide variety of hardware, and unlike AES
     naturally runs in constant time on all hardware.</p>
 <p class="Pp">Poly1305 is a one time authenticator, derived from Carter &amp;
     Wegman universal hashing. It is very fast and very simple.</p>
+<p class="Pp">For specialised needs,
+    <a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>
+    and
+    <a class="Xr" href="crypto_poly1305.html">crypto_poly1305(3monocypher)</a>
+    are available to implement constructions involving them. Whenever possible,
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a> should be
+    preferred, however.</p>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Hashing"><a class="permalink" href="#Hashing">Hashing</a></h2>
@@ -69,7 +75,7 @@
     implement EdDSA, with Curve25519 and Blake2b. This is the same as the more
     famous Ed25519, with SHA-512 replaced by the faster and more secure
   Blake2b.</p>
-<p class="Pp">For highly specialized needs, it is possible to use a custom hash
+<p class="Pp">For highly specialised needs, it is possible to use a custom hash
     function with EdDSA; see
     <a class="Xr" href="crypto_sign_init_first_pass_custom_hash.html">crypto_sign_init_first_pass_custom_hash(3monocypher)</a>.</p>
 </section>
