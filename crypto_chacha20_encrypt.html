@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_CHACHA20_ENCRYPT(3MONOCYPHER)</title>
 </head>
@@ -17,16 +16,18 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_chacha20_encrypt</code>,
-  <code class="Nm">crypto_chacha20_init</code>,
-  <code class="Nm">crypto_chacha20_x_init</code>,
-  <code class="Nm">crypto_chacha20_stream</code>,
-  <code class="Nm">crypto_chacha20_set_ctr</code> &#x2014;
-<div class="Nd">Chacha20 and XChacha20 encryption</div>
+<p class="Pp"><code class="Nm">crypto_chacha20_encrypt</code>,
+    <code class="Nm">crypto_chacha20_init</code>,
+    <code class="Nm">crypto_chacha20_x_init</code>,
+    <code class="Nm">crypto_chacha20_stream</code>,
+    <code class="Nm">crypto_chacha20_set_ctr</code> &#x2014;
+    <span class="Nd">deprecated Chacha20 and XChacha20 encryption
+    functions</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_chacha20_init</code>(<var class="Fa">crypto_chacha_ctx
@@ -55,260 +56,65 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-These functions provide an incremental interface for the Chacha20 encryption
-  primitive.
-<p class="Pp">Chacha20 is a low-level primitive. Consider using authenticated
-    encryption, implemented by
-    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>.</p>
-<p class="Pp">The arguments are:</p>
-<dl class="Bl-tag">
-  <dt><var class="Fa">key</var></dt>
-  <dd>A 32-byte secret key.</dd>
-  <dt><var class="Fa">nonce</var></dt>
-  <dd>An 8-byte or 24-byte number, used only once with any given key. It does
-      not need to be secret or random, but it does have to be unique. Repeating
-      a nonce with the same key reveals the XOR of two different messages, which
-      allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
-      <i class="Em">cannot</i>. They are too small, and the same nonce may be
-      selected twice by accident. See
-      <a class="Xr" href="intro.html">intro(3monocypher)</a> for advice about
-      generating random numbers (use the operating system's random number
-      generator).</dd>
-  <dt><var class="Fa">plain_text</var></dt>
-  <dd>The message to encrypt. It is allowed to be <code class="Dv">NULL</code>,
-      in which case it will be interpreted as an all zero input.
-      <var class="Fa">cipher_text</var> will then contain the raw Chacha20
-      stream.</dd>
-  <dt><var class="Fa">cipher_text</var></dt>
-  <dd>The encrypted message.</dd>
-  <dt><var class="Fa">text_size</var></dt>
-  <dd>Length of both <var class="Fa">plain_text</var> and
-      <var class="Fa">cipher_text</var>, in bytes.</dd>
-  <dt><var class="Fa">stream</var></dt>
-  <dd>The raw Chacha20 stream.</dd>
-  <dt><var class="Fa">stream_size</var></dt>
-  <dd>Length of <var class="Fa">stream</var>, in bytes.</dd>
-  <dt><var class="Fa">ctr</var></dt>
-  <dd>The number of 64-byte blocks since the beginning of the stream.</dd>
-</dl>
-<p class="Pp">The <var class="Fa">key</var> and <var class="Fa">nonce</var>
-    buffers may overlap. <var class="Fa">plain_text</var> and
-    <var class="Fa">cipher_text</var> must either be the same buffer (for
-    in-place encryption), or non-overlapping.</p>
-<p class="Pp"><code class="Fn">crypto_chacha20_init</code>() initialises the
-    <var class="Vt">crypto_chacha_ctx</var> context. It uses an 8-byte nonce,
-    which is too small to be selected at random. Use a counter.</p>
-<p class="Pp"><code class="Fn">crypto_chacha20_x_init</code>() initialises the
-    <var class="Vt">crypto_chacha_ctx</var> context. It uses a 24-byte nonce,
-    which is big enough to be selected at random.</p>
-<p class="Pp"><code class="Fn">crypto_chacha20_x_init</code>() is recommended
-    over <code class="Fn">crypto_chacha20_init</code>(). The ability to use
-    random nonces makes it easier to use securely, and the performance hit is
-    negligible in practice.</p>
-<p class="Pp">The following functions need an initialised context to work
-    properly. Calling them with an uninitialised context triggers undefined
-    behaviour.</p>
-<p class="Pp"><code class="Fn">crypto_chacha20_encrypt</code>() encrypts
-    <var class="Fa">plain_text</var> by XORing it with a pseudo-random stream of
-    numbers, seeded by the provided <var class="Vt">crypto_chacha_ctx</var>
-    context. You may call <code class="Fn">crypto_chacha20_encrypt</code>()
-    repeatedly with the same context struct to encrypt a message incrementally.
-    The <var class="Fa">plain_text</var> pointer is allowed to be
-    <code class="Dv">NULL</code>, in which case it will be interpreted as an all
-    zero input.</p>
-<p class="Pp">Since XOR is its own inverse, decryption is the same operation as
-    encryption. To decrypt the cipher text, encrypt it again with the same key
-    and nonce. You will likely want to wipe the key and context when you are
-    done with encryption or decryption. Use
-    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> to wipe
-    them.</p>
-<p class="Pp"><code class="Fn">crypto_chacha20_stream</code>() is the same as
-    <code class="Fn">crypto_chacha20_encrypt</code>() with
-    <var class="Fa">plain_text</var> being <code class="Dv">NULL</code>. This is
-    useful as a user space random number generator. While <b class="Sy">this
-    must not be used as a cryptographic random number generator</b>, it can be
-    handy outside of a security context. Deterministic procedural generation and
-    reproducible property-based tests come to mind.</p>
-<p class="Pp"><code class="Fn">crypto_chacha20_set_ctr</code>() resets the
-    internal counter of the <var class="Vt">crypto_chacha_ctx</var> to the value
-    specified in <var class="Fa">ctr</var>. Resuming the encryption will use the
-    stream at the block <var class="Fa">ctr</var> (which is the byte
-    &#x2018;<code class="Li">ctr &#x00D7; 64</code>&#x2019;). This can be used
-    to encrypt (or decrypt) part of a long message, or to implement some AEAD
-    constructions such as the one described in RFC 8439. Be careful when using
-    this not to accidentally reuse parts of the random stream as that would
-    destroy confidentiality.</p>
+<p class="Pp">These functions provided an incremental interface for the Chacha20
+    cipher. They are deprecated in favor of
+    <a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
+    <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>,
+    <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20(3monocypher)</a>,
+    and
+    <a class="Xr" href="crypto_xchacha20_ctr.html">crypto_xchacha20_ctr(3monocypher)</a>.</p>
+<p class="Pp">For encryption, you can achieve an identical effect as the
+    deprecated functions by using
+    <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>
+    or
+    <a class="Xr" href="crypto_xchacha20_ctr.html">crypto_xchacha20_ctr(3monocypher)</a>.
+    Care needs to be taken with regards to handling the counter value when
+    migrating old code to use the new functions. The new functions
+    <i class="Em">always return next counter value</i>. This means that input
+    ciphertexts or plaintexts whose lengths are not exactly multiples of 64
+    bytes advance the counter, even though there is theoretically some space
+    left in a Chacha20 block. New applications should design their code so that
+    either the protocl is not reliant on the counter covering the entire text
+    (e.g. by cutting input into independent chunks) or inputs are always such
+    that their lengths are multiples of 64 bytes (e.g. by buffering input until
+    64 bytes have been obtained).</p>
+<p class="Pp">To obtain the raw Chacha20 stream previously provided by
+    <code class="Fn">crypto_chacha20_stream</code>(), pass
+    <code class="Dv">NULL</code> to
+    <a class="Xr" href="crypto_chacha20.html">crypto_chacha20</a> as
+  plaintext.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-These functions return nothing.
-</section>
-<section class="Sh">
-<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-Simple encryption:
-<div class="Bd Pp Bd-indent">
-<pre>
-const uint8_t key        [ 32]; /* Secret random key              */
-const uint8_t nonce      [ 24]; /* Unique nonce (possibly random) */
-const uint8_t plain_text [500]; /* Message to be encrypted        */
-uint8_t       cipher_text[500]; /* Will be the encrypted message  */
-crypto_chacha_ctx ctx;
-crypto_chacha20_x_init(&amp;ctx, key, nonce);
-crypto_chacha20_encrypt(&amp;ctx, cipher_text, plain_text, 500);
-/* Wipe secrets if they are no longer needed */
-crypto_wipe(key,        32);
-crypto_wipe(&amp;ctx,       sizeof(ctx));
-crypto_wipe(plain_text, 500);
-</pre>
-</div>
-<p class="Pp">To decrypt the above:</p>
-<div class="Bd Pp Bd-indent">
-<pre>
-const uint8_t key        [ 32]; /* Same key as above              */
-const uint8_t nonce      [ 24]; /* Same nonce as above            */
-const uint8_t cipher_text[500]; /* Encrypted message              */
-uint8_t plain_text       [500]; /* Will be the decrypted message  */
-crypto_chacha_ctx ctx;
-crypto_chacha20_x_init(&amp;ctx, key, nonce);
-crypto_chacha20_encrypt(&amp;ctx, plain_text, cipher_text, 500);
-/* Wipe secrets if they are no longer needed */
-crypto_wipe(key,  32);
-crypto_wipe(&amp;ctx, sizeof(ctx));
-/* The plain text likely needs to be processed before you wipe it */
-crypto_wipe(plain_text, 500);
-</pre>
-</div>
-<p class="Pp">Incremental encryption:</p>
-<div class="Bd Pp Bd-indent">
-<pre>
-const uint8_t key        [ 32]; /* Secret random key              */
-const uint8_t nonce      [ 24]; /* Unique nonce (possibly random) */
-const uint8_t plain_text [500]; /* Message to be encrypted        */
-uint8_t       cipher_text[500]; /* Will be the encrypted message  */
-crypto_chacha_ctx ctx;
-crypto_chacha20_x_init(&amp;ctx, key, nonce);
-for(int i = 0; i &lt; 500; i += 100) {
-    crypto_chacha20_encrypt(&amp;ctx, cipher_text+i, plain_text+i, 100);
-}
-/* Wipe secrets if they are no longer needed */
-crypto_wipe(key,        32);
-crypto_wipe(&amp;ctx,       sizeof(ctx));
-crypto_wipe(plain_text, 500);
-</pre>
-</div>
-<p class="Pp">Simple encryption with a small, <i class="Em">not</i> random
-    nonce:</p>
-<div class="Bd Pp Bd-indent">
-<pre>
-const uint8_t key        [ 32]; /* Secret, random key             */
-const uint8_t nonce      [  8]; /* Unique nonce (NOT random)      */
-const uint8_t plain_text [500]; /* Message to be encrypted        */
-uint8_t       cipher_text[500]; /* Will be the encrypted message  */
-crypto_chacha_ctx ctx;
-crypto_chacha20_init(&amp;ctx, key, nonce);
-crypto_chacha20_encrypt(&amp;ctx, cipher_text, plain_text, 500);
-/* Wipe secrets if they are no longer needed */
-crypto_wipe(key,        32);
-crypto_wipe(&amp;ctx,       sizeof(ctx));
-crypto_wipe(plain_text, 500);
-</pre>
-</div>
-<p class="Pp">Encryption by jumping around (do not do that, this is only meant
-    to show how <code class="Fn">crypto_chacha20_set_ctr</code>() works):</p>
-<div class="Bd Pp Bd-indent">
-<pre>
-const uint8_t key        [ 32]; /* Secret random key              */
-const uint8_t nonce      [ 24]; /* Unique nonce (possibly random) */
-const uint8_t plain_text [500]; /* Message to be encrypted        */
-uint8_t       cipher_text[500]; /* Will be the encrypted message  */
-crypto_chacha_ctx ctx;
-crypto_chacha20_x_init(&amp;ctx, key, nonce);
-/* Encrypt the second part of the message first... */
-crypto_chacha20_set_ctr(&amp;ctx, 3);
-crypto_chacha20_encrypt(&amp;ctx,
-                        cipher_text + (3 * 64),
-                        plain_text  + (3 * 64),
-                        500         - (3 * 64));
-/* ...then encrypt the first part */
-crypto_chacha20_set_ctr(&amp;ctx, 0);
-crypto_chacha20_encrypt(&amp;ctx, cipher_text, plain_text, 3 * 64);
-/* Wipe secrets if they are no longer needed */
-crypto_wipe(key,        32);
-crypto_wipe(&amp;ctx,       sizeof(ctx));
-crypto_wipe(plain_text, 500);
-</pre>
-</div>
+<p class="Pp">These functions return nothing.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
-</section>
-<section class="Sh">
-<h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-These functions implement Chacha20 and XChacha20. Chacha20 is described in RFC
-  8439. XChacha20 derives from Chacha20 the same way XSalsa20 derives from
-  Salsa20, and benefits from the same security reduction (proven secure as long
-  as Chacha20 itself is secure).
+<p class="Pp"><a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
+    <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>,
+    <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20(3monocypher)</a>,
+    <a class="Xr" href="crypto_xchacha20_ctr.html">crypto_xchacha20_ctr(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_chacha20_encrypt</code>(),
-  <code class="Fn">crypto_chacha20_init</code>(), functions first appeared in
-  Monocypher 0.1. <code class="Fn">crypto_chacha20_stream</code>() was added in
-  Monocypher 0.2. <code class="Fn">crypto_chacha20_x_init</code>() and
-  <code class="Fn">crypto_chacha20_set_ctr</code>() were added in Monocypher
-  1.0.
-</section>
-<section class="Sh">
-<h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
-  CONSIDERATIONS</a></h1>
-<section class="Ss">
-<h2 class="Ss" id="Encrypted_does_not_mean_secure"><a class="permalink" href="#Encrypted_does_not_mean_secure">Encrypted
-  does not mean secure</a></h2>
-Chacha20 only protects against eavesdropping, not forgeries. Most applications
-  need protection against forgeries to be properly secure. To ensure the
-  integrity of a message, use Blake2b in keyed mode, or authenticated
-  encryption; see
-  <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a> and
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Nonce_reuse"><a class="permalink" href="#Nonce_reuse">Nonce
-  reuse</a></h2>
-Repeating a nonce with the same key exposes the XOR of two or more plain text
-  messages, effectively destroying confidentiality.
-<p class="Pp">For the same reason, <b class="Sy">do not select small nonces at
-    random</b>. The <code class="Fn">crypto_chacha20_init</code>() nonce spans
-    only 64 bits, which is small enough to trigger accidental reuses. A counter
-    should be used instead. If multiple parties send out messages, Each can
-    start with an initial nonce of 0, 1 .. n-1 respectively, and increment them
-    by n for each new message. Make sure the counters never wrap around.</p>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Secure_random_number_generation"><a class="permalink" href="#Secure_random_number_generation">Secure
-  random number generation</a></h2>
-Do not use these functions as a cryptographic random number generator. Always
-  use the operating system's random number generator for cryptographic purposes,
-  see <a class="Xr" href="intro.html">intro(3monocypher)</a>.
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Protection_against_side_channels"><a class="permalink" href="#Protection_against_side_channels">Protection
-  against side channels</a></h2>
-Secrets should not dwell in memory longer than needed. Use
-  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> to erase
-  secrets you no longer need. For Chacha20, this means the context, the key, and
-  in some cases the plain text itself.
-</section>
+<p class="Pp">The <code class="Fn">crypto_chacha20_encrypt</code>(),
+    <code class="Fn">crypto_chacha20_init</code>(), functions first appeared in
+    Monocypher 0.1. <code class="Fn">crypto_chacha20_stream</code>() was added
+    in Monocypher 0.2. <code class="Fn">crypto_chacha20_x_init</code>() and
+    <code class="Fn">crypto_chacha20_set_ctr</code>() were added in Monocypher
+    1.0. They were deprecated in Monocypher 3.0.0 and will be removed in
+    Monocypher 4.0.0.</p>
 </section>
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">December 28, 2017</td>
-    <td class="foot-os">OpenBSD 6.4</td>
+    <td class="foot-date">December 2, 2019</td>
+    <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>
 </body>

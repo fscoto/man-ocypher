@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_VERIFY16(3MONOCYPHER)</title>
 </head>
@@ -17,14 +16,15 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_verify16</code>,
-  <code class="Nm">crypto_verify32</code>,
-  <code class="Nm">crypto_verify64</code> &#x2014;
-<div class="Nd">timing-safe data comparison</div>
+<p class="Pp"><code class="Nm">crypto_verify16</code>,
+    <code class="Nm">crypto_verify32</code>,
+    <code class="Nm">crypto_verify64</code> &#x2014;
+    <span class="Nd">timing-safe data comparison</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">int</var>
   <br/>
   <code class="Fn">crypto_verify16</code>(<var class="Fa">const uint8_t
@@ -40,10 +40,10 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-Cryptographic operations often require comparison of secrets or values derived
-  from secrets. Standard comparison functions like
-  <code class="Fn">memcmp</code>() tend to exit when they find the first
-  difference, leaking information through timing differences.
+<p class="Pp">Cryptographic operations often require comparison of secrets or
+    values derived from secrets. Standard comparison functions like
+    <code class="Fn">memcmp</code>() tend to exit when they find the first
+    difference, leaking information through timing differences.</p>
 <p class="Pp">As an example, say a message authentication code (MAC) is sent
     over the network along with a message, but the correct MAC is secret. If the
     attacker attempts a forgery, one does not want to reveal &#x201C;your MAC is
@@ -65,27 +65,28 @@ Cryptographic operations often require comparison of secrets or values derived
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-These functions return 0 if the two memory chunks are the same, -1 otherwise.
+<p class="Pp">These functions return 0 if the two memory chunks are the same, -1
+    otherwise.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_verify16</code>(),
-  <code class="Fn">crypto_verify32</code>(),
-  <code class="Fn">crypto_verify64</code>() functions first appeared in
-  Monocypher 1.1.0. They replaced the <code class="Fn">crypto_memcmp</code>()
-  and <code class="Fn">crypto_zerocmp</code>() functions that were present until
-  Monocypher 1.0.1.
+<p class="Pp">The <code class="Fn">crypto_verify16</code>(),
+    <code class="Fn">crypto_verify32</code>(),
+    <code class="Fn">crypto_verify64</code>() functions first appeared in
+    Monocypher 1.1.0. They replaced the <code class="Fn">crypto_memcmp</code>()
+    and <code class="Fn">crypto_zerocmp</code>() functions that were present
+    until Monocypher 1.0.1.</p>
 </section>
 </div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>
-    <td class="foot-os">OpenBSD 6.4</td>
+    <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>
 </body>

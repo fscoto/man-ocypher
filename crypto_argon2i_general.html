@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_ARGON2I(3MONOCYPHER)</title>
 </head>
@@ -17,12 +16,13 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_argon2i</code> &#x2014;
-<div class="Nd">password key derivation</div>
+<p class="Pp"><code class="Nm">crypto_argon2i</code> &#x2014;
+    <span class="Nd">password key derivation</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_argon2i</code>(<var class="Fa">uint8_t *hash</var>,
@@ -46,9 +46,9 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-Argon2i is a resource intensive password key derivation scheme optimised for the
-  typical x86-like processor. It runs in constant time with respect to the
-  contents of the password.
+<p class="Pp">Argon2i is a resource intensive password key derivation scheme
+    optimised for the typical x86-like processor. It runs in constant time with
+    respect to the contents of the password.</p>
 <p class="Pp">Typical applications are password checking (for online services),
     and key derivation (for encryption). Derived keys can be used to encrypt
     private keys or password databases.</p>
@@ -147,12 +147,12 @@ Argon2i is a resource intensive password key derivation scheme optimised for the
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-These functions return nothing.
+<p class="Pp">These functions return nothing.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-This example shows how to hash a password with the recommended baseline
-  parameters:
+<p class="Pp">This example shows how to hash a password with the recommended
+    baseline parameters:</p>
 <div class="Bd Pp Bd-indent">
 <pre>
 uint8_t        hash[32];                    /* Output hash     */
@@ -178,32 +178,35 @@ free(work_area);
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
-  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
+    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-These functions implement Argon2i. An RFC draft is being maintained.
+<p class="Pp">These functions implement Argon2i. An RFC draft is being
+    maintained.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_argon2i_general</code>() function first appeared in
-  Monocypher 0.1 but was called <code class="Fn">crypto_argon2i</code>(); it was
-  renamed to its current name in Monocypher 1.1.0. The current
-  <code class="Fn">crypto_argon2i</code>() first appeared in Monocypher 1.1.0.
+<p class="Pp">The <code class="Fn">crypto_argon2i_general</code>() function
+    first appeared in Monocypher 0.1 but was called
+    <code class="Fn">crypto_argon2i</code>(); it was renamed to its current name
+    in Monocypher 1.1.0. The current <code class="Fn">crypto_argon2i</code>()
+    first appeared in Monocypher 1.1.0.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
-Any deviation from the specified input and output length ranges results in
-  <b class="Sy">undefined behaviour</b>. Make sure your inputs are correct.
+<p class="Pp">Any deviation from the specified input and output length ranges
+    results in <b class="Sy">undefined behaviour</b>. Make sure your inputs are
+    correct.</p>
 </section>
 </div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>
-    <td class="foot-os">OpenBSD 6.4</td>
+    <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>
 </body>

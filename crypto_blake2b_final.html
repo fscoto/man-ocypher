@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_BLAKE2B(3MONOCYPHER)</title>
 </head>
@@ -17,17 +16,18 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_blake2b</code>,
-  <code class="Nm">crypto_blake2b_general</code>,
-  <code class="Nm">crypto_blake2b_general_init</code>,
-  <code class="Nm">crypto_blake2b_init</code>,
-  <code class="Nm">crypto_blake2b_update</code>,
-  <code class="Nm">crypto_blake2b_final</code> &#x2014;
-<div class="Nd">cryptographic hashing</div>
+<p class="Pp"><code class="Nm">crypto_blake2b</code>,
+    <code class="Nm">crypto_blake2b_general</code>,
+    <code class="Nm">crypto_blake2b_general_init</code>,
+    <code class="Nm">crypto_blake2b_init</code>,
+    <code class="Nm">crypto_blake2b_update</code>,
+    <code class="Nm">crypto_blake2b_final</code> &#x2014;
+    <span class="Nd">cryptographic hashing</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_blake2b</code>(<var class="Fa">uint8_t hash[64]</var>,
@@ -61,8 +61,8 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
-  It is faster than MD5, yet just as secure as SHA-3.
+<p class="Pp">BLAKE2b is a fast cryptographically secure hash, based on the
+    ideas of Chacha20. It is faster than MD5, yet just as secure as SHA-3.</p>
 <p class="Pp">BLAKE2b is immune to length extension attacks, and as such does
     not require any specific precautions, such as using the HMAC algorithm.</p>
 <p class="Pp">The arguments are:</p>
@@ -98,11 +98,12 @@ BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
 <section class="Ss">
 <h2 class="Ss" id="Direct_interface"><a class="permalink" href="#Direct_interface">Direct
   interface</a></h2>
-The direct interface has two functions, <code class="Fn">crypto_blake2b</code>()
-  and <code class="Fn">crypto_blake2b_general</code>().
-  <code class="Fn">crypto_blake2b</code>() is provided for convenience, and is
-  equivalent to calling <code class="Fn">crypto_blake2b_general</code>() with no
-  key and a 64-byte hash.
+<p class="Pp">The direct interface has two functions,
+    <code class="Fn">crypto_blake2b</code>() and
+    <code class="Fn">crypto_blake2b_general</code>().
+    <code class="Fn">crypto_blake2b</code>() is provided for convenience, and is
+    equivalent to calling <code class="Fn">crypto_blake2b_general</code>() with
+    no key and a 64-byte hash.</p>
 <p class="Pp"><code class="Fn">crypto_blake2b_general</code>() users can specify
     the size of the hash, and use a secret key to make the hash unpredictable
     &#x2013; useful for message authentication codes. Even when using a key, you
@@ -112,8 +113,9 @@ The direct interface has two functions, <code class="Fn">crypto_blake2b</code>()
 <section class="Ss">
 <h2 class="Ss" id="Incremental_interface"><a class="permalink" href="#Incremental_interface">Incremental
   interface</a></h2>
-The incremental interface is useful for handling streams of data or large files
-  without using too much memory. This interface uses three steps:
+<p class="Pp">The incremental interface is useful for handling streams of data
+    or large files without using too much memory. This interface uses three
+    steps:</p>
 <ul class="Bl-bullet">
   <li>initialisation with <code class="Fn">crypto_blake2b_general_init</code>()
       or <code class="Fn">crypto_blake2b_init</code>(), where we set up a
@@ -136,11 +138,11 @@ The incremental interface is useful for handling streams of data or large files
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-These functions return nothing.
+<p class="Pp">These functions return nothing.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-Hashing a message all at once:
+<p class="Pp">Hashing a message all at once:</p>
 <div class="Bd Pp Bd-indent">
 <pre>
 uint8_t hash   [ 64]; /* Output hash (64 bytes) */
@@ -195,35 +197,36 @@ crypto_blake2b_final(&amp;ctx, hash);
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-These functions implement BLAKE2b.
+<p class="Pp">These functions implement BLAKE2b, described in RFC 7693.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_blake2b</code>(),
-  <code class="Fn">crypto_blake2b_general</code>(),
-  <code class="Fn">crypto_blake2b_general_init</code>(),
-  <code class="Fn">crypto_blake2b_init</code>(),
-  <code class="Fn">crypto_blake2b_update</code>(), and
-  <code class="Fn">crypto_blake2b_final</code>() functions first appeared in
-  Monocypher 0.1.
+<p class="Pp">The <code class="Fn">crypto_blake2b</code>(),
+    <code class="Fn">crypto_blake2b_general</code>(),
+    <code class="Fn">crypto_blake2b_general_init</code>(),
+    <code class="Fn">crypto_blake2b_init</code>(),
+    <code class="Fn">crypto_blake2b_update</code>(), and
+    <code class="Fn">crypto_blake2b_final</code>() functions first appeared in
+    Monocypher 0.1.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
-Monocypher does not perform any input validation. Any deviation from the
-  specified input and output length ranges results in <b class="Sy">undefined
-  behaviour</b>. Make sure your inputs are correct.
+<p class="Pp">Monocypher does not perform any input validation. Any deviation
+    from the specified input and output length ranges results in
+    <b class="Sy">undefined behaviour</b>. Make sure your inputs are
+  correct.</p>
 </section>
 </div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 28, 2017</td>
-    <td class="foot-os">OpenBSD 6.4</td>
+    <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>
 </body>
