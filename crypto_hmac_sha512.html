@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
-  <title>CRYPTO_HMAC(3MONOCYPHER)</title>
+  <title>CRYPTO_HMAC_SHA512(3MONOCYPHER)</title>
 </head>
 <body>
 <table class="head">
   <tr>
-    <td class="head-ltitle">CRYPTO_HMAC(3MONOCYPHER)</td>
+    <td class="head-ltitle">CRYPTO_HMAC_SHA512(3MONOCYPHER)</td>
     <td class="head-vol">3MONOCYPHER</td>
-    <td class="head-rtitle">CRYPTO_HMAC(3MONOCYPHER)</td>
+    <td class="head-rtitle">CRYPTO_HMAC_SHA512(3MONOCYPHER)</td>
   </tr>
 </table>
 <div class="manual-text">
@@ -58,23 +58,20 @@
 <p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
   <dt><var class="Fa">hmac</var></dt>
-  <dd>The output MAC, which is always 64 bytes long. Users may want to wipe the
-      key with
-      <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> once
-      they are done with it.</dd>
+  <dd>The output MAC, which is always 64 bytes long.</dd>
   <dt><var class="Fa">key</var></dt>
-  <dd>Some secret key. One cannot predict the final hash without it. May be
-      <code class="Dv">NULL</code> if <var class="Fa">key_size</var> is 0, in
-      which case no key is used. Users may want to wipe the key with
+  <dd>Some secret key. One cannot predict the final hash without it. Users may
+      want to wipe the key with
       <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> once
       they are done with it.</dd>
   <dt><var class="Fa">key_size</var></dt>
-  <dd>Length of <var class="Fa">key</var>, in bytes. Must be between 0 and 64.
-      32 is a good default.</dd>
+  <dd>Length of <var class="Fa">key</var>, in bytes. 32 is a good default. Keys
+      longer than 128 bytes will be reduced to 64 bytes by hashing the key with
+      SHA-512.</dd>
   <dt><var class="Fa">message</var></dt>
-  <dd>The message to hash. May overlap with <var class="Fa">hmac</var>. May be
-      <code class="Dv">NULL</code> if <var class="Fa">message_size</var> is
-    0.</dd>
+  <dd>The message to compute the HMAC for. May overlap with
+      <var class="Fa">hmac</var>. May be <code class="Dv">NULL</code> if
+      <var class="Fa">message_size</var> is 0.</dd>
   <dt><var class="Fa">message_size</var></dt>
   <dd>Length of <var class="Fa">message</var>, in bytes.</dd>
 </dl>
@@ -165,7 +162,7 @@ crypto_hmac_sha512_final(&amp;ctx, hash);
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">December 3, 2019</td>
+    <td class="foot-date">December 5, 2019</td>
     <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>

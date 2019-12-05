@@ -54,8 +54,8 @@
     instead, as it both performs faster on x86_64 CPUs and lacks many of the
     pitfalls of SHA-512.</p>
 <p class="Pp">SHA-512 is <i class="Em">vulnerable to length extension
-    attacks</i>; using it as a message authentication code (MAC) algorithm
-    requires precautions. The
+    attacks</i>; using it as a message authentication code (MAC) algorithm or
+    keyed hash requires precautions. The
     <a class="Xr" href="crypto_hmac_sha512.html">crypto_hmac_sha512(3monocypher)</a>
     family of functions provides HMAC with SHA-512. Use
     <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
@@ -144,7 +144,7 @@ crypto_sha512_final(&amp;ctx, hash);
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">December 3, 2019</td>
+    <td class="foot-date">December 5, 2019</td>
     <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>
