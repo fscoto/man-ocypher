@@ -80,12 +80,12 @@
     uses three steps:</p>
 <ul class="Bl-bullet">
   <li>initialisation with <code class="Fn">crypto_hmac_sha512_init</code>(),
-      where we set up a context with the hashing parameters;</li>
-  <li>update with <code class="Fn">crypto_hmac_sha512_update</code>(), where we
-      hash the message chunk by chunk, and keep the intermediary result in the
+      which sets up a context with the hashing parameters;</li>
+  <li>update with <code class="Fn">crypto_hmac_sha512_update</code>(), which
+      hashes the message chunk by chunk, and keep the intermediary result in the
       context;</li>
   <li>and finalisation with <code class="Fn">crypto_hmac_sha512_final</code>(),
-      where we produce the final hash. The
+      which produces the final hash. The
       <var class="Ft">crypto_hmac_sha512_ctx</var> is automatically wiped upon
       finalisation.</li>
 </ul>

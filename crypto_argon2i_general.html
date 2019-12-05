@@ -107,9 +107,10 @@
     to compare password hashes to prevent timing attacks.</p>
 <p class="Pp">To select the <var class="Fa">nb_blocks</var> and
     <var class="Fa">nb_iterations</var> parameters, it should first be decided
-    how long the computation should take. For user authentication, we recommend
-    somewhere between half a second (convenient) and several seconds (paranoid).
-    The computation should use as much memory as can be spared.</p>
+    how long the computation should take. For user authentication, values
+    somewhere between half a second (convenient) and several seconds (paranoid)
+    are recommended. The computation should use as much memory as can be
+  spared.</p>
 <p class="Pp">Since parameter selection depends on your hardware, some trial and
     error will be required in order to determine the ideal settings. Three
     iterations and 100000 blocks (that is, one hundred megabytes of memory) is a
