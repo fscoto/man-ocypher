@@ -43,7 +43,7 @@
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_sha512_final</code>(<var class="Fa">crypto_sha512_ctx
-    *ctx</var>, <var class="Fa">uint8_t *hash</var>);</p>
+    *ctx</var>, <var class="Fa">uint8_t hash[64]</var>);</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
@@ -56,8 +56,8 @@
 <p class="Pp">SHA-512 is <i class="Em">vulnerable to length extension
     attacks</i>; using it as a message authentication code (MAC) algorithm
     requires precautions. The
-    <a class="Xr" href="crypto_hmac.html">crypto_hmac(3monocypher)</a> family of
-    functions provides HMAC with SHA-512. Use
+    <a class="Xr" href="crypto_hmac_sha512.html">crypto_hmac_sha512(3monocypher)</a>
+    family of functions provides HMAC with SHA-512. Use
     <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
     to compare MACs created this way.</p>
 <p class="Pp">The arguments are:</p>
@@ -122,7 +122,7 @@ crypto_sha512_final(&amp;ctx, hash);
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
 <p class="Pp"><a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
-    <a class="Xr" href="crypto_hmac.html">crypto_hmac(3monocypher)</a>,
+    <a class="Xr" href="crypto_hmac_sha512.html">crypto_hmac_sha512(3monocypher)</a>,
     <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
     <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>

@@ -16,10 +16,10 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<p class="Pp"><code class="Nm">crypto_hmac</code>,
-    <code class="Nm">crypto_hmac_init</code>,
-    <code class="Nm">crypto_hmac_update</code>,
-    <code class="Nm">crypto_hmac_final</code> &#x2014;
+<p class="Pp"><code class="Nm">crypto_hmac_sha512</code>,
+    <code class="Nm">crypto_hmac_sha512_init</code>,
+    <code class="Nm">crypto_hmac_sha512_update</code>,
+    <code class="Nm">crypto_hmac_sha512_final</code> &#x2014;
     <span class="Nd">cryptographic hash-based message authentication code with
     SHA-512</span></p>
 </section>
@@ -29,23 +29,23 @@
     &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
-  <code class="Fn">crypto_hmac</code>(<var class="Fa">uint8_t hmac[64]</var>,
-    <var class="Fa">const uint8_t *key</var>, <var class="Fa">size_t
-    key_size</var>, <var class="Fa">const uint8_t *message</var>,
-    <var class="Fa">size_t message_size</var>);</p>
+  <code class="Fn">crypto_hmac_sha512</code>(<var class="Fa">uint8_t
+    hmac[64]</var>, <var class="Fa">const uint8_t *key</var>,
+    <var class="Fa">size_t key_size</var>, <var class="Fa">const uint8_t
+    *message</var>, <var class="Fa">size_t message_size</var>);</p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
-  <code class="Fn">crypto_hmac_init</code>(<var class="Fa">crypto_hmac_ctx
+  <code class="Fn">crypto_hmac_sha512_init</code>(<var class="Fa">crypto_hmac_sha512_ctx
     *ctx</var>, <var class="Fa">const uint8_t *key</var>, <var class="Fa">size_t
     key_size</var>);</p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
-  <code class="Fn">crypto_hmac_update</code>(<var class="Fa">crypto_hmac_ctx
+  <code class="Fn">crypto_hmac_sha512_update</code>(<var class="Fa">crypto_hmac_sha512_ctx
     *ctx</var>, <var class="Fa">const uint8_t *message</var>,
     <var class="Fa">size_t message_size</var>);</p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
-  <code class="Fn">crypto_hmac_final</code>(<var class="Fa">crypto_hmac_ctx
+  <code class="Fn">crypto_hmac_sha512_final</code>(<var class="Fa">crypto_hmac_sha512_ctx
     *ctx</var>, <var class="Fa">uint8_t hmac[64]</var>);</p>
 </section>
 <section class="Sh">
@@ -82,19 +82,20 @@
     streams of data or large files without using too much memory. This interface
     uses three steps:</p>
 <ul class="Bl-bullet">
-  <li>initialisation with <code class="Fn">crypto_hmac_init</code>(), where we
-      set up a context with the hashing parameters;</li>
-  <li>update with <code class="Fn">crypto_hmac_update</code>(), where we hash
-      the message chunk by chunk, and keep the intermediary result in the
+  <li>initialisation with <code class="Fn">crypto_hmac_sha512_init</code>(),
+      where we set up a context with the hashing parameters;</li>
+  <li>update with <code class="Fn">crypto_hmac_sha512_update</code>(), where we
+      hash the message chunk by chunk, and keep the intermediary result in the
       context;</li>
-  <li>and finalisation with <code class="Fn">crypto_hmac_final</code>(), where
-      we produce the final hash. The <var class="Ft">crypto_hmac_ctx</var> is
-      automatically wiped upon finalisation.</li>
+  <li>and finalisation with <code class="Fn">crypto_hmac_sha512_final</code>(),
+      where we produce the final hash. The
+      <var class="Ft">crypto_hmac_sha512_ctx</var> is automatically wiped upon
+      finalisation.</li>
 </ul>
-<p class="Pp"><code class="Fn">crypto_hmac</code>() is a convenience function
-    that performs <code class="Fn">crypto_hmac_init</code>(),
-    <code class="Fn">crypto_hmac_update</code>(), and
-    <code class="Fn">crypto_hmac_final</code>().</p>
+<p class="Pp"><code class="Fn">crypto_hmac_sha512</code>() is a convenience
+    function that performs <code class="Fn">crypto_hmac_sha512_init</code>(),
+    <code class="Fn">crypto_hmac_sha512_update</code>(), and
+    <code class="Fn">crypto_hmac_sha512_final</code>().</p>
 <p class="Pp">Use
     <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
     to compare MACs.</p>
@@ -112,7 +113,7 @@
 uint8_t hash   [ 64]; /* Output hash  (between 1 and 64 bytes) */
 uint8_t key    [ 32]; /* Optional key (between 0 and 64 bytes) */
 uint8_t message[500]; /* Message to hash                       */
-crypto_hmac(hash, 64, key, 32, message, 500);
+crypto_hmac_sha512(hash, 64, key, 32, message, 500);
 /* Wipe secrets if they are no longer needed */
 crypto_wipe(message, 500);
 crypto_wipe(key, 32);
@@ -124,16 +125,16 @@ crypto_wipe(key, 32);
 uint8_t hash   [ 64]; /* Output hash  (between 1 and 64 bytes) */
 uint8_t key    [ 32]; /* Optional key (between 0 and 64 bytes) */
 uint8_t message[500]; /* Message to hash                       */
-crypto_hmac_ctx ctx;
-crypto_hmac_init(&amp;ctx, 64, key, 32);
+crypto_hmac_sha512_ctx ctx;
+crypto_hmac_sha512_init(&amp;ctx, 64, key, 32);
 /* Wipe the key */
 crypto_wipe(key, 32);
 for (size_t i = 0; i &lt; 500; i += 100) {
-    crypto_hmac_update(&amp;ctx, message + i, 100);
+    crypto_hmac_sha512_update(&amp;ctx, message + i, 100);
     /* Wipe secrets if they are no longer needed */
     crypto_wipe(message + i, 100);
 }
-crypto_hmac_final(&amp;ctx, hash);
+crypto_hmac_sha512_final(&amp;ctx, hash);
 </pre>
 </div>
 </section>
@@ -155,11 +156,11 @@ crypto_hmac_final(&amp;ctx, hash);
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-<p class="Pp">The <code class="Fn">crypto_hmac</code>(),
-    <code class="Fn">crypto_hmac_init</code>(),
-    <code class="Fn">crypto_hmac_update</code>(), and
-    <code class="Fn">crypto_hmac_final</code>() functions first appeared in
-    Monocypher 3.0.0.</p>
+<p class="Pp">The <code class="Fn">crypto_hmac_sha512</code>(),
+    <code class="Fn">crypto_hmac_sha512_init</code>(),
+    <code class="Fn">crypto_hmac_sha512_update</code>(), and
+    <code class="Fn">crypto_hmac_sha512_final</code>() functions first appeared
+    in Monocypher 3.0.0.</p>
 </section>
 </div>
 <table class="foot">
