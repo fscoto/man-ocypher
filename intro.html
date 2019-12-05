@@ -215,8 +215,10 @@
     secrets and destroy all security.</p>
 <p class="Pp">The Poly1305 authenticator, X25519, and EdDSA use multiplication.
     Some older processors do not multiply in constant time. If the target
-    platform is something other than x86, x86_64, ARM or ARM64, double check how
-    it handles multiplication.</p>
+    platform is something other than Intel or AMD x86_64, double check how it
+    handles multiplication. In particular, <i class="Em">ARM Cortex-M CPUs may
+    lack constant-time multiplication</i>. Some VIA Nano x86 and x86_64 CPUs may
+    lack constant-time multiplication as well.</p>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Data_compression"><a class="permalink" href="#Data_compression">Data
