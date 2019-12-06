@@ -100,7 +100,8 @@ typedef struct {
       <var class="Fa">init</var>, <var class="Fa">update</var> and
       <var class="Fa">final</var> members.</dd>
   <dt><var class="Fa">init</var></dt>
-  <dd>Function that initialises the hash context an outer signing context.</dd>
+  <dd>Function that initialises the hash context of an outer signing
+    context.</dd>
   <dt><var class="Fa">update</var></dt>
   <dd>Function that updates the hash context of an outer signing context. It
       must be able to handle message sizes of at least 32 bytes.</dd>
@@ -199,6 +200,7 @@ main(void)
     struct outer_ctx ctx;
     crypto_sign_init_first_pass_custom_hash((void*)&amp;ctx,
                                             sk, NULL, &amp;my_vtable);
+    crypto_wipe(sk, sizeof(sk));
     crypto_sign_update(          (void*)&amp;ctx, msg, sizeof(msg));
     crypto_sign_init_second_pass((void*)&amp;ctx);
     crypto_sign_update(          (void*)&amp;ctx, msg, sizeof(msg));

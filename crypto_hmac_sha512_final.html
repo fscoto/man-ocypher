@@ -26,7 +26,7 @@
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
 <p class="Pp"><code class="In">#include
-    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
+    &lt;<a class="In">monocypher-ed25519.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_hmac_sha512</code>(<var class="Fa">uint8_t
@@ -93,9 +93,12 @@
     function that performs <code class="Fn">crypto_hmac_sha512_init</code>(),
     <code class="Fn">crypto_hmac_sha512_update</code>(), and
     <code class="Fn">crypto_hmac_sha512_final</code>().</p>
-<p class="Pp">Use
-    <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
-    to compare MACs.</p>
+<p class="Pp">MACs may be truncated safely down to at most 16 bytes; the
+    <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>,
+    <a class="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a>,
+    and
+    <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>.
+    functions can be used to to compare (possibly truncated) MACs.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
