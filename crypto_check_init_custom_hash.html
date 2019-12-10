@@ -50,15 +50,16 @@
     family of functions: They provide the ability to replace the EdDSA hash
     function with any user-provided hash function.</p>
 <p class="Pp"><b class="Sy">This is a highly advanced feature</b>.
+    Interoperability of public key signatures with other cryptographic libraries
+    can normally be achieved by using
     <a class="Xr" href="crypto_ed25519_sign.html">crypto_ed25519_sign(3monocypher)</a>
     or
     <a class="Xr" href="crypto_ed25519_sign_init_first_pass.html">crypto_ed25519_sign_init_first_pass(3monocypher)</a>
-    handle interoperability issues regarding public key signatures. This
-    interface is exposed only for completeness and to handle special situations
-    (e.g. to use the hash function of the future winner of the NIST lightweight
-    crypto competition on a device with highly constrained resources or taking
-    advantage of hardware support for cryptographic hash functions). Whenever
-    possible, these functions should be avoided.</p>
+    already. This interface is exposed only for completeness and to handle
+    special situations (e.g. to use the hash function of the future winner of
+    the NIST lightweight crypto competition on a device with highly constrained
+    resources or taking advantage of hardware support for cryptographic hash
+    functions). Whenever possible, these functions should be avoided.</p>
 <p class="Pp">To make available a custom hash algorithm for use with these
     functions, a <var class="Vt">crypto_sign_vtable</var> structure must be
     provided. It is defined as:</p>
@@ -70,7 +71,7 @@ typedef struct {
     void (*init  )(void *ctx);
     void (*update)(void *ctx, const uint8_t *message,
                    size_t message_size);
-    void (*final )(void *ctx, uint8_t *hash);
+    void (*final )(void *ctx, uint8_t hash[64]);
     size_t ctx_size;
 } crypto_sign_vtable;
 </pre>
@@ -94,8 +95,9 @@ typedef struct {
 <p class="Pp">The fields of <var class="Vt">crypto_sign_vtable</var> are:</p>
 <dl class="Bl-tag">
   <dt><var class="Fa">hash</var></dt>
-  <dd>Function that generates a 64-byte hash for a given message. The output
-      length <i class="Em">must</i> be exactly 64 bytes. This will normally be
+  <dd>Function that computes a 64-byte hash for a given message and writes the
+      computed hash to <var class="Fa">hash</var>. The output length
+      <i class="Em">must</i> be exactly 64 bytes. This will normally be
       constructed using the functions that provide the
       <var class="Fa">init</var>, <var class="Fa">update</var> and
       <var class="Fa">final</var> members.</dd>
@@ -106,8 +108,10 @@ typedef struct {
   <dd>Function that updates the hash context of an outer signing context. It
       must be able to handle message sizes of at least 32 bytes.</dd>
   <dt><var class="Fa">final</var></dt>
-  <dd>Function that finalises the hash context of an outer signing context. This
-      function should wipe the hash context with
+  <dd>Function that finalises the hash context of an outer signing context and
+      writes the computed hash to <var class="Fa">hash</var>. The output length
+      <i class="Em">must</i> be exactly 64 bytes. This function should wipe the
+      hash context with
       <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> if it
       contains pointers to objects outside the outer signing context. Monocypher
       takes care of wiping the outer signing context.</dd>
