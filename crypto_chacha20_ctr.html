@@ -1,7 +1,60 @@
 <!DOCTYPE html>
 <html>
+<!-- This is an automatically generated file.  Do not edit.
+   This file is dual-licensed.  Choose whichever you want.
+  
+   The first licence is a regular 2-clause BSD licence.  The second licence
+   is the CC-0 from Creative Commons. It is intended to release Monocypher
+   to the public domain.  The BSD licence serves as a fallback option.
+  
+   SPDX-License-Identifier: BSD-2-Clause OR CC0-1.0
+  
+   ----------------------------------------------------------------------------
+  
+   Copyright (c) 2017-2019 Loup Vaillant
+   Copyright (c) 2018 Michael Savage
+   Copyright (c) 2017, 2019 Fabio Scotoni
+   All rights reserved.
+  
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are
+   met:
+  
+   1. Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+  
+   2. Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the
+      distribution.
+  
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+   HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  
+   ----------------------------------------------------------------------------
+  
+   Written in 2017-2019 by Loup Vaillant, Michael Savage and Fabio Scotoni
+  
+   To the extent possible under law, the author(s) have dedicated all copyright
+   and related neighboring rights to this software to the public domain
+   worldwide.  This software is distributed without any warranty.
+  
+   You should have received a copy of the CC0 Public Domain Dedication along
+   with this software.  If not, see
+   <https://creativecommons.org/publicdomain/zero/1.0/>
+   -->
 <head>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_CHACHA20(3MONOCYPHER)</title>
 </head>
@@ -16,16 +69,15 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<p class="Pp"><code class="Nm">crypto_chacha20</code>,
-    <code class="Nm">crypto_chacha20_ctr</code>,
-    <code class="Nm">crypto_xchacha20</code>,
-    <code class="Nm">crypto_xchacha20_ctr</code> &#x2014;
-    <span class="Nd">Chacha20 and XChacha20 encryption functions</span></p>
+<code class="Nm">crypto_chacha20</code>,
+  <code class="Nm">crypto_chacha20_ctr</code>,
+  <code class="Nm">crypto_xchacha20</code>,
+  <code class="Nm">crypto_xchacha20_ctr</code> &#x2014;
+<div class="Nd">Chacha20 and XChacha20 encryption functions</div>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<p class="Pp"><code class="In">#include
-    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_chacha20</code>(<var class="Fa">uint8_t
@@ -55,8 +107,7 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<p class="Pp">These functions provide an interface for the Chacha20 encryption
-    primitive.</p>
+These functions provide an interface for the Chacha20 encryption primitive.
 <p class="Pp">Chacha20 is a low-level primitive. Consider using authenticated
     encryption, implemented by
     <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>.</p>
@@ -133,24 +184,24 @@
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<p class="Pp"><code class="Fn">crypto_chacha20</code>() and
-    <code class="Fn">crypto_xchacha20</code>() return nothing.
-    <code class="Fn">crypto_chacha20_ctr</code>() and
-    <code class="Fn">crypto_xchacha20_ctr</code>() functions return the next
-    <var class="Fa">ctr</var> to use with the same key and nonce values; this is
-    always <var class="Fa">text_size</var> divided by 64; plus one if there was
-    a remainder.</p>
+<code class="Fn">crypto_chacha20</code>() and
+  <code class="Fn">crypto_xchacha20</code>() return nothing.
+  <code class="Fn">crypto_chacha20_ctr</code>() and
+  <code class="Fn">crypto_xchacha20_ctr</code>() functions return the next
+  <var class="Fa">ctr</var> to use with the same key and nonce values; this is
+  always <var class="Fa">text_size</var> divided by 64; plus one if there was a
+  remainder.
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-<p class="Pp">Simple encryption:</p>
+Simple encryption:
 <div class="Bd Pp Bd-indent">
 <pre>
 const uint8_t key        [ 32]; /* Secret random key              */
 const uint8_t nonce      [ 24]; /* Unique nonce (possibly random) */
 const uint8_t plain_text [500]; /* Message to be encrypted        */
 uint8_t       cipher_text[500]; /* Will be the encrypted message  */
-crypto_xchacha20_encrypt(cipher_text, plain_text, 500, key, nonce);
+crypto_xchacha20(cipher_text, plain_text, 500, key, nonce);
 /* Wipe secrets if they are no longer needed */
 crypto_wipe(key,        32);
 crypto_wipe(plain_text, 500);
@@ -159,11 +210,11 @@ crypto_wipe(plain_text, 500);
 <p class="Pp">To decrypt the above:</p>
 <div class="Bd Pp Bd-indent">
 <pre>
-const uint8_t key        [ 32]; /* Same key as above              */
-const uint8_t nonce      [ 24]; /* Same nonce as above            */
-const uint8_t cipher_text[500]; /* Encrypted message              */
-uint8_t plain_text       [500]; /* Will be the decrypted message  */
-crypto_xchacha20_encrypt(cipher_text, plain_text, 500, key, nonce);
+const uint8_t key  [ 32]; /* Same key as above              */
+const uint8_t nonce[ 24]; /* Same nonce as above            */
+uint8_t plain_text [500]; /* Will be the decrypted message  */
+uint8_t cipher_text[500]; /* Encrypted message              */
+crypto_xchacha20(cipher_text, plain_text, 500, key, nonce);
 /* Wipe secrets if they are no longer needed */
 crypto_wipe(key,  32);
 /* The plain text likely needs to be processed before you wipe it */
@@ -178,15 +229,16 @@ const uint8_t nonce      [ 24]; /* Unique nonce (possibly random) */
 const uint8_t plain_text [500]; /* Message to be encrypted        */
 uint8_t       cipher_text[500]; /* Will be the encrypted message  */
 uint64_t      ctr;              /* Block counter */
-for(int i = 0; i &lt; 500; i += 64) {
-    ctr = crypto_xchacha20_ctr(&amp;ctx, cipher_text+i, plain_text+i,
-                               64, ctr);
+int i;
+for(i = 0; i &lt; 500; i += 64) {
+    ctr = crypto_xchacha20_ctr(cipher_text+i, plain_text+i, 64,
+                               key, nonce, ctr);
 }
 /* Process data that didn't fit into 64 byte pieces */
-crypto_xchacha20_ctr(&amp;ctx,
-                     cipher_text+500-(i-64),
+crypto_xchacha20_ctr(cipher_text+500-(i-64),
                      plain_text+500-(i-64),
-                     500-(i-64), ctr);
+                     500-(i-64),
+                     key, nonce, ctr);
 /* Wipe secrets if they are no longer needed */
 crypto_wipe(key,        32);
 crypto_wipe(plain_text, 500);
@@ -201,14 +253,12 @@ const uint8_t nonce      [ 24]; /* Unique nonce (possibly random) */
 const uint8_t plain_text [500]; /* Message to be encrypted        */
 uint8_t       cipher_text[500]; /* Will be the encrypted message  */
 /* Encrypt the second part of the message first... */
-crypto_chacha20(&amp;ctx,
-                cipher_text + (3 * 64),
+crypto_chacha20(cipher_text + (3 * 64),
                 plain_text  + (3 * 64),
                 500         - (3 * 64),
-                key, nonce, 3);
+                key, nonce);
 /* ...then encrypt the first part */
-crypto_chacha20(&amp;ctx, cipher_text, plain_text, 3 * 64,
-                key, nonce, 0);
+crypto_chacha20(cipher_text, plain_text, 3 * 64, key, nonce);
 /* Wipe secrets if they are no longer needed */
 crypto_wipe(key,        32);
 crypto_wipe(plain_text, 500);
@@ -218,34 +268,34 @@ crypto_wipe(plain_text, 500);
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<p class="Pp"><a class="Xr" href="crypto_ietf_chacha20.html">crypto_ietf_chacha20(3monocypher)</a>,
-    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
+<a class="Xr" href="crypto_ietf_chacha20.html">crypto_ietf_chacha20(3monocypher)</a>,
+  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-<p class="Pp">These functions implement Chacha20 and XChacha20. Chacha20 is
-    described in: <cite class="Rs"><span class="RsA">Daniel J. Bernstein</span>,
-    <span class="RsT">ChaCha, a variant of Salsa20</span>, <i class="RsJ">SASC
-    2008 &#x2013; The State of the Art of Stream Ciphers</i>,
-    <span class="RsP">pp. 273&#x2013;278</span>.</cite> The nonce and counter
-    sizes were modified in RFC 8439. XChacha20 derives from Chacha20 the same
-    way XSalsa20 derives from Salsa20, and benefits from the same security
-    reduction (proven secure as long as Chacha20 itself is secure).</p>
+These functions implement Chacha20 and XChacha20. Chacha20 is described in:
+  <cite class="Rs"><span class="RsA">Daniel J. Bernstein</span>,
+  <span class="RsT">ChaCha, a variant of Salsa20</span>, <i class="RsJ">SASC
+  2008 &#x2013; The State of the Art of Stream Ciphers</i>,
+  <span class="RsP">pp. 273&#x2013;278</span>.</cite> The nonce and counter
+  sizes were modified in RFC 8439. XChacha20 derives from Chacha20 the same way
+  XSalsa20 derives from Salsa20, and benefits from the same security reduction
+  (proven secure as long as Chacha20 itself is secure).
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-<p class="Pp"><code class="Fn">crypto_chacha20</code>(),
-    <code class="Fn">crypto_chacha20_ctr</code>(),
-    <code class="Fn">crypto_xchacha20</code>(), and
-    <code class="Fn">crypto_xchacha20_ctr</code>() were added in Monocypher
-    3.0.0. They replace <code class="Fn">crypto_chacha20_encrypt</code>(),
-    <code class="Fn">crypto_chacha20_init</code>(),
-    <code class="Fn">crypto_chacha20_stream</code>(),
-    <code class="Fn">crypto_chacha20_x_init</code>(), and
-    <code class="Fn">crypto_chacha20_set_ctr</code>() that were deprecated in
-    Monocypher 3.0.0.</p>
+<code class="Fn">crypto_chacha20</code>(),
+  <code class="Fn">crypto_chacha20_ctr</code>(),
+  <code class="Fn">crypto_xchacha20</code>(), and
+  <code class="Fn">crypto_xchacha20_ctr</code>() were added in Monocypher 3.0.0.
+  They replace <code class="Fn">crypto_chacha20_encrypt</code>(),
+  <code class="Fn">crypto_chacha20_init</code>(),
+  <code class="Fn">crypto_chacha20_stream</code>(),
+  <code class="Fn">crypto_chacha20_x_init</code>(), and
+  <code class="Fn">crypto_chacha20_set_ctr</code>() that were deprecated in
+  Monocypher 3.0.0.
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
@@ -253,18 +303,18 @@ crypto_wipe(plain_text, 500);
 <section class="Ss">
 <h2 class="Ss" id="Encrypted_does_not_mean_secure"><a class="permalink" href="#Encrypted_does_not_mean_secure">Encrypted
   does not mean secure</a></h2>
-<p class="Pp">Chacha20 only protects against eavesdropping, not forgeries. Most
-    applications need protection against forgeries to be properly secure. To
-    ensure the integrity of a message, use Blake2b in keyed mode, or
-    authenticated encryption; see
-    <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a> and
-    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>.</p>
+Chacha20 only protects against eavesdropping, not forgeries. Most applications
+  need protection against forgeries to be properly secure. To ensure the
+  integrity of a message, use Blake2b in keyed mode, or authenticated
+  encryption; see
+  <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a> and
+  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>.
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Nonce_reuse"><a class="permalink" href="#Nonce_reuse">Nonce
   reuse</a></h2>
-<p class="Pp">Repeating a nonce with the same key exposes the XOR of two or more
-    plain text messages, effectively destroying confidentiality.</p>
+Repeating a nonce with the same key exposes the XOR of two or more plain text
+  messages, effectively destroying confidentiality.
 <p class="Pp">For the same reason, <b class="Sy">do not select small nonces at
     random</b>. The <code class="Fn">crypto_chacha20</code>() nonce spans only
     64 bits, which is small enough to trigger accidental reuses. A message
@@ -276,18 +326,17 @@ crypto_wipe(plain_text, 500);
 <section class="Ss">
 <h2 class="Ss" id="Secure_random_number_generation"><a class="permalink" href="#Secure_random_number_generation">Secure
   random number generation</a></h2>
-<p class="Pp">Do not use these functions as a cryptographic random number
-    generator. Always use the operating system's random number generator for
-    cryptographic purposes, see
-    <a class="Xr" href="intro.html">intro(3monocypher)</a>.</p>
+Do not use these functions as a cryptographic random number generator. Always
+  use the operating system's random number generator for cryptographic purposes,
+  see <a class="Xr" href="intro.html">intro(3monocypher)</a>.
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Protection_against_side_channels"><a class="permalink" href="#Protection_against_side_channels">Protection
   against side channels</a></h2>
-<p class="Pp">Secrets should not dwell in memory longer than needed. Use
-    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> to erase
-    secrets you no longer need. For Chacha20, this means the key and in some
-    cases the plain text itself.</p>
+Secrets should not dwell in memory longer than needed. Use
+  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> to erase
+  secrets you no longer need. For Chacha20, this means the key and in some cases
+  the plain text itself.
 </section>
 </section>
 </div>

@@ -1,7 +1,60 @@
 <!DOCTYPE html>
 <html>
+<!-- This is an automatically generated file.  Do not edit.
+   This file is dual-licensed.  Choose whichever you want.
+  
+   The first licence is a regular 2-clause BSD licence.  The second licence
+   is the CC-0 from Creative Commons. It is intended to release Monocypher
+   to the public domain.  The BSD licence serves as a fallback option.
+  
+   SPDX-License-Identifier: BSD-2-Clause OR CC0-1.0
+  
+   ----------------------------------------------------------------------------
+  
+   Copyright (c) 2017-2019 Loup Vaillant
+   Copyright (c) 2017-2018 Michael Savage
+   Copyright (c) 2017, 2019 Fabio Scotoni
+   All rights reserved.
+  
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are
+   met:
+  
+   1. Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+  
+   2. Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the
+      distribution.
+  
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+   HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  
+   ----------------------------------------------------------------------------
+  
+   Written in 2017-2019 by Loup Vaillant, Michael Savage and Fabio Scotoni
+  
+   To the extent possible under law, the author(s) have dedicated all copyright
+   and related neighboring rights to this software to the public domain
+   worldwide.  This software is distributed without any warranty.
+  
+   You should have received a copy of the CC0 Public Domain Dedication along
+   with this software.  If not, see
+   <https://creativecommons.org/publicdomain/zero/1.0/>
+   -->
 <head>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_LOCK(3MONOCYPHER)</title>
 </head>
@@ -16,16 +69,15 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<p class="Pp"><code class="Nm">crypto_lock_aead</code>,
-    <code class="Nm">crypto_unlock_aead</code>,
-    <code class="Nm">crypto_lock</code>, <code class="Nm">crypto_unlock</code>
-    &#x2014; <span class="Nd">authenticated encryption with additional
-    data</span></p>
+<code class="Nm">crypto_lock_aead</code>,
+  <code class="Nm">crypto_unlock_aead</code>,
+  <code class="Nm">crypto_lock</code>, <code class="Nm">crypto_unlock</code>
+  &#x2014;
+<div class="Nd">authenticated encryption with additional data</div>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<p class="Pp"><code class="In">#include
-    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_lock</code>(<var class="Fa">uint8_t mac[16]</var>,
@@ -59,9 +111,9 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<p class="Pp"><code class="Fn">crypto_lock</code>() encrypts and authenticates a
-    plaintext. It can be decrypted by <code class="Fn">crypto_unlock</code>().
-    The arguments are:</p>
+<code class="Fn">crypto_lock</code>() encrypts and authenticates a plaintext. It
+  can be decrypted by <code class="Fn">crypto_unlock</code>(). The arguments
+  are:
 <dl class="Bl-tag">
   <dt><var class="Fa">key</var></dt>
   <dd>A 32-byte session key, shared between the sender and the recipient. It
@@ -130,20 +182,20 @@
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<p class="Pp"><code class="Fn">crypto_lock</code>() and
-    <code class="Fn">crypto_lock_aead</code>() return nothing.
-    <code class="Fn">crypto_unlock</code>() and
-    <code class="Fn">crypto_unlock_aead</code>() return 0 on success or -1 if
-    the message was corrupted (i.e. <var class="Fa">mac</var> mismatched the
-    combination of <var class="Fa">key</var>, <var class="Fa">nonce</var>,
-    <var class="Fa">ad</var> and <var class="Fa">cipher_text</var>). Corruption
-    can be caused by transmission errors, programmer error, or an attacker's
-    interference. <var class="Fa">plain_text</var> does not need to be wiped if
-    the decryption fails.</p>
+<code class="Fn">crypto_lock</code>() and
+  <code class="Fn">crypto_lock_aead</code>() return nothing.
+  <code class="Fn">crypto_unlock</code>() and
+  <code class="Fn">crypto_unlock_aead</code>() return 0 on success or -1 if the
+  message was corrupted (i.e. <var class="Fa">mac</var> mismatched the
+  combination of <var class="Fa">key</var>, <var class="Fa">nonce</var>,
+  <var class="Fa">ad</var> and <var class="Fa">cipher_text</var>). Corruption
+  can be caused by transmission errors, programmer error, or an attacker's
+  interference. <var class="Fa">plain_text</var> does not need to be wiped if
+  the decryption fails.
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-<p class="Pp">Encryption:</p>
+Encryption:
 <div class="Bd Pp Bd-indent">
 <pre>
 const uint8_t key        [32];  /* Random, secret session key  */
@@ -214,34 +266,34 @@ crypto_wipe(key, 32);
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<p class="Pp"><a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
+<a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-<p class="Pp">These functions implement RFC 8439, with XChacha20 instead of
-    Chacha20. XChacha20 derives from Chacha20 the same way XSalsa20 derives from
-    Salsa20, and benefits from the same security reduction (proven secure as
-    long as Chacha20 itself is secure).</p>
+These functions implement RFC 8439, with XChacha20 instead of Chacha20.
+  XChacha20 derives from Chacha20 the same way XSalsa20 derives from Salsa20,
+  and benefits from the same security reduction (proven secure as long as
+  Chacha20 itself is secure).
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-<p class="Pp">The <code class="Fn">crypto_lock</code>() and
-    <code class="Fn">crypto_unlock</code>() functions first appeared in
-    Monocypher 0.1. <code class="Fn">crypto_lock_aead</code>() and
-    <code class="Fn">crypto_unlock_aead</code>() were introduced in Monocypher
-    1.1.0. In Monocypher 2.0.0, the underlying algorithms for these functions
-    were changed from a custom XChacha20/Poly1305 construction to an
-    implementation of RFC 7539 (now RFC 8439) with XChacha20 instead of
-    Chacha20. The <code class="Fn">crypto_lock_encrypt</code>() and
-    <code class="Fn">crypto_lock_auth</code>() functions were removed in
-    Monocypher 2.0.0.</p>
+The <code class="Fn">crypto_lock</code>() and
+  <code class="Fn">crypto_unlock</code>() functions first appeared in Monocypher
+  0.1. <code class="Fn">crypto_lock_aead</code>() and
+  <code class="Fn">crypto_unlock_aead</code>() were introduced in Monocypher
+  1.1.0. In Monocypher 2.0.0, the underlying algorithms for these functions were
+  changed from a custom XChacha20/Poly1305 construction to an implementation of
+  RFC 7539 (now RFC 8439) with XChacha20 instead of Chacha20. The
+  <code class="Fn">crypto_lock_encrypt</code>() and
+  <code class="Fn">crypto_lock_auth</code>() functions were removed in
+  Monocypher 2.0.0.
 </section>
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">December 28, 2017</td>
+    <td class="foot-date">December 12, 2019</td>
     <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>

@@ -1,7 +1,58 @@
 <!DOCTYPE html>
 <html>
+<!-- This is an automatically generated file.  Do not edit.
+   This file is dual-licensed.  Choose whichever you want.
+  
+   The first licence is a regular 2-clause BSD licence.  The second licence
+   is the CC-0 from Creative Commons. It is intended to release Monocypher
+   to the public domain.  The BSD licence serves as a fallback option.
+  
+   SPDX-License-Identifier: BSD-2-Clause OR CC0-1.0
+  
+   ----------------------------------------------------------------------------
+  
+   Copyright (c) 2019-2020 Fabio Scotoni
+   All rights reserved.
+  
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are
+   met:
+  
+   1. Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+  
+   2. Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the
+      distribution.
+  
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+   HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  
+   ----------------------------------------------------------------------------
+  
+   Written in 2019-2020 by Fabio Scotoni
+  
+   To the extent possible under law, the author(s) have dedicated all copyright
+   and related neighboring rights to this software to the public domain
+   worldwide.  This software is distributed without any warranty.
+  
+   You should have received a copy of the CC0 Public Domain Dedication along
+   with this software.  If not, see
+   <https://creativecommons.org/publicdomain/zero/1.0/>
+   -->
 <head>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_SIGN_INIT_FIRST_PASS_CUSTOM_HASH(3MONOCYPHER)</title>
 </head>
@@ -16,15 +67,14 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<p class="Pp"><code class="Nm">crypto_sign_init_first_pass_custom_hash</code>,
-    <code class="Nm">crypto_sign_public_key_custom_hash</code>,
-    <code class="Nm">crypto_check_init_custom_hash</code> &#x2014;
-    <span class="Nd">public key signatures with custom hash functions</span></p>
+<code class="Nm">crypto_sign_init_first_pass_custom_hash</code>,
+  <code class="Nm">crypto_sign_public_key_custom_hash</code>,
+  <code class="Nm">crypto_check_init_custom_hash</code> &#x2014;
+<div class="Nd">public key signatures with custom hash functions</div>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<p class="Pp"><code class="In">#include
-    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_sign_init_first_pass_custom_hash</code>(<var class="Fa">crypto_sign_ctx_abstract
@@ -45,10 +95,10 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<p class="Pp">These functions are variants of the
-    <a class="Xr" href="crypto_sign_init_first_pass.html">crypto_sign_init_first_pass(3monocypher)</a>
-    family of functions: They provide the ability to replace the EdDSA hash
-    function with any user-provided hash function.</p>
+These functions are variants of the
+  <a class="Xr" href="crypto_sign_init_first_pass.html">crypto_sign_init_first_pass(3monocypher)</a>
+  family of functions: They provide the ability to replace the EdDSA hash
+  function with any user-provided hash function.
 <p class="Pp"><b class="Sy">This is a highly advanced feature</b>.
     Interoperability of public key signatures with other cryptographic libraries
     can normally be achieved by using
@@ -137,13 +187,13 @@ typedef struct {
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<p class="Pp">These functions return nothing.</p>
+These functions return nothing.
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-<p class="Pp">Defining and using a custom implementation of SHA-512 and crudely
-    checking its results against
-    <a class="Xr" href="crypto_ed25519_sign.html">crypto_ed25519_sign(3monocypher)</a>:</p>
+Defining and using a custom implementation of SHA-512 and crudely checking its
+  results against
+  <a class="Xr" href="crypto_ed25519_sign.html">crypto_ed25519_sign(3monocypher)</a>:
 <div class="Bd Pp Bd-indent">
 <pre>
 struct outer_ctx {
@@ -163,21 +213,21 @@ my_hash(uint8_t hash[64], const uint8_t *msg, size_t len)
 static void
 my_init(void *ctx)
 {
-    struct outer_ctx *octx = ctx;
+    struct outer_ctx *octx = (struct outer_ctx *)ctx;
     SHA512Init(&amp;octx-&gt;hash_ctx);
 }
 
 static void
 my_update(void *ctx, const uint8_t *msg, size_t len)
 {
-    struct outer_ctx *octx = ctx;
+    struct outer_ctx *octx = (struct outer_ctx *)ctx;
     SHA512Update(&amp;octx-&gt;hash_ctx, msg, len);
 }
 
 static void
 my_final(void *ctx, uint8_t *hash)
 {
-    struct outer_ctx *octx = ctx;
+    struct outer_ctx *octx = (struct outer_ctx *)ctx;
     SHA512Final(hash, &amp;octx-&gt;hash_ctx);
 }
 
@@ -193,22 +243,22 @@ int
 main(void)
 {
     uint8_t theirs[64], mine[64];
-    uint8_t sk[32];
+    uint8_t sk[32] = {0x01, 0x02, 0x03, 0x04};
     const uint8_t msg[] = {
         0x00, 0x01, 0x02, 0x04
     };
 
-    arc4random_buf(sk, sizeof(sk));
     crypto_ed25519_sign(theirs, sk, NULL, msg, sizeof(msg));
 
     struct outer_ctx ctx;
-    crypto_sign_init_first_pass_custom_hash((void*)&amp;ctx,
+    crypto_sign_ctx_abstract *actx = (crypto_sign_ctx_abstract*)&amp;ctx;
+    crypto_sign_init_first_pass_custom_hash(actx,
                                             sk, NULL, &amp;my_vtable);
     crypto_wipe(sk, sizeof(sk));
-    crypto_sign_update(          (void*)&amp;ctx, msg, sizeof(msg));
-    crypto_sign_init_second_pass((void*)&amp;ctx);
-    crypto_sign_update(          (void*)&amp;ctx, msg, sizeof(msg));
-    crypto_sign_final(           (void*)&amp;ctx, mine);
+    crypto_sign_update(          actx, msg, sizeof(msg));
+    crypto_sign_init_second_pass(actx);
+    crypto_sign_update(          actx, msg, sizeof(msg));
+    crypto_sign_final(           actx, mine);
 
     if (crypto_verify64(theirs, mine) != 0) {
         fprintf(stderr, &quot;theirs != mine\n&quot;);
@@ -222,25 +272,24 @@ main(void)
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<p class="Pp"><a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
-    <a class="Xr" href="crypto_sha512.html">crypto_sha512(3monocypher)</a>,
-    <a class="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a>,
-    <a class="Xr" href="crypto_sign_init_first_pass.html">crypto_sign_init_first_pass(3monocypher)</a>,
-    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
+<a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
+  <a class="Xr" href="crypto_sha512.html">crypto_sha512(3monocypher)</a>,
+  <a class="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a>,
+  <a class="Xr" href="crypto_sign_init_first_pass.html">crypto_sign_init_first_pass(3monocypher)</a>,
+  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-<p class="Pp">The
-    <code class="Fn">crypto_sign_init_first_pass_custom_hash</code>(),
-    <code class="Fn">crypto_sign_public_key_custom_hash</code>(),
-    <code class="Fn">crypto_check_init_first_pass_custom_hash</code>() functions
-    first appeared in Monocypher 3.0.0.</p>
+The <code class="Fn">crypto_sign_init_first_pass_custom_hash</code>(),
+  <code class="Fn">crypto_sign_public_key_custom_hash</code>(),
+  <code class="Fn">crypto_check_init_first_pass_custom_hash</code>() functions
+  first appeared in Monocypher 3.0.0.
 </section>
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">December 10, 2019</td>
+    <td class="foot-date">December 28, 2019</td>
     <td class="foot-os">OpenBSD 6.6</td>
   </tr>
 </table>
