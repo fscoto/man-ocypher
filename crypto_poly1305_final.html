@@ -54,7 +54,6 @@
    -->
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_POLY1305(3MONOCYPHER)</title>
 </head>
@@ -69,15 +68,16 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_poly1305</code>,
-  <code class="Nm">crypto_poly1305_init</code>,
-  <code class="Nm">crypto_poly1305_update</code>,
-  <code class="Nm">crypto_poly1305_final</code> &#x2014;
-<div class="Nd">Poly1305 one-time message authentication codes</div>
+<p class="Pp"><code class="Nm">crypto_poly1305</code>,
+    <code class="Nm">crypto_poly1305_init</code>,
+    <code class="Nm">crypto_poly1305_update</code>,
+    <code class="Nm">crypto_poly1305_final</code> &#x2014;
+    <span class="Nd">Poly1305 one-time message authentication codes</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_poly1305</code>(<var class="Fa">uint8_t mac[16]</var>,
@@ -99,10 +99,10 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
-  means the authentication key can be used only once. <b class="Sy">This makes
-  Poly1305 easy to misuse</b>. On the other hand, Poly1305 is fast, and provably
-  secure if used correctly.
+<p class="Pp">Poly1305 is a one-time message authentication code.
+    &#x201C;One-time&#x201D; means the authentication key can be used only once.
+    <b class="Sy">This makes Poly1305 easy to misuse</b>. On the other hand,
+    Poly1305 is fast, and provably secure if used correctly.</p>
 <p class="Pp">Poly1305 is a low-level primitive. Consider using authenticated
     encryption, implemented by
     <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>.</p>
@@ -124,31 +124,31 @@ Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
 <section class="Ss">
 <h2 class="Ss" id="Direct_interface"><a class="permalink" href="#Direct_interface">Direct
   interface</a></h2>
-<code class="Fn">crypto_poly1305</code>() produces a message authentication code
-  for the given message and authentication key. To verify the integrity of a
-  message, use
-  <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a> to
-  compare the received MAC to the output <var class="Fa">mac</var>.
+<p class="Pp"><code class="Fn">crypto_poly1305</code>() produces a message
+    authentication code for the given message and authentication key. To verify
+    the integrity of a message, use
+    <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>
+    to compare the received MAC to the output <var class="Fa">mac</var>.</p>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Incremental_interface"><a class="permalink" href="#Incremental_interface">Incremental
   interface</a></h2>
-<code class="Fn">crypto_poly1305_init</code>() initialises a context.
-  <var class="Fa">key</var> should be wiped once the context is initialised.
-  Then, <code class="Fn">crypto_poly1305_update</code>() authenticates the
-  message chunk by chunk. Once the message is entirely processed,
-  <code class="Fn">crypto_poly1305_final</code>() yields the message
-  authentication code.
+<p class="Pp"><code class="Fn">crypto_poly1305_init</code>() initialises a
+    context. <var class="Fa">key</var> should be wiped once the context is
+    initialised. Then, <code class="Fn">crypto_poly1305_update</code>()
+    authenticates the message chunk by chunk. Once the message is entirely
+    processed, <code class="Fn">crypto_poly1305_final</code>() yields the
+    message authentication code.</p>
 </section>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-These functions return nothing.
+<p class="Pp">These functions return nothing.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-To authenticate a message:
+<p class="Pp">To authenticate a message:</p>
 <div class="Bd Pp Bd-indent">
 <pre>
 const uint8_t msg[500]; /* Message to authenticate           */
@@ -198,37 +198,38 @@ crypto_poly1305_final(&amp;ctx, mac);
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-These functions implement Poly1305, described in RFC 8439.
+<p class="Pp">These functions implement Poly1305, described in RFC 8439.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_poly1305_init</code>(),
-  <code class="Fn">crypto_poly1305_update</code>(), and
-  <code class="Fn">crypto_poly1305_final</code>() functions first appeared in
-  Monocypher 0.1. <code class="Fn">crypto_poly1305</code>() first appeared in
-  Monocypher 1.1.0.
+<p class="Pp">The <code class="Fn">crypto_poly1305_init</code>(),
+    <code class="Fn">crypto_poly1305_update</code>(), and
+    <code class="Fn">crypto_poly1305_final</code>() functions first appeared in
+    Monocypher 0.1. <code class="Fn">crypto_poly1305</code>() first appeared in
+    Monocypher 1.1.0.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
-Poly1305 is difficult to use correctly. Do not use it unless you are absolutely
-  sure what you are doing. Use authenticated encryption instead; see
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>. If you are
-  certain you do not want encryption, refer to
-  <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a> on
-  how to use Blake2b to generate message authentication codes.
+<p class="Pp">Poly1305 is difficult to use correctly. Do not use it unless you
+    are absolutely sure what you are doing. Use authenticated encryption
+    instead; see
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>. If you
+    are certain you do not want encryption, refer to
+    <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a> on
+    how to use Blake2b to generate message authentication codes.</p>
 <section class="Ss">
 <h2 class="Ss" id="Authentication_key_requirements"><a class="permalink" href="#Authentication_key_requirements">Authentication
   key requirements</a></h2>
-Poly1305 is a <i class="Em">one time</i> authenticator. This puts rather
-  stringent constraints on the authentication key:
+<p class="Pp">Poly1305 is a <i class="Em">one time</i> authenticator. This puts
+    rather stringent constraints on the authentication key:</p>
 <ul class="Bl-bullet">
   <li>Any given key must be used only once. Using the same key for two different
       messages reveals it to the attacker. Do not use the session key, or it
@@ -254,10 +255,11 @@ Poly1305 is a <i class="Em">one time</i> authenticator. This puts rather
 <section class="Ss">
 <h2 class="Ss" id="Protection_against_side_channels"><a class="permalink" href="#Protection_against_side_channels">Protection
   against side channels</a></h2>
-Use <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>
-  to compare message authentication codes. Avoid standard buffer comparison
-  functions. They may not run in constant time, enabling an attacker to exploit
-  timing attacks to recover the MAC.
+<p class="Pp">Use
+    <a class="Xr" href="crypto_verify16.html">crypto_verify16(3monocypher)</a>
+    to compare message authentication codes. Avoid standard buffer comparison
+    functions. They may not run in constant time, enabling an attacker to
+    exploit timing attacks to recover the MAC.</p>
 <p class="Pp">The authentication key should be wiped with
     <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a> after
     use.</p>

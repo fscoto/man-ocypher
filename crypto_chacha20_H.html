@@ -54,7 +54,6 @@
    -->
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_HCHACHA20(3MONOCYPHER)</title>
 </head>
@@ -69,12 +68,13 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_hchacha20</code> &#x2014;
-<div class="Nd">HChacha20 special-purpose hashing</div>
+<p class="Pp"><code class="Nm">crypto_hchacha20</code> &#x2014;
+    <span class="Nd">HChacha20 special-purpose hashing</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_hchacha20</code>(<var class="Fa">uint8_t
@@ -83,11 +83,12 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<code class="Fn">crypto_hchacha20</code>() provides a not-so-cryptographic hash.
-  It may be used for some specific purposes, such as X25519 key derivation, or
-  XChacha20 initialisation. If in doubt, do not use directly. Use
-  <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
-  instead.
+<p class="Pp"><code class="Fn">crypto_hchacha20</code>() provides a
+    not-so-cryptographic hash. It may be used for some specific purposes, such
+    as X25519 key derivation, or XChacha20 initialisation. If in doubt, do not
+    use directly. Use
+    <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
+    instead.</p>
 <p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
   <dt><var class="Fa">key</var></dt>
@@ -105,11 +106,11 @@
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-This function returns nothing.
+<p class="Pp">This function returns nothing.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-Simple hash:
+<p class="Pp">Simple hash:</p>
 <div class="Bd Pp Bd-indent">
 <pre>
 const uint8_t key[32]; /* Must have enough entropy           */
@@ -125,24 +126,26 @@ crypto_wipe(in , 16);
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_chacha20_encrypt.html">crypto_chacha20_encrypt(3monocypher)</a>,
-  <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_chacha20_encrypt.html">crypto_chacha20_encrypt(3monocypher)</a>,
+    <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-This function implements HChacha20. HChacha20 derives from Chacha20 the same way
-  HSalsa20 derives from Salsa20.
+<p class="Pp">This function implements HChacha20. HChacha20 derives from
+    Chacha20 the same way HSalsa20 derives from Salsa20.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_hchacha20</code>() function first appeared in
-  Monocypher 0.1 as <code class="Fn">crypto_chacha20_H</code>(). It was renamed
-  to <code class="Fn">crypto_hchacha20</code>() in Monocypher 3.0.0.
+<p class="Pp">The <code class="Fn">crypto_hchacha20</code>() function first
+    appeared in Monocypher 0.1 as <code class="Fn">crypto_chacha20_H</code>().
+    It was renamed to <code class="Fn">crypto_hchacha20</code>() in Monocypher
+    3.0.0.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="CAVEATS"><a class="permalink" href="#CAVEATS">CAVEATS</a></h1>
-<b class="Sy">This is not a general-purpose cryptographic hash function</b>.
+<p class="Pp"><b class="Sy">This is not a general-purpose cryptographic hash
+    function</b>.</p>
 </section>
 </div>
 <table class="foot">

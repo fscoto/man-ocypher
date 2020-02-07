@@ -52,7 +52,6 @@
    -->
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_CHACHA20_ENCRYPT(3MONOCYPHER)</title>
 </head>
@@ -67,16 +66,18 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_chacha20_encrypt</code>,
-  <code class="Nm">crypto_chacha20_init</code>,
-  <code class="Nm">crypto_chacha20_x_init</code>,
-  <code class="Nm">crypto_chacha20_stream</code>,
-  <code class="Nm">crypto_chacha20_set_ctr</code> &#x2014;
-<div class="Nd">deprecated Chacha20 and XChacha20 encryption functions</div>
+<p class="Pp"><code class="Nm">crypto_chacha20_encrypt</code>,
+    <code class="Nm">crypto_chacha20_init</code>,
+    <code class="Nm">crypto_chacha20_x_init</code>,
+    <code class="Nm">crypto_chacha20_stream</code>,
+    <code class="Nm">crypto_chacha20_set_ctr</code> &#x2014;
+    <span class="Nd">deprecated Chacha20 and XChacha20 encryption
+    functions</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_chacha20_init</code>(<var class="Fa">crypto_chacha_ctx
@@ -105,13 +106,13 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-These functions provided an incremental interface for the Chacha20 cipher. They
-  are deprecated in favor of
-  <a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
-  <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>,
-  <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20(3monocypher)</a>,
-  and
-  <a class="Xr" href="crypto_xchacha20_ctr.html">crypto_xchacha20_ctr(3monocypher)</a>.
+<p class="Pp">These functions provided an incremental interface for the Chacha20
+    cipher. They are deprecated in favor of
+    <a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
+    <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>,
+    <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20(3monocypher)</a>,
+    and
+    <a class="Xr" href="crypto_xchacha20_ctr.html">crypto_xchacha20_ctr(3monocypher)</a>.</p>
 <p class="Pp">For encryption, you can achieve an identical effect as the
     deprecated functions by using
     <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>
@@ -136,28 +137,28 @@ These functions provided an incremental interface for the Chacha20 cipher. They
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-These functions return nothing.
+<p class="Pp">These functions return nothing.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
-  <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>,
-  <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20(3monocypher)</a>,
-  <a class="Xr" href="crypto_xchacha20_ctr.html">crypto_xchacha20_ctr(3monocypher)</a>,
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
+    <a class="Xr" href="crypto_chacha20_ctr.html">crypto_chacha20_ctr(3monocypher)</a>,
+    <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20(3monocypher)</a>,
+    <a class="Xr" href="crypto_xchacha20_ctr.html">crypto_xchacha20_ctr(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_chacha20_encrypt</code>(),
-  <code class="Fn">crypto_chacha20_init</code>(), functions first appeared in
-  Monocypher 0.1. <code class="Fn">crypto_chacha20_stream</code>() was added in
-  Monocypher 0.2. <code class="Fn">crypto_chacha20_x_init</code>() and
-  <code class="Fn">crypto_chacha20_set_ctr</code>() were added in Monocypher
-  1.0. They were deprecated in Monocypher 3.0.0 and will be removed in
-  Monocypher 4.0.0.
+<p class="Pp">The <code class="Fn">crypto_chacha20_encrypt</code>(),
+    <code class="Fn">crypto_chacha20_init</code>(), functions first appeared in
+    Monocypher 0.1. <code class="Fn">crypto_chacha20_stream</code>() was added
+    in Monocypher 0.2. <code class="Fn">crypto_chacha20_x_init</code>() and
+    <code class="Fn">crypto_chacha20_set_ctr</code>() were added in Monocypher
+    1.0. They were deprecated in Monocypher 3.0.0 and will be removed in
+    Monocypher 4.0.0.</p>
 </section>
 </div>
 <table class="foot">

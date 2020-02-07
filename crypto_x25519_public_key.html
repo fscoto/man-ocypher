@@ -54,7 +54,6 @@
    -->
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_X25519(3MONOCYPHER)</title>
 </head>
@@ -69,13 +68,14 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_x25519</code>,
-  <code class="Nm">crypto_x25519_public_key</code> &#x2014;
-<div class="Nd">X25519 key exchange</div>
+<p class="Pp"><code class="Nm">crypto_x25519</code>,
+    <code class="Nm">crypto_x25519_public_key</code> &#x2014;
+    <span class="Nd">X25519 key exchange</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_x25519</code>(<var class="Fa">uint8_t
@@ -90,11 +90,11 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<code class="Fn">crypto_x25519</code>() computes a shared secret with
-  <var class="Fa">your_secret_key</var> and
-  <var class="Fa">their_public_key</var>. It is a low-level primitive. Use
-  <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
-  unless you have a specific reason not to.
+<p class="Pp"><code class="Fn">crypto_x25519</code>() computes a shared secret
+    with <var class="Fa">your_secret_key</var> and
+    <var class="Fa">their_public_key</var>. It is a low-level primitive. Use
+    <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
+    unless you have a specific reason not to.</p>
 <p class="Pp"><code class="Fn">crypto_x25519_public_key</code>() is the same as
     <a class="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>.
     It deterministically computes the public key from a random secret key.</p>
@@ -120,8 +120,8 @@
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<code class="Fn">crypto_x25519</code>() and
-  <code class="Fn">crypto_x25519_public_key</code>() return nothing.
+<p class="Pp"><code class="Fn">crypto_x25519</code>() and
+    <code class="Fn">crypto_x25519_public_key</code>() return nothing.</p>
 <p class="Pp">Some poorly designed protocols require to test for
     &#x201C;contributory&#x201D; behaviour, which ensures that no untrusted
     party forces the shared secret to a known constant. Protocols should instead
@@ -131,8 +131,9 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-Generate a pair of shared keys with your secret key and their public key. (This
-  can help nonce management for full duplex communications.)
+<p class="Pp">Generate a pair of shared keys with your secret key and their
+    public key. (This can help nonce management for full duplex
+  communications.)</p>
 <div class="Bd Pp Bd-indent">
 <pre>
 const uint8_t their_pk     [32]; /* Their public key          */
@@ -154,35 +155,35 @@ crypto_wipe(shared_secret, 32);
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-This function implements X25519, described in RFC 7748.
+<p class="Pp">This function implements X25519, described in RFC 7748.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_x25519</code>(), and
-  <code class="Fn">crypto_x25519_public_key</code>() functions first appeared in
-  Monocypher 0.1.
+<p class="Pp">The <code class="Fn">crypto_x25519</code>(), and
+    <code class="Fn">crypto_x25519_public_key</code>() functions first appeared
+    in Monocypher 0.1.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
-If either of the long term secret keys leaks, it may compromise
-  <i class="Em">all past messages</i>. This can be avoided by using protocols
-  that provide forward secrecy, such as the X3DH key agreement protocol.
+<p class="Pp">If either of the long term secret keys leaks, it may compromise
+    <i class="Em">all past messages</i>. This can be avoided by using protocols
+    that provide forward secrecy, such as the X3DH key agreement protocol.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="IMPLEMENTATION_DETAILS"><a class="permalink" href="#IMPLEMENTATION_DETAILS">IMPLEMENTATION
   DETAILS</a></h1>
-The most significant bit of the public key is systematically ignored. It is not
-  needed because every public key should be smaller than 2^255-19, which fits in
-  255 bits. If another implementation of X25519 gives you a key that is not
-  fully reduced and has its high bit set, the computation will fail. On the
-  other hand, it also means you may use this bit for other purposes (such as
-  parity flipping for Ed25519 compatibility).
+<p class="Pp">The most significant bit of the public key is systematically
+    ignored. It is not needed because every public key should be smaller than
+    2^255-19, which fits in 255 bits. If another implementation of X25519 gives
+    you a key that is not fully reduced and has its high bit set, the
+    computation will fail. On the other hand, it also means you may use this bit
+    for other purposes (such as parity flipping for Ed25519 compatibility).</p>
 </section>
 </div>
 <table class="foot">

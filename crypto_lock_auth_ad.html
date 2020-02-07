@@ -54,7 +54,6 @@
    -->
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_LOCK_INIT(3MONOCYPHER)</title>
 </head>
@@ -69,21 +68,23 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_lock_init</code>,
-  <code class="Nm">crypto_lock_auth_ad</code>,
-  <code class="Nm">crypto_lock_auth_message</code>,
-  <code class="Nm">crypto_lock_update</code>,
-  <code class="Nm">crypto_lock_final</code>,
-  <code class="Nm">crypto_unlock_init</code>,
-  <code class="Nm">crypto_unlock_auth_ad</code>,
-  <code class="Nm">crypto_unlock_auth_message</code>,
-  <code class="Nm">crypto_unlock_update</code>,
-  <code class="Nm">crypto_unlock_final</code> &#x2014;
-<div class="Nd">incremental authenticated encryption with additional data</div>
+<p class="Pp"><code class="Nm">crypto_lock_init</code>,
+    <code class="Nm">crypto_lock_auth_ad</code>,
+    <code class="Nm">crypto_lock_auth_message</code>,
+    <code class="Nm">crypto_lock_update</code>,
+    <code class="Nm">crypto_lock_final</code>,
+    <code class="Nm">crypto_unlock_init</code>,
+    <code class="Nm">crypto_unlock_auth_ad</code>,
+    <code class="Nm">crypto_unlock_auth_message</code>,
+    <code class="Nm">crypto_unlock_update</code>,
+    <code class="Nm">crypto_unlock_final</code> &#x2014;
+    <span class="Nd">incremental authenticated encryption with additional
+    data</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_lock_init</code>(<var class="Fa">crypto_lock_ctx
@@ -136,13 +137,13 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-These functions were variants of
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="crypto_unlock.html">crypto_unlock(3monocypher)</a>,
-  <a class="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>
-  and
-  <a class="Xr" href="crypto_unlock_aead.html">crypto_unlock_aead(3monocypher)</a>.
-  They are deprecated in favor of those simpler functions.
+<p class="Pp">These functions were variants of
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="crypto_unlock.html">crypto_unlock(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>
+    and
+    <a class="Xr" href="crypto_unlock_aead.html">crypto_unlock_aead(3monocypher)</a>.
+    They are deprecated in favor of those simpler functions.</p>
 <p class="Pp">Change your protocol so that it does not rely on the removed
     functions, namely by splitting the data into chunks that you can
     individually use
@@ -160,15 +161,15 @@ These functions were variants of
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<code class="Fn">crypto_lock_init</code>(),
-  <code class="Fn">crypto_unlock_init</code>(),
-  <code class="Fn">crypto_lock_auth_ad</code>(),
-  <code class="Fn">crypto_unlock_auth_ad</code>(),
-  <code class="Fn">crypto_lock_auth_message</code>(),
-  <code class="Fn">crypto_unlock_auth_message</code>(),
-  <code class="Fn">crypto_lock_update</code>(),
-  <code class="Fn">crypto_unlock_update</code>(), and
-  <code class="Fn">crypto_lock_final</code>() return nothing.
+<p class="Pp"><code class="Fn">crypto_lock_init</code>(),
+    <code class="Fn">crypto_unlock_init</code>(),
+    <code class="Fn">crypto_lock_auth_ad</code>(),
+    <code class="Fn">crypto_unlock_auth_ad</code>(),
+    <code class="Fn">crypto_lock_auth_message</code>(),
+    <code class="Fn">crypto_unlock_auth_message</code>(),
+    <code class="Fn">crypto_lock_update</code>(),
+    <code class="Fn">crypto_unlock_update</code>(), and
+    <code class="Fn">crypto_lock_final</code>() return nothing.</p>
 <p class="Pp"><code class="Fn">crypto_unlock_final</code>() returns 0 on success
     or -1 if the message was corrupted. Corruption can be caused by transmission
     errors, programmer error, or an attacker's interference.
@@ -177,32 +178,32 @@ These functions were variants of
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>,
-  <a class="Xr" href="crypto_unlock.html">crypto_unlock(3monocypher)</a>,
-  <a class="Xr" href="crypto_unlock_aead.html">crypto_unlock_aead(3monocypher)</a>,
-  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock_aead.html">crypto_lock_aead(3monocypher)</a>,
+    <a class="Xr" href="crypto_unlock.html">crypto_unlock(3monocypher)</a>,
+    <a class="Xr" href="crypto_unlock_aead.html">crypto_unlock_aead(3monocypher)</a>,
+    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn">crypto_lock_init</code>(),
-  <code class="Fn">crypto_lock_auth_ad</code>(),
-  <code class="Fn">crypto_lock_auth_message</code>(),
-  <code class="Fn">crypto_lock_update</code>(),
-  <code class="Fn">crypto_lock_final</code>(),
-  <code class="Fn">crypto_unlock_init</code>(),
-  <code class="Fn">crypto_unlock_auth_ad</code>(),
-  <code class="Fn">crypto_unlock_auth_message</code>(),
-  <code class="Fn">crypto_unlock_update</code>(), and
-  <code class="Fn">crypto_unlock_final</code>() functions first appeared in
-  Monocypher 1.1.0. <code class="Fn">crypto_lock_aead_auth</code>() and
-  <code class="Fn">crypto_unlock_aead_auth</code>() were renamed to
-  <code class="Fn">crypto_lock_auth_ad</code>() and
-  <code class="Fn">crypto_unlock_auth_ad</code>() respectively in Monocypher
-  2.0.0. They were deprecated in Monocypher 3.0.0 and will be removed in
-  Monocypher 4.0.0.
+<p class="Pp">The <code class="Fn">crypto_lock_init</code>(),
+    <code class="Fn">crypto_lock_auth_ad</code>(),
+    <code class="Fn">crypto_lock_auth_message</code>(),
+    <code class="Fn">crypto_lock_update</code>(),
+    <code class="Fn">crypto_lock_final</code>(),
+    <code class="Fn">crypto_unlock_init</code>(),
+    <code class="Fn">crypto_unlock_auth_ad</code>(),
+    <code class="Fn">crypto_unlock_auth_message</code>(),
+    <code class="Fn">crypto_unlock_update</code>(), and
+    <code class="Fn">crypto_unlock_final</code>() functions first appeared in
+    Monocypher 1.1.0. <code class="Fn">crypto_lock_aead_auth</code>() and
+    <code class="Fn">crypto_unlock_aead_auth</code>() were renamed to
+    <code class="Fn">crypto_lock_auth_ad</code>() and
+    <code class="Fn">crypto_unlock_auth_ad</code>() respectively in Monocypher
+    2.0.0. They were deprecated in Monocypher 3.0.0 and will be removed in
+    Monocypher 4.0.0.</p>
 </section>
 </div>
 <table class="foot">

@@ -52,7 +52,6 @@
    -->
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
   <title>CRYPTO_IETF_CHACHA20(3MONOCYPHER)</title>
 </head>
@@ -67,13 +66,14 @@
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm">crypto_ietf_chacha20</code>,
-  <code class="Nm">crypto_ietf_chacha20_ctr</code> &#x2014;
-<div class="Nd">IETF Chacha20 encryption functions</div>
+<p class="Pp"><code class="Nm">crypto_ietf_chacha20</code>,
+    <code class="Nm">crypto_ietf_chacha20_ctr</code> &#x2014;
+    <span class="Nd">IETF Chacha20 encryption functions</span></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><code class="In">#include
+    &lt;<a class="In">monocypher.h</a>&gt;</code></p>
 <p class="Pp"><var class="Ft">void</var>
   <br/>
   <code class="Fn">crypto_ietf_chacha20</code>(<var class="Fa">uint8_t
@@ -90,11 +90,11 @@
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-These functions provide an interface for the Chacha20 encryption primitive as
-  specified by the IETF in RFC 8439. They are provided strictly for
-  compatibility with existing systems or strict standards compliance. New
-  programs are strongly encouraged to use
-  <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20</a> instead.
+<p class="Pp">These functions provide an interface for the Chacha20 encryption
+    primitive as specified by the IETF in RFC 8439. They are provided strictly
+    for compatibility with existing systems or strict standards compliance. New
+    programs are strongly encouraged to use
+    <a class="Xr" href="crypto_xchacha20.html">crypto_xchacha20</a> instead.</p>
 <p class="Pp">Chacha20 is a low-level primitive. Consider using authenticated
     encryption, implemented by
     <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>.</p>
@@ -112,29 +112,29 @@ These functions provide an interface for the Chacha20 encryption primitive as
 <section class="Sh">
 <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<code class="Fn">crypto_ietf_chacha20</code>() returns nothing.
-  <code class="Fn">crypto_ietf_chacha20_ctr</code>() functions return the next
-  <var class="Fa">ctr</var> to use with the same key and nonce values; this is
-  always <var class="Fa">text_size</var> divided by 64; plus one if there was a
-  remainder.
+<p class="Pp"><code class="Fn">crypto_ietf_chacha20</code>() returns nothing.
+    <code class="Fn">crypto_ietf_chacha20_ctr</code>() functions return the next
+    <var class="Fa">ctr</var> to use with the same key and nonce values; this is
+    always <var class="Fa">text_size</var> divided by 64; plus one if there was
+    a remainder.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
-  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
-  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+<p class="Pp"><a class="Xr" href="crypto_chacha20.html">crypto_chacha20(3monocypher)</a>,
+    <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+    <a class="Xr" href="crypto_wipe.html">crypto_wipe(3monocypher)</a>,
+    <a class="Xr" href="intro.html">intro(3monocypher)</a></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
-These functions implement Chacha20 as described in RFC 8439.
+<p class="Pp">These functions implement Chacha20 as described in RFC 8439.</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-<code class="Fn">crypto_ietf_chacha20</code>() and
-  <code class="Fn">crypto_ietf_chacha20_ctr</code>() were added in Monocypher
-  3.0.0.
+<p class="Pp"><code class="Fn">crypto_ietf_chacha20</code>() and
+    <code class="Fn">crypto_ietf_chacha20_ctr</code>() were added in Monocypher
+    3.0.0.</p>
 </section>
 </div>
 <table class="foot">
