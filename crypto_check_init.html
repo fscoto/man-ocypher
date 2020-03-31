@@ -141,7 +141,12 @@ Signing is done in two passes. This requires five steps:
       public key is optional, and will be recomputed if not provided. This
       recomputation doubles the execution time for short messages.</li>
   <li>The first pass proper, with
-      <code class="Fn" title="Fn">crypto_sign_update</code>().</li>
+      <code class="Fn" title="Fn">crypto_sign_update</code>(). Forgetting to
+      call <code class="Fn" title="Fn">crypto_sign_update</code>() will appear
+      to work in that it produces valid signatures, but also
+      <b class="Sy" title="Sy">loses all security because attackers may now
+      recover the secret key</b>. Under <i class="Em" title="Em">no</i>
+      circumstances must you forget the first pass.</li>
   <li>Initialisation of the second pass with
       <code class="Fn" title="Fn">crypto_sign_init_second_pass</code>().</li>
   <li>The second pass proper, with
@@ -211,8 +216,45 @@ if (crypto_check_final((crypto_sign_ctx_abstract*)&amp;ctx)) {
     /* Message is corrupted, abort processing */ 
 } else { 
     /* Message is genuine */ 
-} 
-
+}
+</pre>
+</div>
+<div class="Pp"></div>
+This interface can be used to mitigate attacks that leverage power analysis and
+  fault injection (glitching) &#x2013; both of which require physical access and
+  appropriate equipment &#x2013; by injecting additional randomness (at least 32
+  bytes) and padding (to the hash function's block size, which is 128 bytes for
+  all hash functions supported by Monocypher), of which 32 bytes are already
+  inserted into the buffer by
+  <code class="Fn" title="Fn">crypto_sign_init_first_pass</code>(). Access to a
+  cryptographically secure pseudo-random generator is a requirement for
+  effective side channel mitigation. Signing a message with increased
+  power-related side channel mitigations:
+<div class="Pp"></div>
+<div class="Bd Bd-indent">
+<pre class="Li">
+const uint8_t message  [   500]; /* Message to sign         */ 
+uint8_t       sk       [    32]; /* Secret key              */ 
+const uint8_t pk       [    32]; /* Public key (optional)   */ 
+uint8_t       signature[    64]; /* Output signature        */ 
+uint8_t       buf      [128-32] = {0}; /* Mitigation buffer */ 
+crypto_sign_ctx ctx; 
+crypto_sign_ctx_abstract *actx = (crypto_sign_ctx_abstract *)&amp;ctx; 
+ 
+arc4random_buf(buf, 32); 
+/* The rest of buf MUST be zeroes. */ 
+ 
+crypto_sign_init_first_pass(actx, sk, pk); 
+crypto_sign_update         (actx, buf, sizeof(buf)); 
+crypto_sign_update         (actx, message, 500); 
+ 
+crypto_sign_init_second_pass(actx); 
+crypto_sign_update          (actx, message, 500); 
+crypto_sign_final           (actx, signature); 
+ 
+crypto_wipe(buf, 32); 
+/* Wipe the secret key if no longer needed */ 
+crypto_wipe(sk,  32);
 </pre>
 </div>
 <h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
@@ -226,6 +268,9 @@ if (crypto_check_final((crypto_sign_ctx_abstract*)&amp;ctx)) {
 <h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 These functions implement PureEdDSA with Curve25519 and Blake2b, as described in
   RFC 8032. This is the same as Ed25519, with Blake2b instead of SHA-512.
+<div class="Pp"></div>
+The example for side channel mitigation follows the methodology outlined in
+  I-D.draft-mattsson-cfrg-det-sigs-with-noise-02.
 <h1 class="Sh" title="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
 The <code class="Fn" title="Fn">crypto_sign_init_first_pass</code>(),
   <code class="Fn" title="Fn">crypto_sign_update</code>(),
@@ -251,7 +296,10 @@ Messages are not verified until the call to
 <div class="Pp"></div>
 When signing messages, the security considerations documented in
   <a class="Xr" title="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a>
-  also apply.
+  also apply. In particular, if power-related side channels are part of your
+  threat model, note that there may still be other power-related side channels
+  (such as if the CPU leaks information when an operation overflows a register)
+  that must be considered.
 <h1 class="Sh" title="Sh" id="IMPLEMENTATION_DETAILS"><a class="permalink" href="#IMPLEMENTATION_DETAILS">IMPLEMENTATION
   DETAILS</a></h1>
 EdDSA signatures require two passes that cannot be performed in parallel. There

@@ -128,16 +128,19 @@ The arguments are:
       <var class="Fa" title="Fa">your_secret_key</var> may overlap if your
       secret is no longer required.</dd>
 </dl>
+<div class="Pp"></div>
+Some protocols, such as some password-authenticated key exchange (PAKE)
+  protocols and oblivious pseudo-random functions (OPRF), may require
+  &#x201C;contributory&#x201D; behaviour, which ensures that no untrusted party
+  forces the shared secret to a known constant. If a protocol requires
+  contributory behaviour, compare the output of
+  <code class="Fn" title="Fn">crypto_x25519</code>() to an all-zero buffer using
+  <a class="Xr" title="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a>;
+  abort the protocol if the output and the all-zero buffer are equal.
 <h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
 <code class="Fn" title="Fn">crypto_x25519</code>() and
   <code class="Fn" title="Fn">crypto_x25519_public_key</code>() return nothing.
-<div class="Pp"></div>
-Some poorly designed protocols require to test for &#x201C;contributory&#x201D;
-  behaviour, which ensures that no untrusted party forces the shared secret to a
-  known constant. Protocols should instead be designed in such a way that no
-  such check is necessary, namely by authenticating the other party or
-  exchanging keys over a trusted channel.
 <h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 The following example assumes the existence of
   <code class="Fn" title="Fn">arc4random_buf</code>(), which fills the given

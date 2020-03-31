@@ -129,17 +129,17 @@ The arguments are:
 <var class="Fa" title="Fa">shared_key</var> and
   <var class="Fa" title="Fa">your_secret_key</var> may overlap if the secret is
   no longer required.
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
-  VALUES</a></h1>
-<code class="Fn" title="Fn">crypto_key_exchange</code>() and
-  <code class="Fn" title="Fn">crypto_key_exchange_public_key</code>() return
-  nothing.
 <div class="Pp"></div>
 Some poorly designed protocols require to test for &#x201C;contributory&#x201D;
   behaviour, which ensures that no untrusted party forces the shared secret to a
   known constant. Protocols should instead be designed in such a way that no
   such check is necessary, namely by authenticating the other party or
   exchanging keys over a trusted channel.
+<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+  VALUES</a></h1>
+<code class="Fn" title="Fn">crypto_key_exchange</code>() and
+  <code class="Fn" title="Fn">crypto_key_exchange_public_key</code>() return
+  nothing.
 <h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 The following examples assume the existence of
   <code class="Fn" title="Fn">arc4random_buf</code>(), which fills the given
