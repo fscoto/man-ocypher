@@ -64,142 +64,136 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_sha512</code>,
-  <code class="Nm" title="Nm">crypto_sha512_init</code>,
-  <code class="Nm" title="Nm">crypto_sha512_update</code>,
-  <code class="Nm" title="Nm">crypto_sha512_final</code> &#x2014;
-<div class="Nd" title="Nd">cryptographic hashing with the SHA-512
-  algorithm</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher-ed25519.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_sha512</code>(<var class="Fa" title="Fa">uint8_t
-  hash[64]</var>, <var class="Fa" title="Fa">const uint8_t *message</var>,
-  <var class="Fa" title="Fa">size_t message_size</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_sha512_init</code>(<var class="Fa" title="Fa">crypto_sha512_ctx
-  *ctx</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_sha512_update</code>(<var class="Fa" title="Fa">crypto_sha512_ctx
-  *ctx</var>, <var class="Fa" title="Fa">const uint8_t *message</var>,
-  <var class="Fa" title="Fa">size_t message_size</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_sha512_final</code>(<var class="Fa" title="Fa">crypto_sha512_ctx
-  *ctx</var>, <var class="Fa" title="Fa">uint8_t hash[64]</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_sha512</code>,
+  <code class="Nm">crypto_sha512_init</code>,
+  <code class="Nm">crypto_sha512_update</code>,
+  <code class="Nm">crypto_sha512_final</code> &#x2014;
+<div class="Nd">cryptographic hashing with the SHA-512 algorithm</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher-ed25519.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_sha512</code>(<var class="Fa">uint8_t hash[64]</var>,
+    <var class="Fa">const uint8_t *message</var>, <var class="Fa">size_t
+    message_size</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_sha512_init</code>(<var class="Fa">crypto_sha512_ctx
+    *ctx</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_sha512_update</code>(<var class="Fa">crypto_sha512_ctx
+    *ctx</var>, <var class="Fa">const uint8_t *message</var>,
+    <var class="Fa">size_t message_size</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_sha512_final</code>(<var class="Fa">crypto_sha512_ctx
+    *ctx</var>, <var class="Fa">uint8_t hash[64]</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
 SHA-512 is a cryptographically secure hash, provided to enable compatibility
   with other cryptographic systems. It is generally recommended to use
-  <a class="Xr" title="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
+  <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
   instead, as it both performs faster on x86_64 CPUs and lacks many of the
   pitfalls of SHA-512.
-<div class="Pp"></div>
-Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
-  from them; use the
-  <a class="Xr" title="Xr" href="crypto_argon2i.html">crypto_argon2i(3monocypher)</a>
-  family of functions for that purpose instead.
-<div class="Pp"></div>
-SHA-512 is <i class="Em" title="Em">vulnerable to length extension attacks</i>;
-  using it as a message authentication code (MAC) algorithm or keyed hash
-  requires precautions. The
-  <a class="Xr" title="Xr" href="crypto_hmac_sha512.html">crypto_hmac_sha512(3monocypher)</a>
-  family of functions provides HMAC with SHA-512. Use
-  <a class="Xr" title="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
-  to compare MACs created this way.
-<div class="Pp"></div>
-The arguments are:
+<p class="Pp">Note that SHA-512 itself is not suitable for hashing passwords and
+    deriving keys from them; use the
+    <a class="Xr" href="crypto_argon2i.html">crypto_argon2i(3monocypher)</a>
+    family of functions for that purpose instead.</p>
+<p class="Pp">SHA-512 is <i class="Em">vulnerable to length extension
+    attacks</i>; using it as a message authentication code (MAC) algorithm or
+    keyed hash requires precautions. The
+    <a class="Xr" href="crypto_hmac_sha512.html">crypto_hmac_sha512(3monocypher)</a>
+    family of functions provides HMAC with SHA-512. Use
+    <a class="Xr" href="crypto_verify64.html">crypto_verify64(3monocypher)</a>
+    to compare MACs created this way.</p>
+<p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">hash</var></dt>
+  <dt><var class="Fa">hash</var></dt>
   <dd>The output hash, which is always 64 bytes long.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">message</var></dt>
-  <dd>The message to hash. May overlap with
-      <var class="Fa" title="Fa">hash</var>. May be
-      <code class="Dv" title="Dv">NULL</code> if
-      <var class="Fa" title="Fa">message_size</var> is 0.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">message_size</var></dt>
-  <dd>Length of <var class="Fa" title="Fa">message</var>, in bytes.</dd>
+  <dt><var class="Fa">message</var></dt>
+  <dd>The message to hash. May overlap with <var class="Fa">hash</var>. May be
+      <code class="Dv">NULL</code> if <var class="Fa">message_size</var> is
+    0.</dd>
+  <dt><var class="Fa">message_size</var></dt>
+  <dd>Length of <var class="Fa">message</var>, in bytes.</dd>
 </dl>
-<div class="Pp"></div>
-An incremental interface is provided. It is useful for handling streams of data
-  or large files without using too much memory. This interface uses three steps:
+<p class="Pp">An incremental interface is provided. It is useful for handling
+    streams of data or large files without using too much memory. This interface
+    uses three steps:</p>
 <ul class="Bl-bullet">
-  <li>initialisation with
-      <code class="Fn" title="Fn">crypto_sha512_init</code>(), which sets up a
-      context with the hashing parameters;</li>
-  <li>update with <code class="Fn" title="Fn">crypto_sha512_update</code>(),
-      which hashes the message chunk by chunk, and keep the intermediary result
-      in the context;</li>
-  <li>and finalisation with
-      <code class="Fn" title="Fn">crypto_sha512_final</code>(), which produces
-      the final hash. The <var class="Ft" title="Ft">crypto_sha512_ctx</var> is
+  <li>initialisation with <code class="Fn">crypto_sha512_init</code>(), which
+      sets up a context with the hashing parameters;</li>
+  <li>update with <code class="Fn">crypto_sha512_update</code>(), which hashes
+      the message chunk by chunk, and keep the intermediary result in the
+      context;</li>
+  <li>and finalisation with <code class="Fn">crypto_sha512_final</code>(), which
+      produces the final hash. The <var class="Ft">crypto_sha512_ctx</var> is
       automatically wiped upon finalisation.</li>
 </ul>
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_sha512</code>() is a convenience function
-  that performs <code class="Fn" title="Fn">crypto_sha512_init</code>(),
-  <code class="Fn" title="Fn">crypto_sha512_update</code>(), and
-  <code class="Fn" title="Fn">crypto_sha512_final</code>().
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+<p class="Pp"><code class="Fn">crypto_sha512</code>() is a convenience function
+    that performs <code class="Fn">crypto_sha512_init</code>(),
+    <code class="Fn">crypto_sha512_update</code>(), and
+    <code class="Fn">crypto_sha512_final</code>().</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
 These functions return nothing.
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 Hashing a message all at once:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-uint8_t hash   [64]; /* Output hash (64 bytes)          */ 
-uint8_t message[12] = &quot;Lorem ipsum&quot;; /* Message to hash */ 
+<div class="Bd Pp Bd-indent">
+<pre>
+uint8_t hash   [64]; /* Output hash (64 bytes)          */
+uint8_t message[12] = &quot;Lorem ipsum&quot;; /* Message to hash */
 crypto_sha512(hash, message, 12);
 </pre>
 </div>
-<div class="Pp"></div>
-Hashing a message incrementally:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-uint8_t hash   [ 64]; /* Output hash (64 bytes) */ 
-uint8_t message[500] = {1}; /* Message to hash  */ 
-crypto_sha512_ctx ctx; 
-crypto_sha512_init(&amp;ctx); 
-for (size_t i = 0; i &lt; 500; i += 100) { 
-    crypto_sha512_update(&amp;ctx, message + i, 100); 
-} 
+<p class="Pp">Hashing a message incrementally:</p>
+<div class="Bd Pp Bd-indent">
+<pre>
+uint8_t hash   [ 64]; /* Output hash (64 bytes) */
+uint8_t message[500] = {1}; /* Message to hash  */
+crypto_sha512_ctx ctx;
+crypto_sha512_init(&amp;ctx);
+for (size_t i = 0; i &lt; 500; i += 100) {
+    crypto_sha512_update(&amp;ctx, message + i, 100);
+}
 crypto_sha512_final(&amp;ctx, hash);
 </pre>
 </div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_hmac_sha512.html">crypto_hmac_sha512(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+<a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>,
+  <a class="Xr" href="crypto_hmac_sha512.html">crypto_hmac_sha512(3monocypher)</a>,
+  <a class="Xr" href="crypto_lock.html">crypto_lock(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 These functions implement SHA-512, described in RFC 6234 and the Federal
   Information Processing Standard (FIPS) 180-4.
-<h1 class="Sh" title="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn" title="Fn">crypto_sha512</code>(),
-  <code class="Fn" title="Fn">crypto_sha512_init</code>(),
-  <code class="Fn" title="Fn">crypto_sha512_update</code>(), and
-  <code class="Fn" title="Fn">crypto_sha512_final</code>() functions first
-  appeared in Monocypher 0.3; they were not intended for use outside Monocypher
-  itself and thus undocumented. They became part of the official API in
-  Monocypher 3.0.0.
-<h1 class="Sh" title="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_sha512</code>(),
+  <code class="Fn">crypto_sha512_init</code>(),
+  <code class="Fn">crypto_sha512_update</code>(), and
+  <code class="Fn">crypto_sha512_final</code>() functions first appeared in
+  Monocypher 0.3; they were not intended for use outside Monocypher itself and
+  thus undocumented. They became part of the official API in Monocypher 3.0.0.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 SHA-512 is a general-purpose cryptographic hash function; this means that it is
   not suited for hashing passwords and deriving cryptographic keys from
@@ -210,12 +204,14 @@ SHA-512 is a general-purpose cryptographic hash function; this means that it is
   tend to be simple, it is important to artificially slow down attackers by
   using especially computationally difficult hashing algorithms. Monocypher
   therefore provides
-  <a class="Xr" title="Xr" href="crypto_argon2i.html">crypto_argon2i(3monocypher)</a>
-  for password hashing and deriving keys from passwords.</div>
+  <a class="Xr" href="crypto_argon2i.html">crypto_argon2i(3monocypher)</a> for
+  password hashing and deriving keys from passwords.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">February 5, 2020</td>
-    <td class="foot-os">Debian</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
   </tr>
 </table>
 </body>

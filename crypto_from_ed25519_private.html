@@ -64,44 +64,52 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_from_ed25519_private</code>,
-  <code class="Nm" title="Nm">crypto_from_ed25519_public</code> &#x2014;
-<div class="Nd" title="Nd">conversion of key pairs for EdDSA with BLAKE2b to
-  X25519 key pairs</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_from_ed25519_private</code>(<var class="Fa" title="Fa">uint8_t
-  x25519[32]</var>, <var class="Fa" title="Fa">const uint8_t eddsa[32]</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_from_ed25519_public</code>(<var class="Fa" title="Fa">uint8_t
-  x25519[32]</var>, <var class="Fa" title="Fa">const uint8_t eddsa[32]</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_from_ed25519_private</code>,
+  <code class="Nm">crypto_from_ed25519_public</code> &#x2014;
+<div class="Nd">conversion of key pairs for EdDSA with BLAKE2b to X25519 key
+  pairs</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_from_ed25519_private</code>(<var class="Fa">uint8_t
+    x25519[32]</var>, <var class="Fa">const uint8_t eddsa[32]</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_from_ed25519_public</code>(<var class="Fa">uint8_t
+    x25519[32]</var>, <var class="Fa">const uint8_t eddsa[32]</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
 These functions work like
-  <a class="Xr" title="Xr" href="crypto_from_eddsa_private.html">crypto_from_eddsa_private(3monocypher)</a>
+  <a class="Xr" href="crypto_from_eddsa_private.html">crypto_from_eddsa_private(3monocypher)</a>
   and
-  <a class="Xr" title="Xr" href="crypto_from_eddsa_public.html">crypto_from_eddsa_public(3monocypher)</a>,
+  <a class="Xr" href="crypto_from_eddsa_public.html">crypto_from_eddsa_public(3monocypher)</a>,
   except that they operate on Ed25519 key pairs rather than key pairs for EdDSA
   with BLAKE2b. Please see the documentation for those functions for details.
-<h1 class="Sh" title="Sh" id="IMPLEMENTATION_DETAILS"><a class="permalink" href="#IMPLEMENTATION_DETAILS">IMPLEMENTATION
+</section>
+<section class="Sh">
+<h1 class="Sh" id="IMPLEMENTATION_DETAILS"><a class="permalink" href="#IMPLEMENTATION_DETAILS">IMPLEMENTATION
   DETAILS</a></h1>
-<code class="Fn" title="Fn">crypto_from_ed25519_public</code>() is actually
-  implemented as a macro that aliases to
-  <a class="Xr" title="Xr" href="crypto_from_eddsa_public.html">crypto_from_eddsa_public(3monocypher)</a>.
-<h1 class="Sh" title="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn" title="Fn">crypto_from_ed25519_private</code>() and
-  <code class="Fn" title="Fn">crypto_from_ed25519_public</code>() functions
-  first appeared in Monocypher 3.1.0.</div>
+<code class="Fn">crypto_from_ed25519_public</code>() is actually implemented as
+  a macro that aliases to
+  <a class="Xr" href="crypto_from_eddsa_public.html">crypto_from_eddsa_public(3monocypher)</a>.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_from_ed25519_private</code>() and
+  <code class="Fn">crypto_from_ed25519_public</code>() functions first appeared
+  in Monocypher 3.1.0.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">March 25, 2020</td>
-    <td class="foot-os">Debian</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
   </tr>
 </table>
 </body>

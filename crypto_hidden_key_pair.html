@@ -64,32 +64,33 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_curve_to_hidden</code>,
-  <code class="Nm" title="Nm">crypto_hidden_to_curve</code>,
-  <code class="Nm" title="Nm">crypto_hidden_key_pair</code> &#x2014;
-<div class="Nd" title="Nd">hiding of X25519 public keys</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">int</var>
-<br/>
-<code class="Fn" title="Fn">crypto_curve_to_hidden</code>(<var class="Fa" title="Fa">uint8_t
-  hidden[32]</var>, <var class="Fa" title="Fa">const uint8_t curve[32]</var>,
-  <var class="Fa" title="Fa">uint8_t tweak</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_hidden_to_curve</code>(<var class="Fa" title="Fa">uint8_t
-  curve[32]</var>, <var class="Fa" title="Fa">const uint8_t hidden[32]</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_hidden_key_pair</code>(<var class="Fa" title="Fa">uint8_t
-  hidden[32]</var>, <var class="Fa" title="Fa">uint8_t secret_key[32]</var>,
-  <var class="Fa" title="Fa">uint8_t seed[32]</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_curve_to_hidden</code>,
+  <code class="Nm">crypto_hidden_to_curve</code>,
+  <code class="Nm">crypto_hidden_key_pair</code> &#x2014;
+<div class="Nd">hiding of X25519 public keys</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">int</var>
+  <br/>
+  <code class="Fn">crypto_curve_to_hidden</code>(<var class="Fa">uint8_t
+    hidden[32]</var>, <var class="Fa">const uint8_t curve[32]</var>,
+    <var class="Fa">uint8_t tweak</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_hidden_to_curve</code>(<var class="Fa">uint8_t
+    curve[32]</var>, <var class="Fa">const uint8_t hidden[32]</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_hidden_key_pair</code>(<var class="Fa">uint8_t
+    hidden[32]</var>, <var class="Fa">uint8_t secret_key[32]</var>,
+    <var class="Fa">uint8_t seed[32]</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
 These functions allow obfuscating X25519 public keys by making them appear
   effectively indistinguishable from random noise. This is of interest for key
   exchange protocols that require indistinguishability from randomness, such as
@@ -97,150 +98,135 @@ These functions allow obfuscating X25519 public keys by making them appear
   (short-lived, possibly just one-time) X25519 keys, not for long-term public
   keys. After an initial key exchange involving hidden keys, subsequent key
   exchange messages should be encrypted instead; see, for example, the Noise
-  protocol. This is an <i class="Em" title="Em">advanced feature</i> &#x2013;
-  unless you are implementing an protocol that requires indistinguishability of
-  all communications from random noise, consider
-  <a class="Xr" title="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>
+  protocol. This is an <i class="Em">advanced feature</i> &#x2013; unless you
+  are implementing an protocol that requires indistinguishability of all
+  communications from random noise, consider
+  <a class="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>
   instead.
-<div class="Pp"></div>
-For understanding what these functions do, it is important to note that a
-  &#x201C;public key&#x201D; in this context refers to a
-  <i class="Em" title="Em">point on Curve25519</i>. This also means that these
-  functions are not compatible with
-  <a class="Xr" title="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a>
-  and related functions.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_curve_to_hidden</code>() takes a public key
-  <var class="Fa" title="Fa">curve</var> and a
-  <var class="Fa" title="Fa">tweak</var>, hiding the public key it so that it is
-  effectively indistinguishable from random noise. Note that only
-  <a class="Xr" title="Xr" href="crypto_x25519_dirty_fast.html">crypto_x25519_dirty_fast(3monocypher)</a>
-  or
-  <a class="Xr" title="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>
-  can generate a suitable public key; the
-  <a class="Xr" title="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>
-  function is insufficient. The <var class="Fa" title="Fa">tweak</var> must be
-  chosen at random. Even then, this operation <i class="Em" title="Em">may</i>
-  fail: Not all curve points are capable of being hidden. In this case,
-  <code class="Fn" title="Fn">crypto_curve_to_hidden</code>() must be tried
-  again with a new key pair; the <var class="Fa" title="Fa">tweak</var> does not
-  need to be changed. On average, two attempts are needed. Once a suitable
-  public key has been found,
-  <code class="Fn" title="Fn">crypto_curve_to_hidden</code>() always succeeds
-  it. Given the same values for <var class="Fa" title="Fa">tweak</var> and
-  <var class="Fa" title="Fa">curve</var>,
-  <code class="Fn" title="Fn">crypto_curve_to_hidden</code>() yields the same
-  output value <var class="Fa" title="Fa">hidden</var>.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_hidden_to_curve</code>() performs the inverse
-  operation: It decodes a hidden point to a curve point on Curve25519.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_hidden_key_pair</code>() is a convenience
-  function that generates a secret key and its corresponding public key, which
-  is effectively indistinguishable from random noise, from a random seed.
-  <i class="Em" title="Em">The execution time of this function is
-  unpredictable</i> because it may take many failures until a key pair could be
-  generated successfully.
-  <code class="Fn" title="Fn">crypto_hidden_key_pair</code>() uses
-  <a class="Xr" title="Xr" href="crypto_x25519_dirty_fast.html">crypto_x25519_dirty_fast(3monocypher)</a>
-  internally; if code size is an important concern, its functionality can be
-  replicated with
-  <a class="Xr" title="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>
-  instead.
-<div class="Pp"></div>
-The arguments are:
+<p class="Pp">For understanding what these functions do, it is important to note
+    that a &#x201C;public key&#x201D; in this context refers to a
+    <i class="Em">point on Curve25519</i>. This also means that these functions
+    are not compatible with
+    <a class="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a> and
+    related functions.</p>
+<p class="Pp"><code class="Fn">crypto_curve_to_hidden</code>() takes a public
+    key <var class="Fa">curve</var> and a <var class="Fa">tweak</var>, hiding
+    the public key it so that it is effectively indistinguishable from random
+    noise. Note that only
+    <a class="Xr" href="crypto_x25519_dirty_fast.html">crypto_x25519_dirty_fast(3monocypher)</a>
+    or
+    <a class="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>
+    can generate a suitable public key; the
+    <a class="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>
+    function is insufficient. The <var class="Fa">tweak</var> must be chosen at
+    random. Even then, this operation <i class="Em">may</i> fail: Not all curve
+    points are capable of being hidden. In this case,
+    <code class="Fn">crypto_curve_to_hidden</code>() must be tried again with a
+    new key pair; the <var class="Fa">tweak</var> does not need to be changed.
+    On average, two attempts are needed. Once a suitable public key has been
+    found, <code class="Fn">crypto_curve_to_hidden</code>() always succeeds for
+    it. Given the same values for <var class="Fa">tweak</var> and
+    <var class="Fa">curve</var>,
+    <code class="Fn">crypto_curve_to_hidden</code>() yields the same output
+    value <var class="Fa">hidden</var>.</p>
+<p class="Pp"><code class="Fn">crypto_hidden_to_curve</code>() performs the
+    inverse operation: It decodes a hidden point to a curve point on
+  Curve25519.</p>
+<p class="Pp"><code class="Fn">crypto_hidden_key_pair</code>() is a convenience
+    function that generates a secret key and its corresponding public key, which
+    is effectively indistinguishable from random noise, from a random seed.
+    <i class="Em">The execution time of this function is unpredictable</i>
+    because it may take many failures until a key pair could be generated
+    successfully. <code class="Fn">crypto_hidden_key_pair</code>() uses
+    <a class="Xr" href="crypto_x25519_dirty_fast.html">crypto_x25519_dirty_fast(3monocypher)</a>
+    internally; if code size is an important concern, its functionality can be
+    replicated with
+    <a class="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>
+    instead.</p>
+<p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">curve</var></dt>
+  <dt><var class="Fa">curve</var></dt>
   <dd>A point on the curve, which is a Curve25519 public key generated with
       either
-      <a class="Xr" title="Xr" href="crypto_x25519_dirty_fast.html">crypto_x25519_dirty_fast(3monocypher)</a>
+      <a class="Xr" href="crypto_x25519_dirty_fast.html">crypto_x25519_dirty_fast(3monocypher)</a>
       or
-      <a class="Xr" title="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">hidden</var></dt>
+      <a class="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>.</dd>
+  <dt><var class="Fa">hidden</var></dt>
   <dd>The hidden encoding of a point on the curve which is effectively
       indistinguishable from random.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">secret_key</var></dt>
+  <dt><var class="Fa">secret_key</var></dt>
   <dd>The secret key that was generated from the given
-      <var class="Fa" title="Fa">seed</var>.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">seed</var></dt>
+      <var class="Fa">seed</var>.</dd>
+  <dt><var class="Fa">seed</var></dt>
   <dd>A 32-byte random number from which to derive a key pair. See
-      <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a> for
-      advice about generating random bytes (use the operating system's random
-      number generator). The <var class="Fa" title="Fa">seed</var> is wiped
-      automatically.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">tweak</var></dt>
+      <a class="Xr" href="intro.html">intro(3monocypher)</a> for advice about
+      generating random bytes (use the operating system's random number
+      generator). The <var class="Fa">seed</var> is wiped automatically.</dd>
+  <dt><var class="Fa">tweak</var></dt>
   <dd>A 1-byte random number, which influences the final output of
-      <code class="Fn" title="Fn">crypto_curve_to_hidden</code>().</dd>
+      <code class="Fn">crypto_curve_to_hidden</code>().</dd>
 </dl>
-<div class="Pp"></div>
-The <var class="Fa" title="Fa">hidden</var> and
-  <var class="Fa" title="Fa">curve</var> arguments may overlap or point at the
-  same buffer.
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+<p class="Pp">The <var class="Fa">hidden</var> and <var class="Fa">curve</var>
+    arguments may overlap or point at the same buffer.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<code class="Fn" title="Fn">crypto_curve_to_hidden</code>() returns 0 on
-  success, -1 if the given <var class="Fa" title="Fa">curve</var> argument is
-  unsuitable for hiding.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_hidden_to_curve</code>() and
-  <code class="Fn" title="Fn">crypto_hidden_key_pair</code>() return nothing;
-  they cannot fail.
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+<code class="Fn">crypto_curve_to_hidden</code>() returns 0 on success, -1 if the
+  given <var class="Fa">curve</var> argument is unsuitable for hiding.
+<p class="Pp"><code class="Fn">crypto_hidden_to_curve</code>() and
+    <code class="Fn">crypto_hidden_key_pair</code>() return nothing; they cannot
+    fail.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 Generate a key pair manually using
-  <a class="Xr" title="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>
+  <a class="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>
   instead of its fast variant:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-uint8_t sk  [32]; /* Secret key output        */ 
-uint8_t pk  [32]; /* Hidden public key output */ 
-uint8_t tweak;    /* Random tweak input       */ 
-arc4random_buf(&amp;tweak, 1); 
-for (;;) { 
-    arc4random_buf(sk, 32); 
-    crypto_x25519_dirty_small(pk, sk); 
-    if (crypto_curve_to_hidden(pk, pk, tweak) == 0) 
-        break; 
-} 
+<div class="Bd Pp Bd-indent">
+<pre>
+uint8_t sk  [32]; /* Secret key output        */
+uint8_t pk  [32]; /* Hidden public key output */
+uint8_t tweak;    /* Random tweak input       */
+arc4random_buf(&amp;tweak, 1);
+for (;;) {
+    arc4random_buf(sk, 32);
+    crypto_x25519_dirty_small(pk, sk);
+    if (crypto_curve_to_hidden(pk, pk, tweak) == 0)
+        break;
+}
 /* Now save the secret key and send the hidden public key. */
 </pre>
 </div>
-<div class="Pp"></div>
-Performing a key exchange with the other party's public key having been hidden:
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-uint8_t hidden_pk [32]; /* Their hidden public key   */ 
-uint8_t their_pk  [32]; /* Their unhidden public key */ 
-uint8_t your_sk   [32]; /* Your secret key           */ 
-uint8_t shared_key[32]; /* Shared session key        */ 
-crypto_hidden_to_curve(their_pk, hidden_pk); 
-crypto_key_exchange(shared_key, your_sk, their_pk); 
-/* Wipe secrets if they are no longer needed */ 
+<p class="Pp">Performing a key exchange with the other party's public key having
+    been hidden:</p>
+<div class="Bd Pp Bd-indent">
+<pre>
+uint8_t hidden_pk [32]; /* Their hidden public key   */
+uint8_t their_pk  [32]; /* Their unhidden public key */
+uint8_t your_sk   [32]; /* Your secret key           */
+uint8_t shared_key[32]; /* Shared session key        */
+crypto_hidden_to_curve(their_pk, hidden_pk);
+crypto_key_exchange(shared_key, your_sk, their_pk);
+/* Wipe secrets if they are no longer needed */
 crypto_wipe(your_sk, 32);
 </pre>
 </div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+<a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+  <a class="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>,
+  <a class="Xr" href="crypto_x25519_dirty_small.html">crypto_x25519_dirty_small(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 These functions implement the Elligator 2 mapping for Curve25519. This mapping
   is incompatible with both the hash-to-curve Internet draft and the
   implementation of Elligator 2 in libsodium. Elligator 2 was described in:
-  <cite class="Rs" title="Rs"><span class="RsA">Daniel J. Bernstein</span>,
+  <cite class="Rs"><span class="RsA">Daniel J. Bernstein</span>,
   <span class="RsA">Mike Hamburg</span>, <span class="RsA">Anna Krasnova</span>,
   and <span class="RsA">Tanja Lange</span>, <span class="RsT">Elligator:
   Elliptic-curve points indistinguishable from uniform random strings</span>,
@@ -248,30 +234,35 @@ These functions implement the Elligator 2 mapping for Curve25519. This mapping
   '13: Proceedings of the 2013 ACM SIGSAC conference on Computer &amp;
   communications security</i>, <span class="RsP">pp. 967&#x2013;980</span>,
   <span class="RsD">2013</span>.</cite>
-<h1 class="Sh" title="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn" title="Fn">crypto_curve_to_hidden</code>(),
-  <code class="Fn" title="Fn">crypto_hidden_to_curve</code>(), and
-  <code class="Fn" title="Fn">crypto_hidden_key_pair</code>() functions first
-  appeared in Monocypher 3.1.0.
-<h1 class="Sh" title="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_curve_to_hidden</code>(),
+  <code class="Fn">crypto_hidden_to_curve</code>(), and
+  <code class="Fn">crypto_hidden_key_pair</code>() functions first appeared in
+  Monocypher 3.1.0.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 The secret keys for the public keys fed into
-  <code class="Fn" title="Fn">crypto_curve_to_hidden</code>()
-  <b class="Sy" title="Sy">must be chosen randomly</b>, rather than
-  deterministically. Otherwise, the timing information given by the required
-  number of retries also leaks information on the secret keys.
-<div class="Pp"></div>
-These functions <i class="Em" title="Em">help</i> build highly
-  difficult-to-analyze protocols, but are insufficient by themselves: Other
-  metadata, such as the amount of bytes sent in a packet or the size of the
-  32-byte random-looking string that represents the curve point itself, can be
-  very strong indicators of the use of cryptography. Consider using appropriate
-  padding algorithms, such as PADME, and obscure other metadata as much as
-  possible.</div>
+  <code class="Fn">crypto_curve_to_hidden</code>() <b class="Sy">must be chosen
+  randomly</b>, rather than deterministically. Otherwise, the timing information
+  given by the required number of retries also leaks information on the secret
+  keys.
+<p class="Pp">These functions <i class="Em">help</i> build highly
+    difficult-to-analyze protocols, but are insufficient by themselves: Other
+    metadata, such as the amount of bytes sent in a packet or the size of the
+    32-byte random-looking string that represents the curve point itself, can be
+    very strong indicators of the use of cryptography. Consider using
+    appropriate padding algorithms, such as PADME, and obscure other metadata as
+    much as possible.</p>
+</section>
+</div>
 <table class="foot">
   <tr>
-    <td class="foot-date">March 24, 2020</td>
-    <td class="foot-os">Debian</td>
+    <td class="foot-date">March 31, 2020</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
   </tr>
 </table>
 </body>

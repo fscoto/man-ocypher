@@ -64,65 +64,64 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_x25519_inverse</code> &#x2014;
-<div class="Nd" title="Nd">X25519 scalar multiplication with the multiplicative
-  inverse of a scalar</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_x25519_inverse</code>(<var class="Fa" title="Fa">uint8_t
-  blind_salt[32]</var>, <var class="Fa" title="Fa">const uint8_t
-  private_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
-  curve_point</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-The <code class="Fn" title="Fn">crypto_x25519_inverse</code>() function performs
-  scalar multiplication of the multiplicative inverse of a scalar for X25519.
-  <b class="Sy" title="Sy">This is a highly advanced, specialized feature</b>;
-  unless you are implementing a protocol that requires this specifically,
-  <b class="Sy" title="Sy">you likely have no reason to be using these
-  functions</b> and are probably looking for
-  <a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
-  or
-  <a class="Xr" title="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_x25519_inverse</code> &#x2014;
+<div class="Nd">X25519 scalar multiplication with the multiplicative inverse of
+  a scalar</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_x25519_inverse</code>(<var class="Fa">uint8_t
+    blind_salt[32]</var>, <var class="Fa">const uint8_t private_key[32]</var>,
+    <var class="Fa">const uint8_t curve_point</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+The <code class="Fn">crypto_x25519_inverse</code>() function performs scalar
+  multiplication of the multiplicative inverse of a scalar for X25519.
+  <b class="Sy">This is a highly advanced, specialized feature</b>; unless you
+  are implementing a protocol that requires this specifically, <b class="Sy">you
+  likely have no reason to be using these functions</b> and are probably looking
+  for
+  <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
+  or <a class="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>
   instead. Expect elliptic curve jargon on this page.
-<div class="Pp"></div>
-This function is used, for example, with exponential blinding in oblivious
-  pseudo-random functions (OPRFs). The arguments are:
+<p class="Pp">This function is used, for example, with exponential blinding in
+    oblivious pseudo-random functions (OPRFs). The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">blind_salt</var></dt>
+  <dt><var class="Fa">blind_salt</var></dt>
   <dd>The output point.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">private_key</var></dt>
+  <dt><var class="Fa">private_key</var></dt>
   <dd>The private key (scalar) to use. First, the value is clamped; then the
       clamped value's multiplicative inverse (modulo the curve order) is
       determined; the clamped value's multiplicative inverse then has its
       cofactor cleared, and that final value is then used for scalar
       multiplication.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">curve_point</var></dt>
+  <dt><var class="Fa">curve_point</var></dt>
   <dd>The curve point on X25519 to multiply with the multiplicative inverse
-      (modulo the curve order) of
-    <var class="Fa" title="Fa">private_key</var>.</dd>
+      (modulo the curve order) of <var class="Fa">private_key</var>.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn" title="Fn">crypto_x25519_inverse</code>() function first
-  appeared in Monocypher 3.1.0.</div>
+<a class="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_x25519_inverse</code>() function first appeared in
+  Monocypher 3.1.0.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">March 24, 2020</td>
-    <td class="foot-os">Debian</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
   </tr>
 </table>
 </body>

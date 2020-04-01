@@ -64,86 +64,88 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_from_eddsa_private</code>,
-  <code class="Nm" title="Nm">crypto_from_eddsa_public</code> &#x2014;
-<div class="Nd" title="Nd">conversion of key pairs for EdDSA with BLAKE2b to
-  X25519 key pairs</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_from_eddsa_private</code>(<var class="Fa" title="Fa">uint8_t
-  x25519[32]</var>, <var class="Fa" title="Fa">const uint8_t eddsa[32]</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_from_eddsa_public</code>(<var class="Fa" title="Fa">uint8_t
-  x25519[32]</var>, <var class="Fa" title="Fa">const uint8_t eddsa[32]</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_from_eddsa_private</code>,
+  <code class="Nm">crypto_from_eddsa_public</code> &#x2014;
+<div class="Nd">conversion of key pairs for EdDSA with BLAKE2b to X25519 key
+  pairs</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_from_eddsa_private</code>(<var class="Fa">uint8_t
+    x25519[32]</var>, <var class="Fa">const uint8_t eddsa[32]</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_from_eddsa_public</code>(<var class="Fa">uint8_t
+    x25519[32]</var>, <var class="Fa">const uint8_t eddsa[32]</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
 These functions convert keys for use with
-  <a class="Xr" title="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a>
-  (EdDSA with the BLAKE2b hash function) to keys for use with
-  <a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
-  and
-  <a class="Xr" title="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>.
+  <a class="Xr" href="crypto_sign.html">crypto_sign(3monocypher)</a> (EdDSA with
+  the BLAKE2b hash function) to keys for use with
+  <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
+  and <a class="Xr" href="crypto_x25519.html">crypto_x25519(3monocypher)</a>.
   This may be useful in some resource-constrained contexts or when no other key
   is available (for example, when retrieving SSH public keys from GitHub and
   reusing the SSH public keys as X25519 public keys).
-<div class="Pp"></div>
-The <code class="Fn" title="Fn">crypto_from_eddsa_private</code>() function
-  converts an EdDSA (with BLAKE2b) private key to an X25519 private key. The
-  <code class="Fn" title="Fn">crypto_from_eddsa_public</code>() function
-  converts an EdDSA public key to an X25519 public key.
-<div class="Pp"></div>
-X25519 key pairs cannot be converted back to EdDSA key pairs. The conversion of
-  private keys is specific to EdDSA with BLAKE2b because of the way EdDSA works.
-  In particular, this means that the output of
-  <code class="Fn" title="Fn">crypto_from_eddsa_private</code>() differs from
-  <a class="Xr" title="Xr" href="crypto_from_ed25519_private.html">crypto_from_ed25519_private(3monocypher)</a>
-  in the optional code. However, the output of
-  <code class="Fn" title="Fn">crypto_from_eddsa_public</code>() is identical to
-  <a class="Xr" title="Xr" href="crypto_from_ed25519_public.html">crypto_from_ed25519_public(3monocypher)</a>.
-<div class="Pp"></div>
-The arguments are:
+<p class="Pp">The <code class="Fn">crypto_from_eddsa_private</code>() function
+    converts an EdDSA (with BLAKE2b) private key to an X25519 private key. The
+    <code class="Fn">crypto_from_eddsa_public</code>() function converts an
+    EdDSA public key to an X25519 public key.</p>
+<p class="Pp">X25519 key pairs cannot be converted back to EdDSA key pairs. The
+    conversion of private keys is specific to EdDSA with BLAKE2b because of the
+    way EdDSA works. In particular, this means that the output of
+    <code class="Fn">crypto_from_eddsa_private</code>() differs from
+    <a class="Xr" href="crypto_from_ed25519_private.html">crypto_from_ed25519_private(3monocypher)</a>
+    in the optional code. However, the output of
+    <code class="Fn">crypto_from_eddsa_public</code>() is identical to
+    <a class="Xr" href="crypto_from_ed25519_public.html">crypto_from_ed25519_public(3monocypher)</a>.</p>
+<p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">eddsa</var></dt>
+  <dt><var class="Fa">eddsa</var></dt>
   <dd>The signing public key or private key to convert to a X25519 public key or
       private key, respectively.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">x25519</var></dt>
+  <dt><var class="Fa">x25519</var></dt>
   <dd>The converted private key or public key.</dd>
 </dl>
-<div class="Pp"></div>
-The arguments may overlap or point at the same buffer.
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+<p class="Pp">The arguments may overlap or point at the same buffer.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
 These functions return nothing. They cannot fail.
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="crypto_sign_public_key.html">crypto_sign_public_key(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn" title="Fn">crypto_from_eddsa_private</code>() and
-  <code class="Fn" title="Fn">crypto_from_eddsa_public</code>() functions first
-  appeared in Monocypher 3.1.0.
-<h1 class="Sh" title="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
+<a class="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>,
+  <a class="Xr" href="crypto_sign_public_key.html">crypto_sign_public_key(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_from_eddsa_private</code>() and
+  <code class="Fn">crypto_from_eddsa_public</code>() functions first appeared in
+  Monocypher 3.1.0.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 It is generally considered poor form to reuse the same key for different
   purposes. While this conversion is technically safe, avoid these functions
   nonetheless unless you are particularly resource-constrained or have some
-  other kind of hard requirement. It is otherwise an unnecessary risk
-  factor.</div>
+  other kind of hard requirement. It is otherwise an unnecessary risk factor.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">March 25, 2020</td>
-    <td class="foot-os">Debian</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
   </tr>
 </table>
 </body>

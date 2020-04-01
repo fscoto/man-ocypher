@@ -68,136 +68,150 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">crypto_x25519</code>,
-  <code class="Nm" title="Nm">crypto_x25519_public_key</code> &#x2014;
-<div class="Nd" title="Nd">X25519 key exchange</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="In" title="In">#include
-  &lt;<a class="In" title="In">monocypher.h</a>&gt;</code>
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_x25519</code>(<var class="Fa" title="Fa">uint8_t
-  raw_shared_secret[32]</var>, <var class="Fa" title="Fa">const uint8_t
-  your_secret_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
-  their_public_key[32]</var>);
-<div class="Pp"></div>
-<var class="Ft" title="Ft">void</var>
-<br/>
-<code class="Fn" title="Fn">crypto_x25519_public_key</code>(<var class="Fa" title="Fa">uint8_t
-  your_public_key[32]</var>, <var class="Fa" title="Fa">const uint8_t
-  your_secret_key[32]</var>);
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-<code class="Fn" title="Fn">crypto_x25519</code>() computes a shared secret with
-  <var class="Fa" title="Fa">your_secret_key</var> and
-  <var class="Fa" title="Fa">their_public_key</var>. It is a low-level
-  primitive. Use
-  <a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">crypto_x25519</code>,
+  <code class="Nm">crypto_x25519_public_key</code> &#x2014;
+<div class="Nd">X25519 key exchange</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="In">#include &lt;<a class="In">monocypher.h</a>&gt;</code>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_x25519</code>(<var class="Fa">uint8_t
+    raw_shared_secret[32]</var>, <var class="Fa">const uint8_t
+    your_secret_key[32]</var>, <var class="Fa">const uint8_t
+    their_public_key[32]</var>);</p>
+<p class="Pp"><var class="Ft">void</var>
+  <br/>
+  <code class="Fn">crypto_x25519_public_key</code>(<var class="Fa">uint8_t
+    your_public_key[32]</var>, <var class="Fa">const uint8_t
+    your_secret_key[32]</var>);</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<code class="Fn">crypto_x25519</code>() computes a shared secret with
+  <var class="Fa">your_secret_key</var> and
+  <var class="Fa">their_public_key</var>. It is a low-level primitive. Use
+  <a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>
   unless you have a specific reason not to.
-<div class="Pp"></div>
-<code class="Fn" title="Fn">crypto_x25519_public_key</code>() is the same as
-  <a class="Xr" title="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>.
-  It deterministically computes the public key from a random secret key.
-<div class="Pp"></div>
-The arguments are:
+<p class="Pp"><code class="Fn">crypto_x25519_public_key</code>() is the same as
+    <a class="Xr" href="crypto_key_exchange_public_key.html">crypto_key_exchange_public_key(3monocypher)</a>.
+    It deterministically computes the public key from a random secret key.</p>
+<p class="Pp">The arguments are:</p>
 <dl class="Bl-tag">
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">raw_shared_secret</var></dt>
+  <dt><var class="Fa">raw_shared_secret</var></dt>
   <dd>The shared secret, known only to those who know a relevant secret key
       (yours or theirs). It is not cryptographically random. Do not use it
       directly as a key. Hash it with
-      <a class="Xr" title="Xr" href="crypto_chacha20_H.html">crypto_chacha20_H(3monocypher)</a>
+      <a class="Xr" href="crypto_chacha20_H.html">crypto_chacha20_H(3monocypher)</a>
       or
-      <a class="Xr" title="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
+      <a class="Xr" href="crypto_blake2b.html">crypto_blake2b(3monocypher)</a>
       first.</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">your_secret_key</var></dt>
+  <dt><var class="Fa">your_secret_key</var></dt>
   <dd>A 32-byte secret random number. See
-      <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a> for
-      advice about generating random bytes (use the operating system's random
-      number generator).</dd>
-  <dt>&#x00A0;</dt>
-  <dd>&#x00A0;</dd>
-  <dt><var class="Fa" title="Fa">their_public_key</var></dt>
+      <a class="Xr" href="intro.html">intro(3monocypher)</a> for advice about
+      generating random bytes (use the operating system's random number
+      generator).</dd>
+  <dt><var class="Fa">their_public_key</var></dt>
   <dd>The public key of the other party.
-    <div class="Pp"></div>
-    <var class="Fa" title="Fa">raw_shared_secret</var> and
-      <var class="Fa" title="Fa">your_secret_key</var> may overlap if your
-      secret is no longer required.</dd>
+    <p class="Pp"><var class="Fa">raw_shared_secret</var> and
+        <var class="Fa">your_secret_key</var> may overlap if your secret is no
+        longer required.</p>
+  </dd>
 </dl>
-<div class="Pp"></div>
-Some protocols, such as some password-authenticated key exchange (PAKE)
-  protocols and oblivious pseudo-random functions (OPRF), may require
-  &#x201C;contributory&#x201D; behaviour, which ensures that no untrusted party
-  forces the shared secret to a known constant. If a protocol requires
-  contributory behaviour, compare the output of
-  <code class="Fn" title="Fn">crypto_x25519</code>() to an all-zero buffer using
-  <a class="Xr" title="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a>;
-  abort the protocol if the output and the all-zero buffer are equal.
-<h1 class="Sh" title="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+<p class="Pp">Some protocols, such as some password-authenticated key exchange
+    (PAKE) protocols and oblivious pseudo-random functions (OPRF), may require
+    &#x201C;contributory&#x201D; behaviour, which ensures that no untrusted
+    party forces the shared secret to a known constant. If a protocol requires
+    contributory behaviour, compare the output of
+    <code class="Fn">crypto_x25519</code>() to an all-zero buffer using
+    <a class="Xr" href="crypto_verify32.html">crypto_verify32(3monocypher)</a>;
+    abort the protocol if the output and the all-zero buffer are equal.</p>
+<p class="Pp">Do not use the same secret key for both key exchanges and
+    signatures. The public keys are different, and revealing both may leak
+    information. If there really is no room to store or derive two different
+    secret keys, consider generating a key pair for signatures and then
+    converting it with
+    <a class="Xr" href="crypto_from_eddsa_private.html">crypto_from_eddsa_private(3monocypher)</a>
+    and
+    <a class="Xr" href="crypto_from_eddsa_public.html">crypto_from_eddsa_public(3monocypher)</a>.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
   VALUES</a></h1>
-<code class="Fn" title="Fn">crypto_x25519</code>() and
-  <code class="Fn" title="Fn">crypto_x25519_public_key</code>() return nothing.
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+<code class="Fn">crypto_x25519</code>() and
+  <code class="Fn">crypto_x25519_public_key</code>() return nothing.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 The following example assumes the existence of
-  <code class="Fn" title="Fn">arc4random_buf</code>(), which fills the given
-  buffer with cryptographically secure random bytes. If
-  <code class="Fn" title="Fn">arc4random_buf</code>() does not exist on your
-  system, see <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-  for advice about how to generate cryptographically secure random bytes.
-<div class="Pp"></div>
-Generate a pair of shared keys with your secret key and their public key. (This
-  can help nonce management for full duplex communications.)
-<div class="Pp"></div>
-<div class="Bd Bd-indent">
-<pre class="Li">
-const uint8_t their_pk     [32]; /* Their public key          */ 
-uint8_t       your_sk      [32]; /* Your secret key           */ 
-uint8_t       shared_secret[32]; /* Shared secret (NOT a key) */ 
-arc4random_buf(your_sk, 32); 
-crypto_x25519(shared_secret, your_sk, their_pk); 
-/* Wipe secrets if they are no longer needed */ 
-crypto_wipe(your_sk, 32); 
- 
-uint8_t shared_keys[64]; /* Two shared session keys */ 
-crypto_blake2b(shared_keys, shared_secret, 32); 
-const uint8_t *key_1 = shared_keys;      /* Shared key 1 */ 
-const uint8_t *key_2 = shared_keys + 32; /* Shared key 2 */ 
-/* Wipe secrets if they are no longer needed */ 
+  <code class="Fn">arc4random_buf</code>(), which fills the given buffer with
+  cryptographically secure random bytes. If
+  <code class="Fn">arc4random_buf</code>() does not exist on your system, see
+  <a class="Xr" href="intro.html">intro(3monocypher)</a> for advice about how to
+  generate cryptographically secure random bytes.
+<p class="Pp">Generate a pair of shared keys with your secret key and their
+    public key. (This can help nonce management for full duplex
+  communications.)</p>
+<div class="Bd Pp Bd-indent">
+<pre>
+const uint8_t their_pk     [32]; /* Their public key          */
+uint8_t       your_sk      [32]; /* Your secret key           */
+uint8_t       shared_secret[32]; /* Shared secret (NOT a key) */
+arc4random_buf(your_sk, 32);
+crypto_x25519(shared_secret, your_sk, their_pk);
+/* Wipe secrets if they are no longer needed */
+crypto_wipe(your_sk, 32);
+
+uint8_t shared_keys[64]; /* Two shared session keys */
+crypto_blake2b(shared_keys, shared_secret, 32);
+const uint8_t *key_1 = shared_keys;      /* Shared key 1 */
+const uint8_t *key_2 = shared_keys + 32; /* Shared key 2 */
+/* Wipe secrets if they are no longer needed */
 crypto_wipe(shared_secret, 32);
 </pre>
 </div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
-  <a class="Xr" title="Xr" href="intro.html">intro(3monocypher)</a>
-<h1 class="Sh" title="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
+<a class="Xr" href="crypto_key_exchange.html">crypto_key_exchange(3monocypher)</a>,
+  <a class="Xr" href="intro.html">intro(3monocypher)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="STANDARDS"><a class="permalink" href="#STANDARDS">STANDARDS</a></h1>
 This function implements X25519, described in RFC 7748.
-<h1 class="Sh" title="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
-The <code class="Fn" title="Fn">crypto_x25519</code>(), and
-  <code class="Fn" title="Fn">crypto_x25519_public_key</code>() functions first
-  appeared in Monocypher 0.1.
-<h1 class="Sh" title="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY"><a class="permalink" href="#HISTORY">HISTORY</a></h1>
+The <code class="Fn">crypto_x25519</code>(), and
+  <code class="Fn">crypto_x25519_public_key</code>() functions first appeared in
+  Monocypher 0.1.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SECURITY_CONSIDERATIONS"><a class="permalink" href="#SECURITY_CONSIDERATIONS">SECURITY
   CONSIDERATIONS</a></h1>
 If either of the long term secret keys leaks, it may compromise
-  <i class="Em" title="Em">all past messages</i>. This can be avoided by using
-  protocols that provide forward secrecy, such as the X3DH key agreement
-  protocol.
-<h1 class="Sh" title="Sh" id="IMPLEMENTATION_DETAILS"><a class="permalink" href="#IMPLEMENTATION_DETAILS">IMPLEMENTATION
+  <i class="Em">all past messages</i>. This can be avoided by using protocols
+  that provide forward secrecy, such as the X3DH key agreement protocol.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="IMPLEMENTATION_DETAILS"><a class="permalink" href="#IMPLEMENTATION_DETAILS">IMPLEMENTATION
   DETAILS</a></h1>
 The most significant bit of the public key is systematically ignored. It is not
   needed because every public key should be smaller than 2^255-19, which fits in
   255 bits. If another implementation of X25519 gives you a key that is not
   fully reduced and has its high bit set, the computation will fail. On the
   other hand, it also means you may use this bit for other purposes (such as
-  parity flipping for Ed25519 compatibility).</div>
+  parity flipping for Ed25519 compatibility).
+</section>
+</div>
 <table class="foot">
   <tr>
-    <td class="foot-date">March 2, 2020</td>
-    <td class="foot-os">Debian</td>
+    <td class="foot-date">March 31, 2020</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
   </tr>
 </table>
 </body>
